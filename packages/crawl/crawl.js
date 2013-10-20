@@ -19,16 +19,15 @@ Crawl.listings = function (listingUrl) {
         var $document = $(result.content);
 
         var rows = $document.find('.clsGRID tr:not(:first-child)');
+        rows.each(function (index, row) {
+            var columns = $(row).find('td');
 
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows.eq(i);
-
-            var itemNumber = $(row.find('td')[1]).find('a').text();
-            var brand = $(row.find('td')[2]).text();
-            var pack = $(row.find('td')[3]).text();
-            var description = $(row.find('td')[4]).text();
+            var itemNumber = columns.eq(1).find('a').text();
+            var brand = columns.eq(2).text();
+            var pack = columns.eq(3).text();
+            var description = columns.eq(4).text();
 
             console.log(itemNumber, brand, pack, description);
-        }
+        });
     });
 };

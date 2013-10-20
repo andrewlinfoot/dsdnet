@@ -2,7 +2,7 @@ Router.map(function () {
     this.route('home', {
         path: '/',
         data: function () {
-            Meteor.call('crawlCategories');
+//            Meteor.call('crawlCategories');
         }
     });
 

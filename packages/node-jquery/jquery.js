@@ -1,1 +1,1 @@
-$ = Npm.require('jquery');
+$ = Npm.require('jquery').create();

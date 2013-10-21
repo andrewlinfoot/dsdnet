@@ -38,3 +38,12 @@
 	    		margin-left: 15px;
 	    		margin-right: 15px;
 	    	}
+	    	.dsdaboutpic{
+	    		height: 100%;
+	    		overflow: hidden;
+	    	}
+	    	.img-sqr-wrapper{
+	    		height: 250px;
+	    		width: 250px;
+	    		overflow: hidden;
+	    	}

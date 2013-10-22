@@ -1,3 +1,40 @@
 <template name="home">
-  <h1>Hello World!</h1>
+	{{> head}}
+	<body>
+		{{> navbar}}
+
+		{{#each companyProfile}}
+		<div class="dsdnet-home-content-area">
+			<div class="row">
+				<div class="col-xs-3">
+					<div class="img-sqr-wrapper">
+						<img class="dsdaboutpic" src="/mcfarling-warehouse.jpg">
+					</div>
+				</div>
+				<div class ="col-xs-3">
+					<h1>{{name}}</h1>
+					<p><a href="#">{{phone}}</a></p>
+					<p><a target="_blank" href="{{website}}">{{website}}</a></p>
+					<p>{{address}}</p>
+				</div>
+				<div class="col-xs-6">
+					<h3 class="dsdnet-about">About</h3>
+					<p>{{description}}</p>		
+				</div>
+			</div>
+			<div class="row">
+				{{#each categories}}
+					<div class="col-md-3 dsdnet-category-thumbnail">
+						<div class="thumbnail">
+							<img class="img-responsive" src="http://www.mrbigben.com/food/pyramid_dairy.jpg">
+							<div class="caption">
+								<h3>{{this}}</h3>
+							</div>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		{{/each}}
+	</body>
 </template>

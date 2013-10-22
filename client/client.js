@@ -9,10 +9,10 @@ Router.map(function () {
 //    this.route('about');
 
     this.route('products', {
-        path: '/:name/products',
+        path: '/:url/products',
         data: function () {
-            var roomName = this.params.name;
-            Session.set("companyName", this.params.name);
+            var roomName = this.params.url;
+            Session.set("companyUrl", this.params.url);
             return {
                 params: this.params
             };
@@ -20,10 +20,10 @@ Router.map(function () {
     });
 
     this.route('home', {
-        path: '/:name',
+        path: '/:url',
         data: function () {
-            var roomName = this.params.name;
-            Session.set('companyName', this.params.name);
+            var roomName = this.params.url;
+            Session.set('companyUrl', this.params.url);
             return {
                 params: this.params
             };

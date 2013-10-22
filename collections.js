@@ -18,6 +18,7 @@ Companies = new Meteor.Collection('companies');
 
 // {
 // 	_id: companies id,
+//	url: company page url
 // 	name: company name,
 // 	description: company description,
 // 	address: company address,

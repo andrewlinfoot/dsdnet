@@ -3,6 +3,7 @@
 	<body>
 		{{> navbar}}
 
+		{{#each companyProfile}}
 		<div class="dsdnet-home-content-area">
 			<div class="row">
 				<div class="col-xs-3">
@@ -11,17 +12,14 @@
 					</div>
 				</div>
 				<div class ="col-xs-3">
-					<h1>Mcfarling foods</h1>
-					<p><a href="#">(555) 555-5555</a></p>
-					<p><a href="#">McFarlingFoods.com</a></p>
-					<p><a href="#">bob@McFarlingFoods.com</a></p>
-					<p><a href="#">223 pierce street <br>Apt b<br>west lafayette IN 47906</a></p>
+					<h1>{{name}}</h1>
+					<p><a href="#">{{phone}}</a></p>
+					<p><a target="_blank" href="{{website}}">{{website}}</a></p>
+					<p>{{address}}</p>
 				</div>
 				<div class="col-xs-6">
 					<h3 class="dsdnet-about">About</h3>
-					<p>McFarling Foods was founded over fifty years ago in Indianapolis, Indiana. The McFarling Brothers had a vision - To build a company based on honesty, integrity and service... and success would follow.</p>
-
-					<p>Our original focus began with chicken, eggs and butter. Since our inception, we have expanded into a full-line distributor. Our emphasis on poultry has made us a primary supplier within our marketing areas. We currently stock over 5,000 products including: Custom-Cut Beef, Pork, Lamb and Veal; Fresh Poultry and Seafood; Fresh Fruits and Vegetables; Dairy Products; Frozen, Canned and Dry Goods; along with Disposable and Chemical Product lines.</p>		
+					<p>{{description}}</p>		
 				</div>
 			</div>
 			<div class="row">
@@ -37,5 +35,6 @@
 				{{/each}}
 			</div>
 		</div>
+		{{/each}}
 	</body>
 </template>

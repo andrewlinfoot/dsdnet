@@ -3,5 +3,5 @@ Template.products.categories = function () {
 };
 
 Template.products.companyName = function () {
-    return Session.get("companyName");
+    return Companies.find({url: Session.get("companyUrl")});
 };

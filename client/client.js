@@ -6,6 +6,13 @@ Router.map(function () {
         }
     });
 
+    this.route('trigger_crawl', {
+      path: '/startcrawl',
+      data : function(){
+        Meteor.call('startCrawl');
+      }
+    });
+
 //    this.route('about');
 
     this.route('products', {

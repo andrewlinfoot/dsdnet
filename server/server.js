@@ -1,10 +1,7 @@
 Meteor.methods({
-    crawlCategories: function () {
-        Crawl.categories();
-    },
-    crawlListings: function () {
-        Crawl.listings();
-    }
+  startCrawl : function(){
+    Crawl.startCrawl();
+  }
 });
 
 Meteor.startup( function () {

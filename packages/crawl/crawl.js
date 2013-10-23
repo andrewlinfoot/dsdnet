@@ -1,17 +1,16 @@
 Crawl = {};
-
-Crawl.categories = function () {
-  var options = {headers: {}};
+Crawl.options = { headers: {} };
+Crawl.startCrawl = function () {
   var cookieUrl = 
     'http://12.192.21.195/netlinkcatalog/asp/cucbook.asp?bunit=1&cuswhs=001';
   var categoriesUrl = 
     'http://12.192.21.195/netlinkcatalog/asp/contentspane.asp?mode=NC';
-  var categoryUrlTemp = 
+  var subCategoryUrlTemp = 
     'http://12.192.21.195/netlinkcatalog/asp/contentspane.asp?itcat={0}&open=1#{0}'
   HTTP.get(cookieUrl, function(error, result){
-    options.headers.Cookie = result.headers['set-cookie'][0];
+    Crawl.options.headers.Cookie = result.headers['set-cookie'][0];
     HTTP.get(categoriesUrl, 
-      options,
+      Crawl.options,
       function (error, result) {
         var $doc = $(result.content);
         var $menu = $doc.find('.clsMainMenu a :nth-child(3)');
@@ -20,67 +19,67 @@ Crawl.categories = function () {
           return
         }
         var categories = $menu.map(function(index, element){
-          var h = element.href;
-          var index = h.indexOf('itcat=');
-          var val = h.substring(index +6, index+10);
+          var href = element.href;
+          var index = href.indexOf('itcat=');
+          var val = href.substring(index +6, index+10);
           return {
-            title : element.title.split(':')[1].substring(1),
-            url : categoryUrlTemp.replace(/{(0)}/g, val)
+            name : element.title.split(':')[1].substring(1),
+            subCatUrl : subCategoryUrlTemp.replace(/{(0)}/g, val),
+            listingsUrl : href,
+            parent : null
           };
         });
         for(var j = 0; j < categories.length; j++){
-          HTTP.get(categories[j]['url'], options, function(error, result){
+          var catId = Categories.insert({
+            name : categories[j].name,
+            parent : null
+          });
+          Crawl.listings(catId, categories[j].listingsUrl);
+          HTTP.get(categories[j].subCatUrl, Crawl.options, function(error, result){
             var $doc = $(result.content);
             var $submenu = $doc.find('.clsMainMenu');
-            if($submenu.length == 0){
-              console.log(
-                'no result for {0}, check cookie'.replace(/{(0)}/g,
-                  this.category.name)
-                );
-            }
-            var catId = Categories.insert({
-                name : this.category.title,
-                parent : null
-              });
             for( var i = 0; i < $submenu.length; i++){
               var children = $submenu.eq(i).children();
               if(children.length != 3){
                 continue;
               }
-              var child = children.eq(2)
-              Categories.insert({
+              var child = children.eq(2);
+              var listingsUrl = child.attr('href');
+              var catId = Categories.insert({
                 name : child.attr('title').split(':')[1].substring(5),
-                url : child.attr('href'),
-                parent : catId
-              })
+                parent : this.parentCategoryId
+              });
+              Crawl.listings(catId, listingsUrl);
             }
-          }.bind({category : categories[j]}));
+          }.bind({parentCategoryId : catId}));
         }
       });
   });
 };
 
-Crawl.listings = function (listingUrl) {
-    //hardcoded for now
-    listingUrl = 'http://12.192.21.195/netlinkcatalog/asp/cucbookresult.asp?itcat=0110&itdesc=%26nbsp%3B%26nbsp%3B%26nbsp%3B%26nbsp%3BBUTTER%26nbsp%3BSOLIDS%26nbsp%3B%26%2338%3B%26nbsp%3BLIQUIDS';
+Crawl.listings = function (CategoryId, listingUrl, lastCrawl) {
+  HTTP.get(listingUrl, Crawl.options, function (error, result) {
+    var $document = $(result.content);
+    if(!lastCrawl){
+      $document.find('center').eq(1).find('a').each(function(){
+        Crawl.listings(CategoryId, this.href, true);
+      });
+    }
+    var rows = $document.find('.clsGRID tr:not(:first-child)');
+    rows.each(function (index, row) {
+      var columns = $(row).find('td');
 
-    HTTP.get(listingUrl, {
-        headers: {
-            Cookie: "ASPSESSIONIDSCTRQTSS=GFLFAHJBCKLBCMMMKEIDKEBP"
-        }
-    }, function (error, result) {
-        var $document = $(result.content);
-
-        var rows = $document.find('.clsGRID tr:not(:first-child)');
-        rows.each(function (index, row) {
-            var columns = $(row).find('td');
-
-            var itemNumber = columns.eq(1).find('a').text();
-            var brand = columns.eq(2).text();
-            var pack = columns.eq(3).text();
-            var description = columns.eq(4).text();
-
-            console.log(itemNumber, brand, pack, description);
-        });
+      var itemNumber = columns.eq(1).find('a').text();
+      var brand = columns.eq(2).text();
+      var pack = columns.eq(3).text();
+      var description = columns.eq(4).text();
+      Products.insert({
+        productNumber : itemNumber,
+        brand : brand,
+        pack : pack,
+        description : description,
+        category : CategoryId
+      });
     });
+  });
 };

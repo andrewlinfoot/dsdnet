@@ -5,3 +5,11 @@ Template.products.categories = function () {
 Template.products.companyName = function () {
     return Companies.find({url: Session.get("companyUrl")});
 };
+
+Template.products.products = function () {
+	return ["Cow Poop", "Chicken Little", "The Great Gadsby"];
+}
+
+Template.navbar.categories = function () {
+	return ["Dairy", "Produce"];
+};

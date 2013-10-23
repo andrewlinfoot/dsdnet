@@ -12,6 +12,7 @@
 		</div>
 		<div class="dsdnet-content">
 			<div class="row">
+				{{#each products}}
 				<div class="col-md-3 dsdnet-product-thumbnail">
 					<div class="thumbnail">
 						<img class="img-responsive" src="http://www.mrbigben.com/food/pyramid_dairy.jpg">
@@ -24,6 +25,7 @@
 						</div>
 					</div>
 				</div>
+				{{/each}}
 			</div>
 		</div>
 	</body>
@@ -38,22 +40,24 @@
 <template name="navbar">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<a class="navbar-brand dsdnet-header-logo" href="#"><img class="img-responsive" src="/dsdnet-logo-40.png"></a>
-		<form class="navbar-form">
-		  <div class="input-group dsdnet-header-search-hack">
-	      <div class="input-group-btn">
-	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">All <span class="caret"></span></button>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">All</a></li>
-	          {{#each categories}}
-	          	<li><a href="#">{{this}}</a></li>
-	          {{/each}}
-	        </ul>
-	      </div><!-- /btn-group -->
-	      <input type="text" class="form-control">
-	      <span class="input-group-btn">
-	        <button class="btn btn-default" type="button">Go!</button>
-	      </span>
-	    </div><!-- /input-group -->						
-		</form>	
+		<div class="dsdwrapper">
+			<form class="navbar-form">
+			  <div class="input-group dsdnet-header-search-hack">
+		      <div class="input-group-btn">
+		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">All <span class="caret"></span></button>
+		        <ul class="dropdown-menu">
+		          <li><a href="#">All</a></li>
+		          {{#each categories}}
+		          	<li><a href="#">{{this}}</a></li>
+		          {{/each}}
+		        </ul>
+		      </div><!-- /btn-group -->
+		      <input type="text" class="form-control">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Go!</button>
+		      </span>
+		    </div><!-- /input-group -->						
+			</form>	
+		</div><!--end dsdwrapper -->
 	</div>
 </template>

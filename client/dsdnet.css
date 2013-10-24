@@ -1,5 +1,13 @@
 /* CSS declarations go here */
-
+				@font-face {
+    				font-family: 'LeagueSpart';
+    				src: url('/LGfont/league_spartan_bold-webfont.eot');
+    				src: url('/LGfont/league_spartan_bold-webfont.eot') format('embedded-opentype'),
+	   					url('/LGfont/league_spartan_bold-webfont.woff') format('woff'),
+	 					url('/LGfont/league_spartan_bold-webfont.ttf') format('truetype'),
+	   					url('/LGfont/league_spartan_bold-webfont.svg#webfont') format('svg');
+    					
+    			}
 	    		body {padding-top: 70px;}
 	    	
 	    	.dsdnet-header-logo {
@@ -10,7 +18,12 @@
 	    		padding-bottom: 5px;
 	    		margin-right: 15px;
 	    	}
-	    	
+	    	.navbar-inverse{
+	    		border: none;
+	    		background-color: #222222;
+	    		background-image: none;
+
+	    	}
 	    	.dsdnet-sidebar {
 	    		width: 250px;
 	    		padding-left: 15px;
@@ -25,9 +38,13 @@
 	    	}
 	    	.dsdnet-about {
 	    		margin-top: 0;
+	    		height: 234px;
+	    		overflow: hidden;
+	    		text-overflow: ellipsis;
+
 	    	}
 	    	.dsdnet-category-thumbnail {
-	    		padding-bottom: 15px;
+	    		padding: 10px;
 	    	}
 	    	.dsdnet-product-thumbnail {
 	    		padding-bottom: 15px;
@@ -39,6 +56,7 @@
 	    	.dsdaboutpic{
 	    		height: 100%;
 	    		float: left;
+
 	    	}
 	    	.img-sqr-wrapper{
 	    		max-height: 250px;
@@ -61,6 +79,8 @@
 	    		background-size: auto;
 	    		background-position: center top;
 	    		margin-top: 15px;
+	    		margin-bottom: -400px;
+	    		overflow: visible;
 
 	    	}
 	    	.section-dividertop{
@@ -75,5 +95,41 @@
 	    		margin-top: -70px;
 
 	    	}
-	    
+	    	.thumbnail{
+	    		border: none;
+	    		padding: 0;
+	    		background-color: #222222;
+	    		border-radius: 0px;
+	    		box-shadow: 1px 1px 2px #000000;
 
+	    	}
+	    	.thumbnail:hover{
+	    		box-shadow: 5px 5px 8px #000000;
+	    		-webkit-transform: scale(1.02);
+	    	}
+	    	.catcaption{
+	    		margin-top: 0;
+	    		margin-left: 5px;
+	    		margin-bottom: 10px;
+	    		color: white;
+	    		font-family: "LeagueSpart", courier, monospace;
+	    	}
+	    	.widewrapper{
+	    		padding-right: 5%;
+	    		padding-left:5%;
+	    		margin: 0 auto;
+	    	}
+	    	.arrowup{
+	    		margin-top: -19px;
+	    		position: absolute;
+	    		margin-left: 5%;
+	    		width: 0; 
+				height: 0; 
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				border-bottom: 20px solid #222222;
+				z-index: 50;
+	    	}
+	    	.navbar{
+	    		box-shadow: 0px 4px 5px #000000;
+	    	}

@@ -1,6 +1,7 @@
 Crawl = {};
 Crawl.options = { headers: {} };
 Crawl.startCrawl = function () {
+  console.log('Starting Crawl: McFarling Foods');
   var cookieUrl = 
     'http://12.192.21.195/netlinkcatalog/asp/cucbook.asp?bunit=1&cuswhs=001';
   var categoriesUrl = 
@@ -56,8 +57,11 @@ Crawl.startCrawl = function () {
       });
   });
 };
-
 Crawl.listings = function (CategoryId, listingUrl, lastCrawl) {
+  listingUrl = listingUrl.replace(/viewid=1/g, 'viewid=2');
+  if( !listingUrl.match(/viewid=2/g)){
+    listingUrl = listingUrl + '&viewid=2';
+  }
   HTTP.get(listingUrl, Crawl.options, function (error, result) {
     var $document = $(result.content);
     if(!lastCrawl){
@@ -65,20 +69,22 @@ Crawl.listings = function (CategoryId, listingUrl, lastCrawl) {
         Crawl.listings(CategoryId, this.href, true);
       });
     }
-    var rows = $document.find('.clsGRID tr:not(:first-child)');
-    rows.each(function (index, row) {
+    var $rows = $document.find('.clsGRID tr:not(:first-child)');
+    $rows.each(function (index, row) {
       var columns = $(row).find('td');
 
-      var itemNumber = columns.eq(1).find('a').text();
+      var itemNumber = parseInt(columns.eq(1).find('a').text());
       var brand = columns.eq(2).text();
       var pack = columns.eq(3).text();
       var description = columns.eq(4).text();
+      var stock = parseInt(columns.eq(5).text());
       Products.insert({
         productNumber : itemNumber,
         brand : brand,
         pack : pack,
         description : description,
-        category : CategoryId
+        category : CategoryId,
+        stock : stock
       });
     });
   });

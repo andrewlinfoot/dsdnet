@@ -105,11 +105,13 @@ body {padding-top: 70px;}
 	background-color: #222222;
 	border-radius: 0px;
 	box-shadow: 1px 1px 2px #000000;
+	color: white;
 
 }
 .thumbnail:hover{
 	box-shadow: 5px 5px 8px #000000;
 	-webkit-transform: scale(1.02);
+	color: white;
 }
 .catcaption{
 	margin-top: 0;
@@ -136,11 +138,11 @@ body {padding-top: 70px;}
 }
 .navbar{
 	box-shadow: 0px 4px 5px #000000;
-<<<<<<< HEAD
 }
 .products{
 	height: 270px;
 	overflow: hidden;
+	position: relative;
 }
 .description{
 	font-family: "LeagueSpart", courier, monospace;
@@ -154,6 +156,7 @@ body {padding-top: 70px;}
 .capproduct{
 	height:50px;
 	position: absolute;
+
 }
 .quartcirc{
      width:80px; 
@@ -162,7 +165,7 @@ body {padding-top: 70px;}
      border-radius: 0 0 90px 0;
      -moz-border-radius: 0 0 90px 0;
      -webkit-border-radius: 0 0 90px 0;
-     margin-top: -206px;
+     top:0;
      position: absolute;
      z-index: 50;
      color: #222222;
@@ -191,7 +194,22 @@ body {padding-top: 70px;}
 }
 .caption{
 	position: relative;
+	color: white;
+
 }
 .caption-expanded {
-	background-color: red;
+	background-color: rgba(34, 34, 34, 0.7);
+	height: 270px;
+	position: absolute;
+	padding-top: 50px !important;
+	top:0;
+	color: white;
+}
+.thumbnail .caption{
+	color: white;
+}
+.table{
+	bottom: 0;
+	position: relative;
+	margin-top: 40px;
 }

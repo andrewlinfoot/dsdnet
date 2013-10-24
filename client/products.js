@@ -60,6 +60,7 @@ Template.products.events({
 	},
 	'click a.plusmore' : function (e) {
 		e.preventDefault();
-		console.log('kaljfdsh');
+		var $target = $(e.currentTarget);
+		$target.closest('.caption').toggleClass('caption-expanded');
 	}
 });

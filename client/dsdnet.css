@@ -1,4 +1,7 @@
-/* CSS declarations go here */
+.dsdnet-subcategories {
+	margin-left: 15px;
+}
+
 @font-face {
 	font-family: 'LeagueSpart';
 	src: url('/LGfont/league_spartan_bold-webfont.eot');
@@ -95,6 +98,7 @@ body {padding-top: 70px;}
 	margin-top: -70px;
 
 }
+
 .thumbnail{
 	border: none;
 	padding: 0;
@@ -132,6 +136,7 @@ body {padding-top: 70px;}
 }
 .navbar{
 	box-shadow: 0px 4px 5px #000000;
+<<<<<<< HEAD
 }
 .products{
 	height: 270px;

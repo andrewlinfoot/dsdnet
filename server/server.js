@@ -26,11 +26,14 @@ Meteor.publish('categories', function () {
 	return Categories.find({parent: null});
 });
 
+Meteor.publish('subCategories', function (currentCategory) {
+	return Categories.find({parent: currentCategory});
+});
+
 Meteor.publish('products', function (currentCategory) {
 	if (currentCategory) {
-		currentCategory = Categories.findOne({name: currentCategory});
-		var subCategories = Categories.find({parent: currentCategory._id});
-		var categoryIdArray = [currentCategory._id];
+		var subCategories = Categories.find({parent: currentCategory});
+		var categoryIdArray = [currentCategory];
 		subCategories.forEach( function (category) {
 			categoryIdArray.push(category._id);
 		});

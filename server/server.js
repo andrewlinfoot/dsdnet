@@ -17,3 +17,22 @@ Meteor.startup( function () {
 		Companies.insert(mcfarlingData);
 	}
 });
+
+Meteor.publish('categories', function () {
+	return Categories.find({parent: null});
+});
+
+Meteor.publish('products', function (currentCategory) {
+	if (currentCategory) {
+		currentCategory = Categories.findOne({name: currentCategory});
+		var subCategories = Categories.find({parent: currentCategory._id});
+		var categoryIdArray = [currentCategory._id];
+		subCategories.forEach( function (category) {
+			categoryIdArray.push(category._id);
+		});
+		console.log(categoryIdArray);
+		return Products.find({category: { $in: categoryIdArray } }, {limit:50, sort: {name: 1} });
+	} else {
+		return Products.find({}, {limit:25, sort: {name: 1} });
+	}
+});

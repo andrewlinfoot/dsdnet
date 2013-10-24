@@ -3,5 +3,5 @@ Template.home.companyProfile = function () {
 };
 
 Template.home.categories = function () {
-	return ["Dairy", "Poultry", "Meats", "Category 5"];
-}
+	return Categories.find({parent: null}, {sort: {name: 1} });
+};

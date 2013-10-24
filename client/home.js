@@ -1,5 +1,5 @@
 Template.home.companyProfile = function () {
-	return Companies.find({url: Session.get("companyUrl")});
+	return Companies.find({url: Session.get("currentCompanyUrl")});
 };
 
 Template.home.categories = function () {

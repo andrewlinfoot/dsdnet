@@ -4,6 +4,10 @@ Deps.autorun( function () {
 	Meteor.subscribe('products', Session.get('currentCategory'));
 });
 
+Deps.autorun( function () {
+	Meteor.subscribe('currentCompany', Session.get('currentCompanyUrl'));
+});
+
 Template.products.categories = function () {
     return Categories.find({parent: null}, {sort: {name: 1} });
 };

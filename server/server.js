@@ -18,6 +18,10 @@ Meteor.startup( function () {
 	}
 });
 
+Meteor.publish('currentCompany', function (currentCompanyUrl) {
+	return Companies.find({url: currentCompanyUrl});
+});
+
 Meteor.publish('categories', function () {
 	return Categories.find({parent: null});
 });

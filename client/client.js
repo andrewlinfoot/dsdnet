@@ -38,7 +38,7 @@ Router.map(function () {
     });
 });
 
-// Scroll to top fix
+// Scroll to top fix for iron-router
 Deps.autorun(function () {
   var current = Router.current();
 

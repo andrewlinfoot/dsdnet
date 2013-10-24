@@ -12,6 +12,10 @@ Template.products.categories = function () {
     return Categories.find({parent: null}, {sort: {name: 1} });
 };
 
+Template.products.currentCategory = function () {
+	return Session.equals('currentCategory', this._id) ? 'active' : '';
+};
+
 Template.products.companyName = function () {
     return Companies.find({url: Session.get("companyUrl")});
 };
@@ -32,9 +36,8 @@ Template.navbar.categories = function () {
 };
 
 Template.products.events({
-	'click a' : function (e) {
+	'click a.category-item' : function (e) {
 		e.preventDefault();
-		var categoryName = e.target.innerText;
-		Session.set("currentCategory",categoryName);
+		Session.set("currentCategory",this._id);
 	}
 });

@@ -34,6 +34,9 @@ body {padding-top: 70px;}
 	left: 0px;
 	top: 30px;
 	box-shadow: 1px 0px 2px #000000;
+	font-family: "LeagueSpart", courier, monospace;
+	color: #222222;
+	line-height: 95%;
 }
 .dsdnet-content {
 	margin-left: 280px;
@@ -83,7 +86,7 @@ body {padding-top: 70px;}
 	background-position: center top;
 	margin-top: 15px;
 	margin-bottom: -400px;
-	overflow: visible;
+	overflow: visible; 
 
 }
 .section-dividertop{
@@ -246,8 +249,35 @@ body {padding-top: 70px;}
 	z-index: 50;
 }*/
 .nav-pills > li.active-subcategory > a{
-	background-color: green;
+	background-color: #A8A8A8;
+	color: #222222;
 }
 .searchbar{
 	padding: 15px;
+
+}
+.sub-category-item{
+	font-size: 85%;
+	color: #222222;
+	line-height: 4%;
+}
+.category-item{
+	color: #222222;
+
+}
+.category-item:hover{
+	color:#8CC63E;
+}
+.sub-category-item:hover{
+	background-color: #8CC63E;
+	color: black;
+	}
+.nav-pills > li.active-subcategory > a:hover{
+	background-color: #8CC63E;
+}
+.nav-pills > li.active > a:hover{
+	background-color: #8CC63E;
+}
+.form-control{
+	border-radius: 200px;
 }

@@ -26,6 +26,10 @@ Meteor.publish('categories', function () {
 	return Categories.find({parent: null});
 });
 
+Meteor.publish('subCategories', function (currentCategory) {
+	return Categories.find({parent: currentCategory});
+});
+
 Meteor.publish('products', function (currentCategory) {
 	if (currentCategory) {
 		var subCategories = Categories.find({parent: currentCategory});

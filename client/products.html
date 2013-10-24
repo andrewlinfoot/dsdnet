@@ -18,6 +18,9 @@
 		</div>
 		<div class="dsdnet-content">
 			<div class="row">
+				<form class="searchbar">
+				<input type="search" class="form-control" placeholder="Search">
+				</form>
 				{{#each products}}
 				<div class="col-md-3 dsdnet-product-thumbnail">
 					<div class="thumbnail products">
@@ -68,24 +71,6 @@
 <template name="navbar">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<a class="navbar-brand dsdnet-header-logo" href="#"><img class="img-responsive" src="/dsdnet-logo-40.png"></a>
-		<div class="dsdwrapper">
-			<form class="navbar-form">
-			  <div class="input-group dsdnet-header-search-hack">
-		      <div class="input-group-btn">
-		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">All <span class="caret"></span></button>
-		        <ul class="dropdown-menu">
-		          <li><a href="#">All</a></li>
-		          {{#each categories}}
-		          	<li><a href="#">{{name}}</a></li>
-		          {{/each}}
-		        </ul>
-		      </div><!-- /btn-group -->
-		      <input type="text" class="form-control">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Go!</button>
-		      </span>
-		    </div><!-- /input-group -->						
-			</form>	
-		</div><!--end dsdwrapper -->
 	</div>
 </template>
+

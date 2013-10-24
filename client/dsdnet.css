@@ -50,7 +50,7 @@ body {padding-top: 70px;}
 	padding: 10px;
 }
 .dsdnet-product-thumbnail {
-	padding-bottom: 15px;
+	padding: 15px;
 }
 .dsdnet-home-content-area {
 	margin-left: 15px;
@@ -247,4 +247,7 @@ body {padding-top: 70px;}
 }*/
 .nav-pills > li.active-subcategory > a{
 	background-color: green;
+}
+.searchbar{
+	padding: 15px;
 }

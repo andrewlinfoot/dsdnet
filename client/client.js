@@ -19,7 +19,7 @@ Router.map(function () {
         path: '/:url/products',
         data: function () {
             var roomName = this.params.url;
-            Session.set("companyUrl", this.params.url);
+            Session.set("currentCompanyUrl", this.params.url);
             return {
                 params: this.params
             };
@@ -30,10 +30,19 @@ Router.map(function () {
         path: '/:url',
         data: function () {
             var roomName = this.params.url;
-            Session.set('companyUrl', this.params.url);
+            Session.set('currentCompanyUrl', this.params.url);
             return {
                 params: this.params
             };
         }
     });
+});
+
+// Scroll to top fix for iron-router
+Deps.autorun(function () {
+  var current = Router.current();
+
+  Deps.afterFlush(function () {
+    $(window).scrollTop(0);
+  });
 });

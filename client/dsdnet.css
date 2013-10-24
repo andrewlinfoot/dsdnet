@@ -1,49 +1,197 @@
-/* CSS declarations go here */
+.dsdnet-subcategories {
+	margin-left: 15px;
+}
 
-	    		body {padding-top: 70px;}
-	    	
-	    	.dsdnet-header-logo {
-	    		width: 250px;
-	    		padding-left: 15px;
-	    		padding-right: 15px;
-	    		padding-top: 5px;
-	    		padding-bottom: 5px;
-	    		margin-right: 15px;
-	    	}
-	    	.dsdnet-header-search-hack {
-	    		padding-left: 15px;
-	    	}
-	    	.dsdnet-sidebar {
-	    		width: 250px;
-	    		padding-left: 15px;
-	    		padding-right: 15px;
-	    		position: absolute;
-	    		left: 0px;
-	    		top: 70px;
-	    	}
-	    	.dsdnet-content {
-	    		margin-left: 280px;
-	    		margin-right: 15px;
-	    	}
-	    	.dsdnet-about {
-	    		margin-top: 0;
-	    	}
-	    	.dsdnet-category-thumbnail {
-	    		padding-bottom: 15px;
-	    	}
-	    	.dsdnet-product-thumbnail {
-	    		padding-bottom: 15px;
-	    	}
-	    	.dsdnet-home-content-area {
-	    		margin-left: 15px;
-	    		margin-right: 15px;
-	    	}
-	    	.dsdaboutpic{
-	    		height: 100%;
-	    		overflow: hidden;
-	    	}
-	    	.img-sqr-wrapper{
-	    		height: 250px;
-	    		width: 250px;
-	    		overflow: hidden;
-	    	}
+@font-face {
+	font-family: 'LeagueSpart';
+	src: url('/LGfont/league_spartan_bold-webfont.eot');
+	src: url('/LGfont/league_spartan_bold-webfont.eot') format('embedded-opentype'),
+			url('/LGfont/league_spartan_bold-webfont.woff') format('woff'),
+			url('/LGfont/league_spartan_bold-webfont.ttf') format('truetype'),
+			url('/LGfont/league_spartan_bold-webfont.svg#webfont') format('svg');
+		
+}
+body {padding-top: 70px;}
+
+.dsdnet-header-logo {
+	width: 250px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-right: 15px;
+}
+.navbar-inverse{
+	border: none;
+	background-color: #222222;
+	background-image: none;
+
+}
+.dsdnet-sidebar {
+	width: 250px;
+	padding-left: 15px;
+	padding-right: 15px;
+	position: absolute;
+	left: 0px;
+	top: 70px;
+}
+.dsdnet-content {
+	margin-left: 280px;
+	margin-right: 15px;
+}
+.dsdnet-about {
+	margin-top: 0;
+	height: 234px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+.dsdnet-category-thumbnail {
+	padding: 10px;
+}
+.dsdnet-product-thumbnail {
+	padding-bottom: 15px;
+}
+.dsdnet-home-content-area {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.dsdaboutpic{
+	height: 100%;
+	float: left;
+
+}
+.img-sqr-wrapper{
+	max-height: 250px;
+	max-width: 250px;
+	overflow: hidden;
+
+}
+.dsdwrapper{
+	max-width: 1120px;
+	width: 100%;
+	margin: 0 auto;
+	
+}
+.section-dividerbot{
+	background: url(/bkgtopgrad.png);
+	height: 500px;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	max-width: 1120px;
+	background-size: auto;
+	background-position: center top;
+	margin-top: 15px;
+	margin-bottom: -400px;
+	overflow: visible;
+
+}
+.section-dividertop{
+	background: url(/bkgbotgrad.png);
+	height: 100px;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	max-width: 1120px;
+	background-size: auto;
+	background-position: center bottom;
+	margin-bottom: 15px;
+	margin-top: -70px;
+
+}
+
+.thumbnail{
+	border: none;
+	padding: 0;
+	background-color: #222222;
+	border-radius: 0px;
+	box-shadow: 1px 1px 2px #000000;
+
+}
+.thumbnail:hover{
+	box-shadow: 5px 5px 8px #000000;
+	-webkit-transform: scale(1.02);
+}
+.catcaption{
+	margin-top: 0;
+	margin-left: 5px;
+	margin-bottom: 10px;
+	color: white;
+	font-family: "LeagueSpart", courier, monospace;
+}
+.widewrapper{
+	padding-right: 5%;
+	padding-left:5%;
+	margin: 0 auto;
+}
+.arrowup{
+	margin-top: -19px;
+	position: absolute;
+	margin-left: 5%;
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 20px solid #222222;
+	z-index: 50;
+}
+.navbar{
+	box-shadow: 0px 4px 5px #000000;
+<<<<<<< HEAD
+}
+.products{
+	height: 270px;
+	overflow: hidden;
+}
+.description{
+	font-family: "LeagueSpart", courier, monospace;
+	color: white;
+	height: 40px;
+}
+#name{
+	font-family: "LeagueSpart", courier, monospace;
+	color: white;
+}
+.capproduct{
+	height:50px;
+	position: absolute;
+}
+.quartcirc{
+     width:80px; 
+     height:40px;  
+     background: #8CC63E;
+     border-radius: 0 0 90px 0;
+     -moz-border-radius: 0 0 90px 0;
+     -webkit-border-radius: 0 0 90px 0;
+     margin-top: -206px;
+     position: absolute;
+     z-index: 50;
+     color: #222222;
+     
+
+}
+.invqty{
+	font-size: 30px;
+	font-family: "LeagueSpart", courier, monospace;
+	margin-left: 3px;
+
+}
+.avail{
+	font-family: "LeagueSpart", courier, monospace;
+	position: absolute;
+	margin-top: 4px;
+	margin-left:5px;
+}
+.plusmore{
+	font-family: "LeagueSpart", courier, monospace;
+	color: #8CC63E;
+	position: absolute;
+	top:35px;
+	right:0;
+	margin-right: 10px;
+}
+.caption{
+	position: relative;
+}
+.caption-expanded {
+	background-color: red;
+}

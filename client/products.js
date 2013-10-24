@@ -36,5 +36,9 @@ Template.products.events({
 		e.preventDefault();
 		var categoryName = e.target.innerText;
 		Session.set("currentCategory",categoryName);
+	},
+	'click .plusmore' : function (e) {
+		e.preventDefault();
+		console.log('kaljfdsh');
 	}
 });

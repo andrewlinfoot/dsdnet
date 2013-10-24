@@ -14,14 +14,23 @@
 			<div class="row">
 				{{#each products}}
 				<div class="col-md-3 dsdnet-product-thumbnail">
-					<div class="thumbnail">
+					<div class="thumbnail products">
 						<img class="img-responsive" src="http://www.mrbigben.com/food/pyramid_dairy.jpg">
+						<div class="quartcirc">
+							<div id="available">
+								<span class="invqty">5</span> <span class="avail"> avail</span>
+
+							</div>
+						</div>
 						<div class="caption">
-							<p>Description: {{description}}</p>
-							<p>Brand: {{brand}}</p>
-							<p>Pack: {{pack}}</p>
-							<p>Item Number: {{productNumber}}</p>
-							<p>availble<p>
+							<p class="description">Description: {{description}}</p>
+							<p id="brand">Brand: {{brand}}</p>
+							<p id="pack">Pack: {{pack}}</p>
+							<p id="item">Item Number: {{productNumber}}</p>
+							<a href="#" class="plusmore">
+								+ More
+							</a>
+
 						</div>
 					</div>
 				</div>

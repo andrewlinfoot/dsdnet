@@ -162,7 +162,8 @@ body {padding-top: 70px;}
 
 }
 .quartcirc{
-     width:80px; 
+     width:auto; 
+     padding-right: 55px;
      height:40px;  
      background: #8CC63E;
      border-radius: 0 0 90px 0;

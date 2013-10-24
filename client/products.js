@@ -27,7 +27,7 @@ Template.products.currentCategory = function () {
 };
 
 Template.products.currentSubCategory = function () {
-	return Session.equals('currentSubCategory', this._id) ? 'active' : '';
+	return Session.equals('currentSubCategory', this._id) ? 'active active-subcategory' : '';
 };
 
 Template.products.companyName = function () {

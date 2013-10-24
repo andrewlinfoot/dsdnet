@@ -29,11 +29,11 @@ body {padding-top: 70px;}
 }
 .dsdnet-sidebar {
 	width: 250px;
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-top: 40px;
 	position: absolute;
 	left: 0px;
-	top: 70px;
+	top: 30px;
+	box-shadow: 1px 0px 2px #000000;
 }
 .dsdnet-content {
 	margin-left: 280px;
@@ -195,6 +195,10 @@ body {padding-top: 70px;}
 .caption{
 	position: relative;
 	color: white;
+		   transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+ 
 
 }
 .caption-expanded {
@@ -204,6 +208,9 @@ body {padding-top: 70px;}
 	padding-top: 50px !important;
 	top:0;
 	color: white;
+	width: 100%;
+
+
 }
 .thumbnail .caption{
 	color: white;
@@ -212,4 +219,32 @@ body {padding-top: 70px;}
 	bottom: 0;
 	position: relative;
 	margin-top: 40px;
+}
+.nav-pills > li > a{
+	border-radius: 0px;
+	margin-top: 0px;
+
+
+}
+.img-responsive{
+	margin: 0 auto;
+}
+.navmargin{
+	margin-top: 15px;
+}
+.nav-pills > li.active > a{
+	background-color: #222222;
+}
+/*.col_cat_arrow{
+	position: relative;
+	margin-left: 5%;
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid blue;
+	z-index: 50;
+}*/
+.nav-pills > li.active-subcategory > a{
+	background-color: green;
 }

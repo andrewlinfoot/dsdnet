@@ -3,10 +3,10 @@
 	<body>
 		{{> navbar}}
 		<div class="dsdnet-sidebar">
-				<img class="img-responsive" src="http://www.mcfarling.com/images/logosquared.gif">
-				<ul class="nav nav-pills nav-stacked">
+				<img class="img-responsive cener" src="http://www.mcfarling.com/images/logosquared.gif">
+				<ul class="nav nav-pills nav-stacked navmargin">
 					{{#each categories}}
-			     		<li class="{{currentCategory}}"><a class="category-item" href="#">{{name}}</a>
+			     		<li class="{{currentCategory}}"><a class="category-item" href="#"><span class="col_cat_arrow"></span>{{name}}</a>
 			     			<ul class="nav nav-pills nav-stacked dsdnet-subcategories">
 			     				{{#each subCategories}}
 			     					<li class="{{currentSubCategory}}"><a class="sub-category-item" href="#">{{name}}</a></li>
@@ -21,7 +21,7 @@
 				{{#each products}}
 				<div class="col-md-3 dsdnet-product-thumbnail">
 					<div class="thumbnail products">
-						<img class="img-responsive" src="http://www.mrbigben.com/food/pyramid_dairy.jpg">
+						<img class="img-responsive" src="https://susansmithjones.com/sites/default/files/graphics/Excalibur_food_in.jpg">
 						<div class="quartcirc">
 							<div id="available">
 								<span class="invqty">5</span> <span class="avail"> avail</span>
@@ -29,7 +29,7 @@
 							</div>
 						</div>
 						<div class="caption">
-							<p class="description">Description: {{description}}</p>
+							<p class="description">{{description}}</p>
 							<table class="table">
 								<tbody>
 									<tr>

@@ -1,5 +1,11 @@
+Meteor.subscribe('categories');
+
+Deps.autorun( function () {
+	Meteor.subscribe('products', Session.get('currentCategory'));
+});
+
 Template.products.categories = function () {
-    return ["Dairy", "Produce"];
+    return Categories.find({parent: null}, {sort: {name: 1} });
 };
 
 Template.products.companyName = function () {
@@ -7,9 +13,24 @@ Template.products.companyName = function () {
 };
 
 Template.products.products = function () {
-	return ["Cow Poop", "Chicken Little", "The Great Gadsby"];
-}
+	var currentCategory = Session.get(currentCategory);
+	if (currentCategory) {
+		//return products filtered by category
+		return Products.find({}, {limit: 50, sort: {description: 1} });
+	} else {
+		//return all products
+		return Products.find({}, {limit:50, sort: {description: 1} });
+	}
+};
 
 Template.navbar.categories = function () {
-	return ["Dairy", "Produce"];
+	return Categories.find({parent: null}, {sort: {name: 1} });
 };
+
+Template.products.events({
+	'click a' : function (e) {
+		e.preventDefault();
+		var categoryName = e.target.innerText;
+		Session.set("currentCategory",categoryName);
+	}
+});

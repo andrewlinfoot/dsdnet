@@ -6,7 +6,7 @@
 				<img class="img-responsive" src="http://www.mcfarling.com/images/logosquared.gif">
 				<ul class="nav nav-pills nav-stacked">
 					{{#each categories}}
-			     		<li><a href="#">{{this}}</a></li>
+			     		<li><a href="#">{{name}}</a></li>
 			  		{{/each}}
 				</ul>
 		</div>
@@ -17,10 +17,10 @@
 					<div class="thumbnail">
 						<img class="img-responsive" src="http://www.mrbigben.com/food/pyramid_dairy.jpg">
 						<div class="caption">
-							<p>description</p>
-							<p>brand</p>
-							<p>pack</p>
-							<p>item #</p>
+							<p>Description: {{description}}</p>
+							<p>Brand: {{brand}}</p>
+							<p>Pack: {{pack}}</p>
+							<p>Item Number: {{productNumber}}</p>
 							<p>availble<p>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 		        <ul class="dropdown-menu">
 		          <li><a href="#">All</a></li>
 		          {{#each categories}}
-		          	<li><a href="#">{{this}}</a></li>
+		          	<li><a href="#">{{name}}</a></li>
 		          {{/each}}
 		        </ul>
 		      </div><!-- /btn-group -->

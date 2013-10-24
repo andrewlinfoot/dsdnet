@@ -37,3 +37,12 @@ Router.map(function () {
         }
     });
 });
+
+// Scroll to top fix
+Deps.autorun(function () {
+  var current = Router.current();
+
+  Deps.afterFlush(function () {
+    $(window).scrollTop(0);
+  });
+});

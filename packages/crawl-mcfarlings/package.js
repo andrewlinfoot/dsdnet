@@ -1,5 +1,5 @@
 Package.describe({
-    summary: 'Crawler'
+    summary: 'Crawl McFarlings\' products listings and populate databases'
 });
 
 Package.on_use(function (api) {
@@ -7,5 +7,5 @@ Package.on_use(function (api) {
 
     api.add_files('crawl.js', 'server');
 
-    api.export('Crawl');
+    api.export('CrawlMcFarlings');
 });

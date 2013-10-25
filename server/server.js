@@ -1,6 +1,6 @@
 Meteor.methods({
   startCrawl : function(){
-    Crawl.startCrawl();
+    CrawlMcFarlings();
   }
 });
 

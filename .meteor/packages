@@ -7,5 +7,5 @@ standard-app-packages
 insecure
 preserve-inputs
 iron-router
-crawl
+crawl-mcfarlings
 http

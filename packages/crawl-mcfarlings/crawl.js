@@ -12,9 +12,18 @@ CrawlMcFarlings = function () {
   //grab the cookie
   HTTP.get(CookieUrl, function(error, result){
     Options.headers.Cookie = result.headers['set-cookie'][0];
-    //start crawling categories
+    //start crawling rootCategories
     GetCategories();
   });
+}
+
+FindAndUpdate = function(collection, options){
+  var id = collection.findOne(options.query, { _id: true })
+  if(id){
+    collection.update(options.query, options.update, options.upsert);
+    return id._id;
+  }
+  return collection.insert(options.query);
 }
 
 //crawl the categories
@@ -23,33 +32,36 @@ GetCategories = function(){
     Options,
     function (error, result) {
       var $doc = $(result.content);
-      var $menu = $doc.find('.clsMainMenu a :nth-child(3)');
+      var $menu = $doc.find('.clsMainMenu a:nth-child(3)');
       //gather all of the top level categories
-      var categories = $menu.map(function(index, element){
-        var href = element.href;
-        var index = href.indexOf('itcat=');
-        var val = href.substring(index + 6, index + 10);
+      var rootCategories = $menu.map(function(index, element){
+        element.href.match(/itcat=(\d+)/g);
+        var val = RegExp.$1;
         return {
-          name : element.title.split(':')[1].substring(1),
-          subCatUrl : SubCategoryUrlTemp.replace(/{(0)}/g, val),
-          listingsUrl : href,
-          parent : null
+          name: element.title.split(':')[1].substring(1),
+          subCatUrl: SubCategoryUrlTemp.replace(/{(0)}/g, val),
+          listingsUrl: element.href,
+          parent: null
         };
       });
 
       //look at each category, get every subcategory, and store them in
       //the db
-      for(var j = 0; j < categories.length; j++){
-        var catId = Categories.insert({
-          name : categories[j].name,
-          parent : null
+      for(var j = 0; j < rootCategories.length; j++){
+        var categoryName = rootCategories[j].name;
+        //upsert category
+        var q = { name: categoryName, parent: null };
+        var catId = FindAndUpdate(Categories, {
+          query: q,
+          update: { $set: q },
+          new: true,
+          upsert: true
         });
+        GetListings(catId, rootCategories[j].listingsUrl);
         
-        GetListings(catId, categories[j].listingsUrl);
-        
-        HTTP.get(categories[j].subCatUrl, Options, function(error, result){
+        HTTP.get(rootCategories[j].subCatUrl, Options, function(error, result){
           var $doc = $(result.content);
-          //the categories that have 3 child nodes are the subcategories
+          //the categories that have 3 child nodes are the subrootCategories
           //of the current expanded category
           var $submenu = $doc.find('.clsMainMenu');
           for( var i = 0; i < $submenu.length; i++){
@@ -59,24 +71,31 @@ GetCategories = function(){
             }
             var child = children.eq(2);
             var listingsUrl = child.attr('href');
-
+            var categoryName =  child.attr('title').split(':')[1].substring(5);
             //store the category in the db
-            var catId = Categories.insert({
-              name : child.attr('title').split(':')[1].substring(5),
-              parent : this.parentCategoryId
+            var q = {
+              name: categoryName,
+              parent: this.parentCategoryId
+            }
+            var catId = FindAndUpdate(Categories, {
+              query: q,
+              update: { $set: q },
+              new: true,
+              upsert: true
             });
+            //lookup the listings for this subcategory
             GetListings(catId, listingsUrl);
           }
         //bind the category to each subcateogry lookup
-        }.bind({parentCategoryId : catId}));
+        }.bind({parentCategoryId: catId}));
       }
     });
 };
 
 //get the listings in the frame and populate the db
 GetListings = function (CategoryId, listingUrl, lastCrawl) {
-  listingUrl = listingUrl.replace(/viewid=1/g, 'viewid=2');
-  if( !listingUrl.match(/viewid=2/g)){
+  listingUrl = listingUrl.replace('viewid=1', 'viewid=2');
+  if( !listingUrl.match('viewid=2') ){
     listingUrl = listingUrl + '&viewid=2';
   }
   HTTP.get(listingUrl, Options, function (error, result) {
@@ -95,14 +114,19 @@ GetListings = function (CategoryId, listingUrl, lastCrawl) {
       var pack = columns.eq(3).text();
       var description = columns.eq(4).text();
       var stock = parseInt(columns.eq(5).text());
-      Products.insert({
-        productNumber : itemNumber,
-        brand : brand,
-        pack : pack,
-        description : description,
-        category : CategoryId,
-        stock : stock
-      });
+      Products.update({
+          productNumber: itemNumber,
+          brand: brand,
+          pack: pack,
+          description: description,
+          category: CategoryId,
+        }, 
+        {
+          $set: { stock: stock }
+        },
+        {
+          upsert: true
+        });
     });
   });
 };

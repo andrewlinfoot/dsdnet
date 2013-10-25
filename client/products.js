@@ -66,7 +66,7 @@ Template.products.events({
 	'click a.plusmore' : function (e) {
 		e.preventDefault();
 		var $target = $(e.currentTarget);
-		$target.closest('.caption').toggleClass('caption-expanded');
+		$target.closest('.caption-wrapper').toggleClass('caption-wrapper-expanded');
 	},
 	'keyup .search-input' : function (e) {
 		var searchQuery = e.currentTarget.value;

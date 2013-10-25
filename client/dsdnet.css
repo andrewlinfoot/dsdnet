@@ -109,6 +109,7 @@ body {padding-top: 70px;}
 	border-radius: 0px;
 	box-shadow: 1px 1px 2px #000000;
 	color: white;
+	padding-bottom: 55px;
 
 }
 .thumbnail:hover{
@@ -143,9 +144,10 @@ body {padding-top: 70px;}
 	box-shadow: 0px 4px 5px #000000;
 }
 .products{
-	height: 270px;
+	height: auto;
 	overflow: hidden;
 	position: relative;
+	padding-bottom: 65px;
 }
 .description{
 	font-family: "LeagueSpart", courier, monospace;
@@ -197,25 +199,12 @@ body {padding-top: 70px;}
 	margin-right: 10px;
 }
 .caption{
-	position: relative;
-	color: white;
-		   transition: opacity .25s ease-in-out;
-   -moz-transition: opacity .25s ease-in-out;
-   -webkit-transition: opacity .25s ease-in-out;
- 
-
-}
-.caption-expanded {
-	background-color: rgba(34, 34, 34, 0.7);
-	height: 270px;
 	position: absolute;
-	padding-top: 50px !important;
-	top:0;
-	color: white;
 	width: 100%;
 
 
 }
+
 .thumbnail .caption{
 	color: white;
 }
@@ -281,4 +270,16 @@ body {padding-top: 70px;}
 }
 .form-control{
 	border-radius: 200px;
+}
+.caption-wrapper{
+	position: relative;
+	color: white;
+}
+.caption-wrapper-expanded{
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(34, 34, 34, 0.7);
+	padding-top: 45px;
 }

@@ -13,6 +13,9 @@
 		
 }
 body {padding-top: 70px;}
+@font: "LeagueSpart", courier, monospace;
+@green: #8CC63E;
+@gray: #222222;
 
 .dsdnet-header-logo {
 	width: 250px;
@@ -246,6 +249,8 @@ body {padding-top: 70px;}
 }
 .searchbar{
 	padding: 15px;
+	max-width: 960px;
+	margin: 0 auto;
 
 }
 .sub-category-item{
@@ -288,4 +293,54 @@ body {padding-top: 70px;}
 	height: 100%;
 	background-color: rgba(34, 34, 34, 0.7);
 	padding-top: 40px;
+}
+/*HOME PAGE
+/
+/
+/
+*/
+h1{
+	font-family: @font;
+	color: @gray;
+}
+
+.top-section-cont{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+}
+.top-section{
+	height: 100%;
+	top: 25%;
+	position: relative;
+
+}
+.home-row-wrapper{
+	position: relative;
+	background: url(/globe2.png);
+	background-repeat: no-repeat;
+	background-position: center 400px;
+	background-size: cover;
+	height: 100%;
+
+
+
+
+}
+.tester{
+	background-color: red;
+	height: 50px;
+	position: relative;
+}
+.homelogo{
+	height: 100px;
+	margin-left: 15%;
+	margin-top:50px;
+	position: relative;
+
+}
+.call-to-action{
+	margin-bottom: 30px;
+	text-align: center;
 }

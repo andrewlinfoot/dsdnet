@@ -19,44 +19,9 @@
 		<div class="dsdnet-content">
 			<div class="row">
 				<form class="searchbar">
-				<input type="search" class="form-control" placeholder="Search">
+				<input type="search" class="search-input form-control" placeholder="Search">
 				</form>
-				{{#each products}}
-				<div class="col-md-3 dsdnet-product-thumbnail">
-					<div class="thumbnail products">
-						<img class="img-responsive" src="https://susansmithjones.com/sites/default/files/graphics/Excalibur_food_in.jpg">
-						<div class="quartcirc">
-							<div id="available">
-								<span class="invqty">5</span> <span class="avail"> avail</span>
-
-							</div>
-						</div>
-						<div class="caption">
-							<p class="description">{{description}}</p>
-							<table class="table">
-								<tbody>
-									<tr>
-										<td id="brand">Brand:</td>
-										<td>{{brand}}</td>
-									</tr>
-									<tr>
-										<td id="pack">Pack:</td>
-										<td>{{pack}}</td>
-									</tr>
-									<tr>
-										<td p id="item">Item Number:</td>
-										<td>{{productNumber}}</td>
-									</tr>
-								</tbody>
-							</table>
-							<a href="#" class="plusmore">
-								+ More
-							</a>
-
-						</div>
-					</div>
-				</div>
-				{{/each}}
+				{{> productsArea}}
 			</div>
 		</div>
 	</body>
@@ -74,3 +39,41 @@
 	</div>
 </template>
 
+<template name="productsArea">
+	{{#each products}}
+	<div class="col-md-3 dsdnet-product-thumbnail">
+		<div class="thumbnail products">
+			<img class="img-responsive" src="https://susansmithjones.com/sites/default/files/graphics/Excalibur_food_in.jpg">
+			<div class="quartcirc">
+				<div id="available">
+					<span class="invqty">5</span> <span class="avail"> avail</span>
+
+				</div>
+			</div>
+			<div class="caption">
+				<p class="description">{{description}}</p>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td id="brand">Brand:</td>
+							<td>{{brand}}</td>
+						</tr>
+						<tr>
+							<td id="pack">Pack:</td>
+							<td>{{pack}}</td>
+						</tr>
+						<tr>
+							<td p id="item">Item Number:</td>
+							<td>{{productNumber}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="#" class="plusmore">
+					+ More
+				</a>
+
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</template>

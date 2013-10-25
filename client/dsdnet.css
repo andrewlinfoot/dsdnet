@@ -1,5 +1,6 @@
 .dsdnet-subcategories {
 	margin-left: 15px;
+
 }
 
 @font-face {
@@ -37,6 +38,7 @@ body {padding-top: 70px;}
 	font-family: "LeagueSpart", courier, monospace;
 	color: #222222;
 	line-height: 95%;
+	
 }
 .dsdnet-content {
 	margin-left: 280px;
@@ -249,6 +251,8 @@ body {padding-top: 70px;}
 .sub-category-item{
 	font-size: 85%;
 	color: #222222;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	line-height: 4%;
 }
 .category-item{

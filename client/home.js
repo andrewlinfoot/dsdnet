@@ -9,11 +9,7 @@ Template.home.categories = function () {
 Template.home.events({
 	'click .dsdnet-category-thumbnail' : function (e) {
 		e.preventDefault();
-
-		var $target = $(e.currentTarget);
-		var categoryName = $target.find('.catcaption').text();
-		
-		Session.set('currentCategory', categoryName);
+		Session.set('currentCategory', this._id);
 		Router.go( 'products', {url: Session.get('currentCompanyUrl')} );
 	}
 });

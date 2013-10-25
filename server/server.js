@@ -18,6 +18,8 @@ Meteor.startup( function () {
 	}
 });
 
+
+// Publish Functions
 Meteor.publish('currentCompany', function (currentCompanyUrl) {
 	return Companies.find({url: currentCompanyUrl});
 });
@@ -37,7 +39,6 @@ Meteor.publish('products', function (currentCategory) {
 		subCategories.forEach( function (category) {
 			categoryIdArray.push(category._id);
 		});
-		console.log(categoryIdArray);
 		return Products.find({category: { $in: categoryIdArray } }, {limit:50, sort: {name: 1} });
 	} else {
 		return Products.find({}, {limit:25, sort: {name: 1} });

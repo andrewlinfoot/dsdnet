@@ -34,10 +34,15 @@ Template.products.companyName = function () {
     return Companies.find({url: Session.get('companyUrl')});
 };
 
-Template.products.products = function () {
+Template.productsArea.products = function () {
 	var currentSubCategory = Session.get('currentSubCategory');
+	var searchQuery = Session.get('searchQuery');
 
-	if(currentSubCategory) {
+	if(searchQuery && currentSubCategory) {
+		return Products.find({category: currentSubCategory, description: { $regex: Session.get('searchQuery'), $options: 'i'} }, {limit: 50, sort: {description: 1} });
+	} else if (searchQuery) {
+		return Products.find({description: { $regex: Session.get('searchQuery'), $options: 'i'} }, {limit: 50, sort: {description: 1} });
+	} else if (currentSubCategory) {
 		return Products.find({category: currentSubCategory}, {limit: 50, sort: {description: 1} });
 	} else {
 		return Products.find({}, {limit: 50, sort: {description: 1} });
@@ -62,5 +67,13 @@ Template.products.events({
 		e.preventDefault();
 		var $target = $(e.currentTarget);
 		$target.closest('.caption').toggleClass('caption-expanded');
+	},
+	'keyup .search-input' : function (e) {
+		var searchQuery = e.currentTarget.value;
+		if(searchQuery.length === 0) {
+			Session.set('searchQuery', undefined);
+		} else {
+			Session.set('searchQuery', searchQuery);
+		}
 	}
 });

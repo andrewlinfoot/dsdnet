@@ -66,8 +66,10 @@ Template.products.events({
 	'click a.plusmore' : function (e) {
 		e.preventDefault();
 		var $target = $(e.currentTarget);
-		$target.closest('.caption-wrapper').toggleClass('caption-wrapper-expanded');
+		$target.prev('.caption-wrapper').toggleClass('caption-wrapper-expanded');
+		$target.text() === '- Less' ? $target.text('+ More') : $target.text('- Less');
 	},
+
 	'keyup .search-input' : function (e) {
 		var searchQuery = e.currentTarget.value;
 		if(searchQuery.length === 0) {

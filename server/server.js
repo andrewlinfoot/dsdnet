@@ -28,6 +28,17 @@ Meteor.publish('categories', function () {
 	return Categories.find({parent: null});
 });
 
+Meteor.publish('categoryList', function (companySlug, categorySlug) {
+	var company = Companies.findOne({slug: companySlug }, {fields: {_id: 1} });
+	var category = Categories.findOne({slug: categorySlug }, {fields: {_id: 1, parent: 1} });
+	return Categories.find({company: company._id,
+		$or: [
+			{parent: null},
+			{parent: category.parent},
+			{parent: category._id} ]
+		});
+});
+
 Meteor.publish('subCategories', function (currentCategory) {
 	return Categories.find({parent: currentCategory});
 });

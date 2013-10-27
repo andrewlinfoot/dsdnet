@@ -1,6 +1,37 @@
 Crawl = {};
 Options = { headers: {} };
 
+// ms interval between printing progress
+// 0 disables logging
+Crawl.logInterval = 10000;
+
+Crawl.progress = {
+  categories: {
+    started: 0,
+    finished: 0
+  },
+  products: {
+    started: 0,
+    finished: 0
+  }
+}
+Crawl.trackIntervalId = null;
+Crawl.trackProgress = function(){
+
+  var progress = Crawl.progress;
+  console.log('Category pages started: ', Crawl.progress.categories.started);
+  console.log('Category pages finished: ', Crawl.progress.categories.finished);
+  console.log('Product pages started: ', Crawl.progress.products.started);
+  console.log('Product pages finished: ', Crawl.progress.products.finished);
+  if( progress.categories.started == progress.categories.finished 
+    && progress.products.started == progress.products.finished){
+    console.log('Finished');
+    Meteor.clearInterval(Crawl.trackIntervalId);
+    return;
+  }
+  console.log('------------------------------');
+}
+
 CompanyRoot = {
   name: 'McFarling Foods',
   description: 'From our humble beginnings in 1948, McFarling Foods grew to become one of the largest independently-owned foodservice distributors in Indiana and a shareholder in Unipro Foodservice Inc., the world\'s largest foodservice cooperative. In 2009, we\'re celebrating our next step - becoming Indiana\'s largest 100% employee-owned food distributor. We are proud to say that when you call McFarling Foods, you\'re always speaking to an owner. Although our ownership structure has changed, our customers know they can expect the same commitment to service and quality brands that have helped the company become what it is today. McFarling Foods sells CODE, COMPANIONS, CORTONA, and WORLD HORIZON label products, in addition to hundreds of familiar national-labeled lines. McFarling Foods manufactures many products in our modern USDA-inspected meat and poultry departments. We have fresh seafood arriving daily and stock broadline inventories of fresh produce, fluid milk, and ice cream. Extensive frozen, canned, dry, disposable and chemical lines complete our product line. Our customers include renowned independent fine dining, deli, catering and concession, hospital and healthcare, industrial and institutional foodservice operators. McFarling Foods has provided national brands and programs through the local connection to our community for over a half-century. Arrange to visit our facility in Indianapolis. We\'ll show you our investment in the future.',
@@ -28,6 +59,10 @@ CrawlMcFarlings = function () {
     }
   });
   console.log('Starting Crawl: McFarling Foods');
+  Crawl.progress.categories.started++;
+  if(Crawl.logInterval){
+    Crawl.trackIntervalId = Meteor.setInterval(Crawl.trackProgress, Crawl.logInterval);
+  }
   //grab the cookie
   HTTP.get(CookieUrl, function(error, result){
     Options.headers.Cookie = result.headers['set-cookie'][0];
@@ -72,10 +107,11 @@ GetCategories = function(){
           parent: null
         };
       });
-
       //look at each category, get every subcategory, and store them in
       //the db
       for(var j = 0; j < rootCategories.length; j++){
+        //Update progress
+        Crawl.progress.categories.started++;
         var categoryName = rootCategories[j].name;
         //upsert category
         var q = { 
@@ -128,14 +164,19 @@ GetCategories = function(){
             //lookup the listings for this subcategory
             GetListings(catId, listingsUrl);
           }
+          //Update progress
+          Crawl.progress.categories.finished++;
         //bind the category to each subcateogry lookup
         }.bind({parentCategoryId: catId}));
       }
+      Crawl.progress.categories.finished++;
     });
 };
 
 //get the listings in the frame and populate the db
 GetListings = function (CategoryId, listingUrl, lastCrawl) {
+  //update progress
+  Crawl.progress.products.started++;
   listingUrl = listingUrl.replace('viewid=1', 'viewid=2');
   if( !listingUrl.match('viewid=2') ){
     listingUrl = listingUrl + '&viewid=2';
@@ -173,5 +214,6 @@ GetListings = function (CategoryId, listingUrl, lastCrawl) {
           upsert: true
         });
     });
+    Crawl.progress.products.finished++;
   });
 };

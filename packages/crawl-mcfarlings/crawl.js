@@ -1,7 +1,7 @@
 Crawl = {};
 Options = { headers: {} };
 
-CompanyData = {
+CompanyRoot = {
   name: 'McFarling Foods',
   description: 'From our humble beginnings in 1948, McFarling Foods grew to become one of the largest independently-owned foodservice distributors in Indiana and a shareholder in Unipro Foodservice Inc., the world\'s largest foodservice cooperative. In 2009, we\'re celebrating our next step - becoming Indiana\'s largest 100% employee-owned food distributor. We are proud to say that when you call McFarling Foods, you\'re always speaking to an owner. Although our ownership structure has changed, our customers know they can expect the same commitment to service and quality brands that have helped the company become what it is today. McFarling Foods sells CODE, COMPANIONS, CORTONA, and WORLD HORIZON label products, in addition to hundreds of familiar national-labeled lines. McFarling Foods manufactures many products in our modern USDA-inspected meat and poultry departments. We have fresh seafood arriving daily and stock broadline inventories of fresh produce, fluid milk, and ice cream. Extensive frozen, canned, dry, disposable and chemical lines complete our product line. Our customers include renowned independent fine dining, deli, catering and concession, hospital and healthcare, industrial and institutional foodservice operators. McFarling Foods has provided national brands and programs through the local connection to our community for over a half-century. Arrange to visit our facility in Indianapolis. We\'ll show you our investment in the future.',
   address: '333 West 14th Street Indianapolis, IN 46202',
@@ -19,12 +19,12 @@ SubCategoryUrlTemp =
 //start crawling McFarlings 
 CrawlMcFarlings = function () {
   console.log('Refreshing Company Data');
-  FindAndUpdate(Companies, {
+  Crawl.companyId = FindAndUpdate(Companies, {
     query: {
-      name: CompanyData.name
+      name: CompanyRoot.name
     },
     update: {
-      $set: CompanyData
+      $set: CompanyRoot
     }
   });
   console.log('Starting Crawl: McFarling Foods');
@@ -72,7 +72,14 @@ GetCategories = function(){
         var q = { name: categoryName, parent: null };
         var catId = FindAndUpdate(Categories, {
           query: q,
-          update: { $set: q },
+          update: { 
+            $set: {
+              name: q.name,
+              parent: q.parent,
+              company: Crawl.companyId,
+              slug: q.name.replace(/\s/g,'_')
+            }
+          },
           new: true,
           upsert: true
         });
@@ -98,7 +105,12 @@ GetCategories = function(){
             }
             var catId = FindAndUpdate(Categories, {
               query: q,
-              update: { $set: q },
+              update: { $set: {
+                name: q.name,
+                parent: q.parent,
+                company: Crawl.companyId,
+                slug: q.name.replace(/\s/g, '_').concat('_sub')
+              }},
               new: true,
               upsert: true
             });
@@ -135,13 +147,16 @@ GetListings = function (CategoryId, listingUrl, lastCrawl) {
       var stock = parseInt(columns.eq(5).text());
       Products.update({
           productNumber: itemNumber,
-          brand: brand,
-          pack: pack,
-          description: description,
-          category: CategoryId,
         }, 
         {
-          $set: { stock: stock }
+          $set: {
+            stock: stock,
+            brand: brand,
+            pack: pack,
+            description: description,
+            category: CategoryId,
+            slug: description.replace(/\s/g, '_')
+          }
         },
         {
           upsert: true

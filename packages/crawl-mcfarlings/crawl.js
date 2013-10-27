@@ -19,7 +19,7 @@ SubCategoryUrlTemp =
 //start crawling McFarlings 
 CrawlMcFarlings = function () {
   console.log('Refreshing Company Data');
-  Crawl.companyId = FindAndUpdate(Companies, {
+  Crawl.companyId = Util.findUpdate(Companies, {
     query: {
       name: CompanyRoot.name
     },
@@ -36,13 +36,22 @@ CrawlMcFarlings = function () {
   });
 }
 
-FindAndUpdate = function(collection, options){
-  var id = collection.findOne(options.query, { _id: true })
-  if(id){
-    collection.update(options.query, options.update, options.upsert);
-    return id._id;
+Util = {
+  findUpdate : function(collection, options){
+    var id = collection.findOne(options.query, { _id: true });
+    id = id ? id._id : false;
+    if(!id){
+      id = collection.insert(options.query);
+    }
+    collection.update(options.query, options.update,{ upsert: options.upsert });
+    return id;
+  },
+  toTitleCase : function(str){
+    return str.replace(/\w+\S*/g, function(word) {
+      return word.charAt(0).toUpperCase()
+        .concat(word.substring(1).toLowerCase());
+    });
   }
-  return collection.insert(options.query);
 }
 
 //crawl the categories
@@ -69,8 +78,10 @@ GetCategories = function(){
       for(var j = 0; j < rootCategories.length; j++){
         var categoryName = rootCategories[j].name;
         //upsert category
-        var q = { name: categoryName, parent: null };
-        var catId = FindAndUpdate(Categories, {
+        var q = { 
+          name: Util.toTitleCase(categoryName), 
+          parent: null };
+        var catId = Util.findUpdate(Categories, {
           query: q,
           update: { 
             $set: {
@@ -100,10 +111,10 @@ GetCategories = function(){
             var categoryName =  child.attr('title').split(':')[1].substring(5);
             //store the category in the db
             var q = {
-              name: categoryName,
+              name: Util.toTitleCase(categoryName),
               parent: this.parentCategoryId
             }
-            var catId = FindAndUpdate(Categories, {
+            var catId = Util.findUpdate(Categories, {
               query: q,
               update: { $set: {
                 name: q.name,
@@ -143,7 +154,7 @@ GetListings = function (CategoryId, listingUrl, lastCrawl) {
       var itemNumber = parseInt(columns.eq(1).find('a').text());
       var brand = columns.eq(2).text();
       var pack = columns.eq(3).text();
-      var description = columns.eq(4).text();
+      var description = Util.toTitleCase(columns.eq(4).text());
       var stock = parseInt(columns.eq(5).text());
       Products.update({
           productNumber: itemNumber,

@@ -1,5 +1,15 @@
 Crawl = {};
 Options = { headers: {} };
+
+CompanyRoot = {
+  name: 'McFarling Foods',
+  description: 'From our humble beginnings in 1948, McFarling Foods grew to become one of the largest independently-owned foodservice distributors in Indiana and a shareholder in Unipro Foodservice Inc., the world\'s largest foodservice cooperative. In 2009, we\'re celebrating our next step - becoming Indiana\'s largest 100% employee-owned food distributor. We are proud to say that when you call McFarling Foods, you\'re always speaking to an owner. Although our ownership structure has changed, our customers know they can expect the same commitment to service and quality brands that have helped the company become what it is today. McFarling Foods sells CODE, COMPANIONS, CORTONA, and WORLD HORIZON label products, in addition to hundreds of familiar national-labeled lines. McFarling Foods manufactures many products in our modern USDA-inspected meat and poultry departments. We have fresh seafood arriving daily and stock broadline inventories of fresh produce, fluid milk, and ice cream. Extensive frozen, canned, dry, disposable and chemical lines complete our product line. Our customers include renowned independent fine dining, deli, catering and concession, hospital and healthcare, industrial and institutional foodservice operators. McFarling Foods has provided national brands and programs through the local connection to our community for over a half-century. Arrange to visit our facility in Indianapolis. We\'ll show you our investment in the future.',
+  address: '333 West 14th Street Indianapolis, IN 46202',
+  phone: '(800) 622-9003',
+  website: 'http://www.mcfarling.com/',
+  slug: 'McFarling_Foods'
+}
+
 CookieUrl = 
   'http://12.192.21.195/netlinkcatalog/asp/cucbook.asp?bunit=1&cuswhs=001';
 CategoriesUrl = 
@@ -8,6 +18,15 @@ SubCategoryUrlTemp =
   'http://12.192.21.195/netlinkcatalog/asp/contentspane.asp?itcat={0}&open=1#{0}';
 //start crawling McFarlings 
 CrawlMcFarlings = function () {
+  console.log('Refreshing Company Data');
+  Crawl.companyId = Util.findUpdate(Companies, {
+    query: {
+      name: CompanyRoot.name
+    },
+    update: {
+      $set: CompanyRoot
+    }
+  });
   console.log('Starting Crawl: McFarling Foods');
   //grab the cookie
   HTTP.get(CookieUrl, function(error, result){
@@ -17,13 +36,22 @@ CrawlMcFarlings = function () {
   });
 }
 
-FindAndUpdate = function(collection, options){
-  var id = collection.findOne(options.query, { _id: true })
-  if(id){
-    collection.update(options.query, options.update, options.upsert);
-    return id._id;
+Util = {
+  findUpdate : function(collection, options){
+    var id = collection.findOne(options.query, { _id: true });
+    id = id ? id._id : false;
+    if(!id){
+      id = collection.insert(options.query);
+    }
+    collection.update(options.query, options.update,{ upsert: options.upsert });
+    return id;
+  },
+  toTitleCase : function(str){
+    return str.replace(/\w+\S*/g, function(word) {
+      return word.charAt(0).toUpperCase()
+        .concat(word.substring(1).toLowerCase());
+    });
   }
-  return collection.insert(options.query);
 }
 
 //crawl the categories
@@ -50,10 +78,19 @@ GetCategories = function(){
       for(var j = 0; j < rootCategories.length; j++){
         var categoryName = rootCategories[j].name;
         //upsert category
-        var q = { name: categoryName, parent: null };
-        var catId = FindAndUpdate(Categories, {
+        var q = { 
+          name: Util.toTitleCase(categoryName), 
+          parent: null };
+        var catId = Util.findUpdate(Categories, {
           query: q,
-          update: { $set: q },
+          update: { 
+            $set: {
+              name: q.name,
+              parent: q.parent,
+              company: Crawl.companyId,
+              slug: q.name.replace(/\s/g,'_')
+            }
+          },
           new: true,
           upsert: true
         });
@@ -74,12 +111,17 @@ GetCategories = function(){
             var categoryName =  child.attr('title').split(':')[1].substring(5);
             //store the category in the db
             var q = {
-              name: categoryName,
+              name: Util.toTitleCase(categoryName),
               parent: this.parentCategoryId
             }
-            var catId = FindAndUpdate(Categories, {
+            var catId = Util.findUpdate(Categories, {
               query: q,
-              update: { $set: q },
+              update: { $set: {
+                name: q.name,
+                parent: q.parent,
+                company: Crawl.companyId,
+                slug: q.name.replace(/\s/g, '_').concat('_sub')
+              }},
               new: true,
               upsert: true
             });
@@ -112,17 +154,20 @@ GetListings = function (CategoryId, listingUrl, lastCrawl) {
       var itemNumber = parseInt(columns.eq(1).find('a').text());
       var brand = columns.eq(2).text();
       var pack = columns.eq(3).text();
-      var description = columns.eq(4).text();
+      var description = Util.toTitleCase(columns.eq(4).text());
       var stock = parseInt(columns.eq(5).text());
       Products.update({
           productNumber: itemNumber,
-          brand: brand,
-          pack: pack,
-          description: description,
-          category: CategoryId,
         }, 
         {
-          $set: { stock: stock }
+          $set: {
+            stock: stock,
+            brand: brand,
+            pack: pack,
+            description: description,
+            category: CategoryId,
+            slug: description.replace(/\s/g, '_')
+          }
         },
         {
           upsert: true

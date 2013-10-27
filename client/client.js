@@ -26,7 +26,7 @@ Router.map(function () {
         }
     });
 
-    this.route('home', {
+    this.route('company', {
         path: '/:url',
         data: function () {
             var roomName = this.params.url;

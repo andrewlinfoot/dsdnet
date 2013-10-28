@@ -38,7 +38,8 @@ Router.map(function () {
         template: 'company',
         waitOn: function () {
             var companySlug = this.params.companySlug;
-            return Meteor.subscribe('currentCompany', companySlug);
+            return [ Meteor.subscribe('currentCompany', companySlug),
+                     Meteor.subscribe('currentCompanyCategories', companySlug) ];
         },
         data: function () {
             var companySlug = this.params.companySlug;

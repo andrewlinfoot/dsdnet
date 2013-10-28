@@ -9,7 +9,8 @@ Template.company.categories = function () {
 Template.company.events({
 	'click .dsdnet-category-thumbnail' : function (e) {
 		e.preventDefault();
+		var company = Companies.findOne({_id: this.company});
 		Session.set('currentCategory', this._id);
-		Router.go( 'products', {url: Session.get('currentCompanySlug')} );
+		Router.go('companyProducts', {categorySlug:this.slug, companySlug: company.slug});
 	}
 });

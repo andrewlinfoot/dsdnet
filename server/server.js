@@ -9,6 +9,11 @@ Meteor.publish('currentCompany', function (companySlug) {
 	return Companies.find({slug: companySlug});
 });
 
+Meteor.publish('currentCompanyCategories', function (companySlug) {
+	var company = Companies.findOne({slug: companySlug});
+	return Categories.find({company: company._id, parent: null });
+});
+
 // Meteor.publish('categories', function () {
 // 	return Categories.find({parent: null});
 // });

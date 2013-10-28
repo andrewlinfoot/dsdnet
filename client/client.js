@@ -2,7 +2,7 @@ Router.map(function () {
     this.route('home', {
         path: '/',
         data: function () {
-//            Meteor.call('crawlCategories');
+
         }
     });
 
@@ -13,13 +13,20 @@ Router.map(function () {
       }
     });
 
-//    this.route('about');
+    this.route('companyProducts', {
+        path: '/company/:companySlug/:categorySlug',
+        template: 'products',
+        waitOn: function () {
+            var companySlug = this.params.companySlug;
+            var categorySlug = this.params.categorySlug;
 
-    this.route('products', {
-        path: '/:url/products',
+            return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
+                     Meteor.subscribe('categoryList', companySlug, categorySlug),
+                     Meteor.subscribe('currentCompany', companySlug) ];
+        },
         data: function () {
-            var roomName = this.params.url;
-            Session.set("currentCompanyUrl", this.params.url);
+            var companySlug = this.params.companySlug;
+            Session.set('currentCompanySlug', companySlug);
             return {
                 params: this.params
             };
@@ -27,16 +34,23 @@ Router.map(function () {
     });
 
     this.route('company', {
-        path: '/:url',
+        path: '/company/:companySlug',
+        template: 'company',
+        waitOn: function () {
+            var companySlug = this.params.companySlug;
+            return Meteor.subscribe('currentCompany', companySlug);
+        },
         data: function () {
-            var roomName = this.params.url;
-            Session.set('currentCompanyUrl', this.params.url);
+            var companySlug = this.params.companySlug;
+            Session.set('currentCompanySlug', companySlug);
             return {
                 params: this.params
             };
         }
     });
 });
+
+//Router.routes['companyProducts'].path({companySlug: company.slug, categorySlug: catgory.slug});
 
 // Scroll to top fix for iron-router
 Deps.autorun(function () {

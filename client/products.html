@@ -6,10 +6,15 @@
 				<img class="img-responsive cener" src="http://www.mcfarling.com/images/logosquared.gif">
 				<ul class="nav nav-pills nav-stacked navmargin">
 					{{#each categories}}
-			     		<li class="{{currentCategory}}"><a class="category-item" href="#"><span class="col_cat_arrow"></span>{{name}}</a>
+			     		<li class="{{currentCategory}}">
+			     			<a class="category-item" href="#">
+			     				<span class="col_cat_arrow"></span>{{name}}
+			     			</a>
 			     			<ul class="nav nav-pills nav-stacked dsdnet-subcategories">
 			     				{{#each subCategories}}
-			     					<li class="{{currentSubCategory}}"><a class="sub-category-item" href="#">{{name}}</a></li>
+			     					<li class="{{currentSubCategory}}">
+			     						<a class="sub-category-item" href="#">{{name}}</a>
+			     					</li>
 			     				{{/each}}
 			     			</ul>
 			     		</li>
@@ -29,7 +34,7 @@
 
 <template name="head">
 	<head>
-
+		<title>DSDNet</title>
 	</head>
 </template>
 

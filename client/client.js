@@ -13,35 +13,20 @@ Router.map(function () {
       }
     });
 
-//    this.route('about');
-
-    this.route('products', {
-        path: '/:url/products',
-        // waitOn: function () {
-        //     var :slug
-        // },
-        data: function () {
-            var roomName = this.params.url;
-            Session.set("currentCompanyUrl", this.params.url);
-            return {
-                params: this.params
-            };
-        }
-    });
-
     this.route('companyProducts', {
         path: '/company/:companySlug/:categorySlug',
         template: 'products',
-        // waitOn: function () {
-        //     var companySlug = this.params.companySlug;
-        //     var categorySlug = this.params.categorySlug;
+        waitOn: function () {
+            var companySlug = this.params.companySlug;
+            var categorySlug = this.params.categorySlug;
 
-        //     return [ Meteor.subscribe('categoryProducts',categorySlug),
-        //              Meteor.subscribe('categoryList', companySlug, categorySlug) ];
-        // },
+            return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
+                     Meteor.subscribe('categoryList', companySlug, categorySlug),
+                     Meteor.subscribe('currentCompany', companySlug) ];
+        },
         data: function () {
             var companySlug = this.params.companySlug;
-            Session.set('currentCompanyUrl', companySlug);
+            Session.set('currentCompanySlug', companySlug);
             return {
                 params: this.params
             };
@@ -57,13 +42,15 @@ Router.map(function () {
         },
         data: function () {
             var companySlug = this.params.companySlug;
-            Session.set('currentCompanyUrl', companySlug);
+            Session.set('currentCompanySlug', companySlug);
             return {
                 params: this.params
             };
         }
     });
 });
+
+//Router.routes['companyProducts'].path({companySlug: company.slug, categorySlug: catgory.slug});
 
 // Scroll to top fix for iron-router
 Deps.autorun(function () {

@@ -1,13 +1,3 @@
-Meteor.subscribe('categories');
-
-Deps.autorun( function () {
-	Meteor.subscribe('subCategories', Session.get('currentCategory'));
-});
-
-Deps.autorun( function () {
-	Meteor.subscribe('products', Session.get('currentCategory'));
-});
-
 Template.products.categories = function () {
     return Categories.find({parent: null}, {sort: {name: 1} });
 };
@@ -26,38 +16,34 @@ Template.products.currentSubCategory = function () {
 	return Session.equals('currentSubCategory', this._id) ? 'active active-subcategory' : '';
 };
 
-Template.products.companyName = function () {
-    return Companies.find({url: Session.get('companyUrl')});
-};
-
 Template.productsArea.products = function () {
 	var currentSubCategory = Session.get('currentSubCategory');
 	var searchQuery = Session.get('searchQuery');
 
 	if(searchQuery && currentSubCategory) {
-		return Products.find({category: currentSubCategory, description: { $regex: Session.get('searchQuery'), $options: 'i'} }, {limit: 50, sort: {description: 1} });
+		return Products.find({category: currentSubCategory, description: { $regex: Session.get('searchQuery'), $options: 'i'} }, { sort: {description: 1} });
 	} else if (searchQuery) {
-		return Products.find({description: { $regex: Session.get('searchQuery'), $options: 'i'} }, {limit: 50, sort: {description: 1} });
+		return Products.find({description: { $regex: Session.get('searchQuery'), $options: 'i'} }, { sort: {description: 1} });
 	} else if (currentSubCategory) {
-		return Products.find({category: currentSubCategory}, {limit: 50, sort: {description: 1} });
+		return Products.find({category: currentSubCategory}, { sort: {description: 1} });
 	} else {
-		return Products.find({}, {limit: 50, sort: {description: 1} });
+		return Products.find({}, { sort: {description: 1} });
 	}
-};
-
-Template.navbar.categories = function () {
-	return Categories.find({parent: null}, {sort: {name: 1} });
 };
 
 Template.products.events({
 	'click a.category-item' : function (e) {
 		e.preventDefault();
+		var company = Companies.findOne({_id: this.company});
 		Session.set('currentSubCategory', undefined);
 		Session.set('currentCategory', this._id);
+		Router.go('companyProducts', {categorySlug:this.slug, companySlug: company.slug});
 	},
 	'click a.sub-category-item' : function (e) {
 		e.preventDefault();
+		var company = Companies.findOne({_id: this.company});
 		Session.set('currentSubCategory', this._id);
+		Router.go('companyProducts', {categorySlug:this.slug, companySlug: company.slug});
 	},
 	'click a.plusmore' : function (e) {
 		e.preventDefault();
@@ -65,7 +51,6 @@ Template.products.events({
 		$target.prev('.caption-wrapper').toggleClass('caption-wrapper-expanded');
 		$target.text() === '- Less' ? $target.text('+ More') : $target.text('- Less');
 	},
-
 	'keyup .search-input' : function (e) {
 		var searchQuery = e.currentTarget.value;
 		if(searchQuery.length === 0) {

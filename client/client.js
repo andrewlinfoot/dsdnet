@@ -19,14 +19,14 @@ Router.map(function () {
         waitOn: function () {
             var companySlug = this.params.companySlug;
             var categorySlug = this.params.categorySlug;
-
             return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
                      Meteor.subscribe('categoryList', companySlug, categorySlug),
-                     Meteor.subscribe('currentCompany', companySlug) ];
+                     Meteor.subscribe('company', companySlug) ];
         },
         data: function () {
             var companySlug = this.params.companySlug;
             Session.set('currentCompanySlug', companySlug);
+            Session.set('searchQuery', undefined);
             return {
                 params: this.params
             };
@@ -38,8 +38,8 @@ Router.map(function () {
         template: 'company',
         waitOn: function () {
             var companySlug = this.params.companySlug;
-            return [ Meteor.subscribe('currentCompany', companySlug),
-                     Meteor.subscribe('currentCompanyCategories', companySlug) ];
+            return [ Meteor.subscribe('company', companySlug),
+                     Meteor.subscribe('companyCategories', companySlug) ];
         },
         data: function () {
             var companySlug = this.params.companySlug;

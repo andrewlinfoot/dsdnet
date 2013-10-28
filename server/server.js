@@ -5,18 +5,14 @@ Meteor.methods({
 });
 
 // Publish Functions
-Meteor.publish('currentCompany', function (companySlug) {
+Meteor.publish('company', function (companySlug) {
 	return Companies.find({slug: companySlug});
 });
 
-Meteor.publish('currentCompanyCategories', function (companySlug) {
+Meteor.publish('companyCategories', function (companySlug) {
 	var company = Companies.findOne({slug: companySlug});
 	return Categories.find({company: company._id, parent: null });
 });
-
-// Meteor.publish('categories', function () {
-// 	return Categories.find({parent: null});
-// });
 
 Meteor.publish('categoryProducts', function (companySlug, categorySlug) {
 	var category = Categories.findOne({slug: categorySlug});
@@ -42,20 +38,3 @@ Meteor.publish('categoryList', function (companySlug, categorySlug) {
 			{parent: category._id} ]
 		});
 });
-
-// Meteor.publish('subCategories', function (currentCategory) {
-// 	return Categories.find({parent: currentCategory});
-// });
-
-// Meteor.publish('products', function (currentCategory) {
-// 	if (currentCategory) {
-// 		var subCategories = Categories.find({parent: currentCategory});
-// 		var categoryIdArray = [currentCategory];
-// 		subCategories.forEach( function (category) {
-// 			categoryIdArray.push(category._id);
-// 		});
-// 		return Products.find({category: { $in: categoryIdArray } }, {limit:50, sort: {name: 1} });
-// 	} else {
-// 		return Products.find({}, {limit:25, sort: {name: 1} });
-// 	}
-// });

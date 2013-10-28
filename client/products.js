@@ -3,9 +3,7 @@ Template.products.categories = function () {
 };
 
 Template.products.subCategories = function () {
-	if( Session.equals('currentCategory', this._id) ) {
-		return Categories.find({parent: Session.get('currentCategory') }, {sort: {name: 1} });
-	}
+	return Categories.find({parent: this._id}, {sort: {name: 1} });
 };
 
 Template.products.currentCategory = function () {
@@ -17,17 +15,12 @@ Template.products.currentSubCategory = function () {
 };
 
 Template.productsArea.products = function () {
-	var currentSubCategory = Session.get('currentSubCategory');
 	var searchQuery = Session.get('searchQuery');
 
-	if(searchQuery && currentSubCategory) {
-		return Products.find({category: currentSubCategory, description: { $regex: Session.get('searchQuery'), $options: 'i'} }, { sort: {description: 1} });
-	} else if (searchQuery) {
+	if(searchQuery) {
 		return Products.find({description: { $regex: Session.get('searchQuery'), $options: 'i'} }, { sort: {description: 1} });
-	} else if (currentSubCategory) {
-		return Products.find({category: currentSubCategory}, { sort: {description: 1} });
 	} else {
-		return Products.find({}, { sort: {description: 1} });
+		return Products.find({}, {sort: {description: 1} });
 	}
 };
 

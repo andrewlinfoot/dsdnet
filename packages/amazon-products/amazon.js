@@ -1,0 +1,6 @@
+Amazon = {};
+
+Private = {
+  secret:
+  public:
+}

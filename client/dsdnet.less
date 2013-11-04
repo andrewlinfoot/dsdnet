@@ -1,24 +1,45 @@
 @import "/packages/bootstrap3-less/bootstrap.lessimport";
 
-.dsdnet-subcategories {
-	margin-left: 15px;
-
-}
-
 @font-face {
-	font-family: 'LeagueSpart';
-	src: url('/LGfont/league_spartan_bold-webfont.eot');
-	src: url('/LGfont/league_spartan_bold-webfont.eot') format('embedded-opentype'),
-			url('/LGfont/league_spartan_bold-webfont.woff') format('woff'),
-			url('/LGfont/league_spartan_bold-webfont.ttf') format('truetype'),
-			url('/LGfont/league_spartan_bold-webfont.svg#webfont') format('svg');
+	font-family: 'gotham-black';
+	src: url('/gotham/gotham-black-webfont.eot');
+	src: url('/gotham/gotham-black-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gotham-black-webfont.woff') format('woff'),
+			url('/gotham/gotham-black-webfont.ttf') format('truetype'),
+			url('/gotham/gotham-black-webfont.svg#webfont') format('svg');
 		
 }
+@font-face{
+	font-family: 'gotham-normal';
+	src: url('/gotham/gotham-medium-webfont.eot');
+	src: url('/gotham/gotham-medium-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gotham-medium-webfont.woff') format('woff'),
+			url('/gotham/gotham-medium-webfont.ttf') format('truetype'),
+			url('/gotham/gotham-medium-webfont.svg#webfont') format('svg');
+}
+@font-face{
+	font-family: 'gotham-light';
+	src: url('/gotham/gotham-thin-webfont.eot');
+	src: url('/gotham/gotham-thin-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gotham-thin-webfont.woff') format('woff'),
+			url('/gotham/gotham-thin-webfont.ttf') format('truetype'),
+			url('/gotham/gotham-thin-webfont.svg#webfont') format('svg');
+}
 body {padding-top: 70px;}
-@font: "LeagueSpart", courier, monospace;
+@bold-font: "gotham-black", Arial, Helvetica, sans-serif;
+@normal-font: "gotham-normal", Arial, Helvetica, sans-serif;
+@light-font: "gotham-light"Arial, Helvetica, sans-serif;
 @green: #8CC63E;
-@gray: #222222;
+@dark-gray: #222222;
+@light-gray: #f1f1f1;
 
+h1{
+	font-family: @bold-font;
+	color: @gray;
+}
+p{
+	font-family: @normal-font;
+}
 .dsdnet-header-logo {
 	width: 250px;
 	padding-left: 15px;
@@ -40,7 +61,7 @@ body {padding-top: 70px;}
 	left: 0px;
 	top: 30px;
 	box-shadow: 1px 0px 2px #000000;
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	color: #222222;
 	line-height: 95%;
 	
@@ -129,7 +150,7 @@ body {padding-top: 70px;}
 	margin-left: 5px;
 	margin-bottom: 10px;
 	color: white;
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 }
 .widewrapper{
 	padding-right: 5%;
@@ -157,12 +178,12 @@ body {padding-top: 70px;}
 	padding-bottom: 65px;
 }
 .description{
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	color: white;
 	height: 47px;
 }
 #name{
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	color: white;
 }
 .capproduct{
@@ -187,18 +208,18 @@ body {padding-top: 70px;}
 }
 .invqty{
 	font-size: 30px;
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	margin-left: 3px;
 
 }
 .avail{
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	position: absolute;
 	margin-top: 4px;
 	margin-left:5px;
 }
 .plusmore{
-	font-family: "LeagueSpart", courier, monospace;
+	font-family: "gotham-black", courier, monospace;
 	color: #8CC63E;
 	position: absolute;
 	bottom:10px;
@@ -314,10 +335,7 @@ body {padding-top: 70px;}
 /
 /
 */
-h1{
-	font-family: @font;
-	color: @gray;
-}
+
 
 .top-section-cont{
 	height: 100%;
@@ -358,10 +376,4 @@ h1{
 .call-to-action{
 	margin-bottom: 30px;
 	text-align: center;
-}
-h2{
-	font-family: @font;
-}
-h3{
-	font-family: @font;
 }

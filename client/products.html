@@ -14,13 +14,12 @@
 			</div>
 			<div class="col-xs-9">
 				{{> bread-crumb}}
-				{{> prod-mod}}
-				{{> prod-mod}}
-				{{> prod-mod}}
-				{{> prod-mod}}
-				{{> prod-mod}}
-			</div>
 
+				{{#each module}}
+					{{> prod-mod}}
+				{{/each}}
+
+			</div>
 		<!--</div>row-->
 	</div><!--body-wrapper-->
 </template>
@@ -79,7 +78,7 @@
 												
 			</div> 
 			<button type="submit" class="more-btn">
-				more
+				<span class="more-btn-text">more</span>
 				<div class="circle-outer">
 					<div class="circle-middle">
 						<div class="circle-inner">

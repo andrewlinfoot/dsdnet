@@ -100,39 +100,39 @@
 </template>
 
 <template name='categories'>
-			<div>
-				<button type="submit" class="button-lg" data-toggle="dropdown">
-					Family
-					<div class="down-arrow-btn"></div>
-				</button> 	
-				<ul class="dropdown-menu pull-right" role="menu">
-					{{#each family}}
-			    	<li><a class="category-item" href="#">{{description}}</a></li>					
-					{{/each}}
-		  	</ul>
-	  	</div>
-			<div>
-				<button type="submit" class="button-lg" data-toggle="dropdown">
-					Class
-					<div class="down-arrow-btn"></div>
-				</button> 	
-				<ul class="dropdown-menu pull-right" role="menu">
-					{{#each class}}
-			    	<li><a class="category-item" href="#">{{description}}</a></li>					
-					{{/each}}
-		  	</ul>
-	  	</div>
-			<div>
-				<button type="submit" class="button-lg" data-toggle="dropdown">
-					Brick
-					<div class="down-arrow-btn"></div>
-				</button> 	
-				<ul class="dropdown-menu pull-right" role="menu">
-					{{#each brick}}
-			    	<li><a class="category-item" href="#">{{description}}</a></li>					
-					{{/each}}
-		  	</ul>
-	  	</div>
+	<div class="right">
+		<button type="submit" class="button-lg" data-toggle="dropdown">
+			Family
+			<div class="down-arrow-btn"></div>
+		</button> 	
+		<ul class="dropdown-menu" role="menu">
+			{{#each family}}
+	    	<li><a class="category-item" href="#">{{description}}</a></li>	
+			{{/each}}
+  		</ul>
+  	</div><!--end pull-->
+	<div class="right">
+		<button type="submit" class="button-lg" data-toggle="dropdown">
+			Class
+			<div class="down-arrow-btn"></div>
+		</button> 	
+		<ul class="dropdown-menu" role="menu">
+			{{#each class}}
+	    	<li><a class="category-item" href="#">{{description}}</a></li>			
+			{{/each}}
+  		</ul>
+	</div><!--end pull-->
+	<div class="right">
+		<button type="submit" class="button-lg" data-toggle="dropdown">
+			Brick
+			<div class="down-arrow-btn"></div>
+		</button> 	
+		<ul class="dropdown-menu" role="menu">
+			{{#each brick}}
+	    	<li><a class="category-item" href="#">{{description}}</a></li>			
+			{{/each}}
+  		</ul>
+	</div><!--end pull-->
 </template>
 
 <template name="filter-bar">

@@ -65,11 +65,17 @@ h2{
 	background: transparent;
 	border: 0;
 	outline: 0px;
-	font-size: 17pt;
+	//font-size: 17pt;
+	//height: 40px;
 	font-family: @bold-cond-font;
 	color: @dark-gray;
-	padding-left: 0;
-	padding-right: 0;
+	padding: 0;
+	margin-bottom: 8px;
+	// margin-top: 50%;
+	// position: relative;
+	text-align: left;
+	width: 100%;
+	border-bottom: 2px solid @green;
 }
 .button-lg:hover{
 	filter: @button-shadow;
@@ -77,10 +83,13 @@ h2{
 }
 .down-arrow-btn{
 	background: url('/icons/down-arrow.png');
+	background-size: contain;
 	height: 25px;
-	margin-bottom:-5px;
+	//margin-top: 13px;
 	width: 25px;
 	display: inline-block;
+	float: right;
+	margin-top: 3px;
 
 }
 
@@ -178,10 +187,10 @@ h2{
 	left: auto;
 	right: auto;
 }
-.right{
-	float: right;
-	clear: both;
-}
+// .right{
+// 	float: right;
+// 	clear: both;
+// }
 // .module-expanded{
 // 	height: auto;
 // }
@@ -283,7 +292,7 @@ h2{
 	top: auto;
 }
 .current-distributor{
-	border-bottom: 2px solid @black;
+	// border-bottom: 2px solid @black;
 	color: @black;
 	font-family: @bold-font;
 	text-align: right;
@@ -300,4 +309,33 @@ h2{
 }
 .pic-scale{
 	width: 100%;
+}
+.class{
+	margin-left: 10%;
+	width: 90%;
+	font-size: 15pt;
+}
+
+.brick{
+	margin-left: 15%;
+	width: 85%;
+	font-size: 13pt;
+}
+.family{
+	margin-left: 5%;
+	width: 95%;
+	font-size: 17pt;
+}
+.class .down-arrow-btn{
+	height: 21px;
+	width: 21px;
+}
+.brick .down-arrow-btn{
+	height: 17px;
+	width: 17px;
+}
+.button-elips{
+	width: calc(~'100% - 30px');
+	display: inline-block;
+	text-overflow: ellipsis;
 }

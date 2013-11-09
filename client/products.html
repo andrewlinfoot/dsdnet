@@ -103,9 +103,12 @@
 </template>
 
 <template name='categories'>
+	<h2>Category</h2>
 	<div>
-		<button type="submit" class="button-lg family-dropdown" data-toggle="dropdown">
-			Family
+		<button type="submit" class="button-lg family family-dropdown" data-toggle="dropdown">
+			<div class="button-elips">
+				Family
+			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
@@ -114,10 +117,12 @@
 	    	<li><a class="category-item" href="#">{{description}}</a></li>	
 			{{/each}}
   		</ul>
-  	</div><!--end pull-->
-	<div class="right">
-		<button type="submit" class="button-lg class-dropdown" data-toggle="dropdown">
+  	</div>
+	<div>
+		<button type="submit" class="button-lg class class-dropdown" data-toggle="dropdown">
+			<div class="button-elips">
 			Class
+			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
@@ -126,10 +131,12 @@
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}
   		</ul>
-	</div><!--end pull-->
-	<div class="right">
-		<button type="submit" class="button-lg brick-dropdown" data-toggle="dropdown">
+	</div>
+	<div>
+		<button type="submit" class="button-lg brick brick-dropdown" data-toggle="dropdown">
+			<div class="button-elips">
 			Brick
+			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
@@ -138,16 +145,16 @@
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}
   		</ul>
-	</div><!--end pull-->
+	</div>
 </template>
 
 <template name="filter-bar">
 	<div class="current-distributor">
-		<h2>Mcfarling Foods</h2>
-		<p>(425)829-1216<p>
+<!-- 		<h2>Mcfarling Foods</h2>
+		<p>(425)829-1216<p> -->
 
 	</div>
-	<div class="pull-right">
+	<div>
 	  	{{> categories}}
 	</div>	  	
 </template>

@@ -108,28 +108,19 @@ h2{
 	transition:width .5s, height .5s;
 
 }
-.mod-content{
-	padding-left: 15px;
-	padding-right: 15px;
-	height: 80px;
-	overflow: hidden;
-	//max-width: calc(~'100% - @{module-height}');
-}
 .product-facts-container{
-	width: calc(~'100% - @{module-height}');
-	height: 25px;
+ 	padding-left: 15px;
+	padding-right: 15px;
 	display: inline-block;
+	width: calc(~'100% - @{module-height}');
+	height: 130px;
 	overflow: hidden;
-	position: relative;
-	transition: width .5s, height .5s, margin-top .5s;
-	padding-left: 15px;
-	margin-top: 25px;
+	transition:width .5s, height .5s;
 }
 .product-facts{
-	width: 33%;
-	display: inline-block;
-	float: left;
+	display: block;
 	margin-bottom: 5px;
+
 }
 .more-btn{
  	position: absolute;
@@ -181,9 +172,9 @@ h2{
 }
 .product-container-expanded{
 	width: calc(~'100% - @{module-height-expanded}');
-	height: 50px;
-	margin-top: 10px;
+	height: @module-height-expanded;
 }
+
 .picture-nav-left{
 	clear: left;
 	float: left;

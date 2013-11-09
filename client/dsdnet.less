@@ -48,10 +48,32 @@ h2{
 @module-height-expanded: 230px;
 @small-shadow: 0 1px 2px rgba(0,0,0,0.2);
 @small-shadow-inset: 0 -1px 2px rgba(0,0,0,0.2);
+@button-shadow: drop-shadow(0px 1px 2px rgba(0,0,0,0.2));
 
+//buttons
+.button-lg{
+	display: inline-block;
+	background: transparent;
+	border: 0;
+	outline: 0px;
+	font-size: 17pt;
+	font-family: @bold-font;
+	color: @dark-gray;
+}
+.button-lg:hover{
+	filter: @button-shadow;
+	-webkit-filter: @button-shadow;
+}
+.down-arrow-btn{
+	background: url('/icons/down-arrow.png');
+	height: 25px;
+	margin-bottom:-5px;
+	width: 25px;
+	display: inline-block;
 
+}
 
-
+//end buttons
 .navbar{
 	height: @navbar;
 	background-color: @black;

@@ -27,7 +27,7 @@
 <template name="prodMod">
 		<div class="module">
 			<div class = "product-picture">
-				<img src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
+				<img class="pic-scale" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
 			</div>
 			<div class = "picture-nav-left">
 				<button type="submit" class="more-btn picture-nav-btn">
@@ -53,10 +53,9 @@
 					</div>
 				</button><!--button-->	
 			</div>
-			<div class = "mod-content">
-				<h4>{{product_data.custom_product_name}}</h4>
-			</div><!--mod-content-->
- 			<div class="product-facts-container">
+ 			<div class="product-facts-container"> 
+ 								<h4>{{product_data.custom_product_name}}</h4>
+
 				<div class = "product-facts">
 					<span><strong>Brand:</strong>{{product_data.brand_name}}</span>
 				</div>
@@ -75,8 +74,8 @@
 				<div class = "product-facts">
 					<span><strong>Distributor:</strong> Mcfarling</span>
 				</div>
-				{{> nutritionInfo}}
-			</div> 
+					{{> nutritionInfo}}
+			</div>
 			<button type="submit" class="more-btn">
 				<span class="more-btn-text">more</span>
 				<div class="circle-outer">

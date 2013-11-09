@@ -1,5 +1,5 @@
 Template.company.companyProfile = function () {
-	return Companies.find({slug: Session.get("currentCompanySlug")});
+	return Companies.findOne({slug: Session.get("currentCompanySlug")});
 };
 
 Template.company.categories = function () {

@@ -3,7 +3,7 @@
 	<body>
 		{{> navbar}}
 
-		{{#each companyProfile}}
+		{{#with companyProfile}}
 		<div class="dsdnet-home-content-area">
 			<div class="section-dividertop">
 			</div>
@@ -44,6 +44,6 @@
 				{{/each}}
 			</div>
 		</div>
-		{{/each}}
+		{{/with}}
 	</body>
 </template>

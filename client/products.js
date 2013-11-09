@@ -23,6 +23,17 @@ Template.productsArea.products = function () {
 		return Products.find({}, {sort: {description: 1} });
 	}
 };
+	
+//this code is shit
+Template.modal.modalData = function () {
+	var modalDataId = Session.get('modalDataId');
+	return Products.findOne({ _id: modalDataId });
+};
+
+//this code is shit
+Template.modal.rendered = function () {
+	$('#myModal').modal('show');
+};
 
 Template.products.events({
 	'click a.category-item' : function (e) {
@@ -38,11 +49,20 @@ Template.products.events({
 		Session.set('currentSubCategory', this._id);
 		Router.go('companyProducts', {categorySlug:this.slug, companySlug: company.slug});
 	},
-	'click a.plusmore' : function (e) {
+	// 'click a.plusmore' : function (e) {
+	// 	e.preventDefault();
+	// 	var $target = $(e.currentTarget);
+	// 	$target.prev('.caption-wrapper').toggleClass('caption-wrapper-expanded');
+	// 	//$target.text() === '- Less' ? $target.text('+ More') : $target.text('- Less');
+	// 	$('#myModal').modal('show');
+	// },
+	//this code is shit
+	'click .thumbnail.products' : function (e) {
 		e.preventDefault();
-		var $target = $(e.currentTarget);
-		$target.prev('.caption-wrapper').toggleClass('caption-wrapper-expanded');
-		$target.text() === '- Less' ? $target.text('+ More') : $target.text('- Less');
+		if(Session.equals('modalDataId', this._id)) {
+			Session.set('modalDataId', undefined);
+		}
+		Session.set('modalDataId', this._id);
 	},
 	'keyup .search-input' : function (e) {
 		var searchQuery = e.currentTarget.value;

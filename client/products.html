@@ -13,6 +13,7 @@
 				{{> filter-bar}}
 			</div>
 			<div class="col-xs-9">
+				{{> bread-crumb}}
 				{{> prod-mod}}
 				{{> prod-mod}}
 				{{> prod-mod}}
@@ -54,7 +55,7 @@
 			</div>
 			<div class = "mod-content">
 				<h2>helloo</h2>
-				<p> Pop-up try-hard wolf, trust fund swag meggisngs Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carbs. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb.Fixie Bushwick cornhole cred blog. Intelligentsia fanny pack salvia, cred ugh Odd Future cardigan, fanny pack salvia, cred ugh Odd Future cardigan... </p>
+				<p>Pop-up try-hard wolf, trust fund swag</p>
 			</div><!--mod-content-->
  			<div class="product-facts-container">
 				<div class = "product-facts">
@@ -74,7 +75,8 @@
 				</div>
 				<div class = "product-facts">
 					<span><strong>Available:</strong> 3</span>
-				</div>												
+				</div>
+												
 			</div> 
 			<button type="submit" class="more-btn">
 				more
@@ -90,6 +92,11 @@
 </template>
 
 <template name="filter-bar">
+	<div class="current-distributor">
+		<h2>Mcfarling Foods</h2>
+		<p>(425)829-1216<p>
+
+	</div>
 	<div class="pull-right">
 <!-- 		<button type="button" class="sidebar-button" data-toggle="dropdown">
 	    	Action 
@@ -133,4 +140,9 @@
 	    	<li><a href="#">Separated link</a></li>
 	  	</ul>
 	</div><!--btn-group-->	
+</template>
+<template name="bread-crumb">
+	<div class="crumbs">
+		<h4>Catagory     >     distributor     >     price    </h4>
+	</div>
 </template>

@@ -10,6 +10,7 @@
 	<div class="row body-wrapper">
 		<!--<div class="row">-->
 			<div class="col-xs-3">
+				{{> distributor}}
 				{{> filter-bar}}
 			</div>
 			<div class="col-xs-9">
@@ -109,8 +110,14 @@
 	{{/each}}
 </template>
 
+<template name="distributor">
+	<div class="distributor-info">
+		<h3> McFarling Foods </h3>
+		<p>(425)829-1216</p>
+	</div>
+</template>
+
 <template name='categories'>
-	<h2 style="border-bottom:black solid 1px;padding-bottom:5px;margin-top:-20px;">McFarling Foods</h2>
 	<h3>Category</h3>
 	<div>
 		<button type="submit" class="button-lg family family-dropdown" data-toggle="dropdown">
@@ -171,10 +178,8 @@
 </template>
 <template name="breadCrumb">
 	<div class="crumbs">
-		<h4>
 		{{#with crumbs}}
 			{{this}}
 		{{/with}}
-		</h4>
 	</div>
 </template>

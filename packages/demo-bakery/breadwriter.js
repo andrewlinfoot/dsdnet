@@ -76,7 +76,7 @@ BreadWriter.getProducts = function getProducts() {
   kwikeeLogin(function(){
     //only crawl the ceareal brick to cut down on crawling
     var brickCode = 10000601;
-    readBrick(BrickCode);
+    readBrick(brickCode);
     return
     //to crawl all the food service categories
     var foodSegmentId = Categories.findOne({code: '50000000'})._id;

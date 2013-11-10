@@ -14,7 +14,7 @@ Router.map(function () {
     });
 
     this.route('companyProducts', {
-        path: '/company/:companySlug/:categorySlug',
+        path: '/:companySlug/:categorySlug',
         template: 'products',
         waitOn: function () {
             var companySlug = this.params.companySlug;
@@ -33,25 +33,7 @@ Router.map(function () {
         }
     });
 
-    this.route('company', {
-        path: '/company/:companySlug',
-        template: 'company',
-        waitOn: function () {
-            var companySlug = this.params.companySlug;
-            return [ Meteor.subscribe('company', companySlug),
-                     Meteor.subscribe('companyCategories', companySlug) ];
-        },
-        data: function () {
-            var companySlug = this.params.companySlug;
-            Session.set('currentCompanySlug', companySlug);
-            return {
-                params: this.params
-            };
-        }
-    });
 });
-
-//Router.routes['companyProducts'].path({companySlug: company.slug, categorySlug: catgory.slug});
 
 // Scroll to top fix for iron-router
 Deps.autorun(function () {

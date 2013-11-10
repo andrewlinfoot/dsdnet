@@ -1,6 +1,0 @@
-Amazon = {};
-
-Private = {
-  secret:
-  public:
-}

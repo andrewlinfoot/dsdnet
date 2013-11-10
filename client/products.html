@@ -78,11 +78,14 @@
 
 			</div>
 			<div class="nutrition-ing">
-				{{> nutritionInfo}}
+				<div class="nutrition-facts">
+					<h5>Nutrition Facts</h5>
+					{{> nutritionInfo}}
 
-				{{#if product_data.ingredients}}
-				<div style="padding-left:20px;padding-right:20px;padding-bottom:40px;">
-					Ingredients: {{product_data.ingredients}}
+					{{#if product_data.ingredients}}
+				</div>
+ 				<div class="ingredients">
+					<h5>Ingredients</h5> {{product_data.ingredients}}
 				</div>
 				{{/if}}
 

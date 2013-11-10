@@ -207,6 +207,17 @@ h2{
 	display: none;
 	clear: both;
 	height: auto;
+	width: 100%;
+	font-size:	8pt;
+	line-height: 1;
+	list-style: none;
+	text-style-position: 0px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.nutrition-ing ul{
+	margin-left: 15px;
+	padding-left: 0px;
 }
 .picture-nav-left{
 	clear: left;
@@ -347,4 +358,15 @@ h2{
 	padding-top: 20px;
 	padding-bottom: 20px;
 	height: @navbar;
+}
+.nutrition-facts{
+	width: 230px;
+	display: inline-block;
+	padding-right: 15px;
+	float: left;
+}
+.ingredients{
+	display: inline-block;
+	width: calc(~'100% - @{module-height-expanded}');
+	float: left;
 }

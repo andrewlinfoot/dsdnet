@@ -1,0 +1,1 @@
+AddGPCCategories = 'my global variable!! Yay!';

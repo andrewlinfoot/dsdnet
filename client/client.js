@@ -33,6 +33,10 @@ Router.map(function () {
         }
     });
 
+    this.route('chrisplaythings', {
+      path: '/chrisplaythings'
+    });
+
 });
 
 // Scroll to top fix for iron-router

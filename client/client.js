@@ -27,29 +27,28 @@ Router.map(function () {
     });
 
     this.route('companyProducts', {
-        path: '/:companySlug/:categorySlug',
-        template: 'products',
-        waitOn: function () {
-            var companySlug = this.params.companySlug;
-            var categorySlug = this.params.categorySlug;
-            return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
-                     Meteor.subscribe('categoryList', companySlug, categorySlug),
-                     Meteor.subscribe('company', companySlug) ];
-        },
-        data: function () {
-            var companySlug = this.params.companySlug;
-            Session.set('currentCompanySlug', companySlug);
-            Session.set('searchQuery', undefined);
-            return {
-                params: this.params
-            };
-        }
-    });
+        path: '/company',
+        template: 'products'
 
-    this.route('chrisplaythings', {
-      path: '/chrisplaythings'
+        // Old Code
+        // path: '/:companySlug/:categorySlug',
+        // template: 'products',
+        // waitOn: function () {
+        //     var companySlug = this.params.companySlug;
+        //     var categorySlug = this.params.categorySlug;
+        //     return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
+        //              Meteor.subscribe('categoryList', companySlug, categorySlug),
+        //              Meteor.subscribe('company', companySlug) ];
+        // },
+        // data: function () {
+        //     var companySlug = this.params.companySlug;
+        //     Session.set('currentCompanySlug', companySlug);
+        //     Session.set('searchQuery', undefined);
+        //     return {
+        //         params: this.params
+        //     };
+        // }
     });
-
 });
 
 // Scroll to top fix for iron-router

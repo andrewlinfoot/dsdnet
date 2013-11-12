@@ -1,72 +1,149 @@
 <template name="products">
-	{{> head}}
 	<body>
-		{{> navbar}}
-		<div class="dsdnet-sidebar">
-				<img class="img-responsive cener" src="http://www.mcfarling.com/images/logosquared.gif">
-				<ul class="nav nav-pills nav-stacked navmargin">
-					{{#each categories}}
-			     		<li class="{{currentCategory}}">
-			     			<a class="category-item" href="#">
-			     				{{name}}
-			     			</a>
-			     			<ul class="nav nav-pills nav-stacked dsdnet-subcategories">
-			     				{{#each subCategories}}
-			     					<li class="{{currentSubCategory}}">
-			     						<a class="sub-category-item" href="#">{{name}}</a>
-			     					</li>
-			     				{{/each}}
-			     			</ul>
-			     		</li>
-			  		{{/each}}
-				</ul>
-		</div>
-		<div class="dsdnet-content">
-			<div class="row">
-				<form class="searchbar">
-				<input type="search" class="search-input form-control" placeholder="Search">
-				</form>
-				{{> productsArea}}
-			</div>
-		</div>
+		{{> navigation-bar}}
+		{{> main}}
+		
 	</body>
 </template>
 
-<template name="productsArea">
-	{{#each products}}
-	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 dsdnet-product-thumbnail">
-		<div class="thumbnail products">
-			<img class="img-responsive" src="https://susansmithjones.com/sites/default/files/graphics/Excalibur_food_in.jpg">
-			<div class="quartcirc">
-				<div id="available">
-					<span class="invqty">{{stock}}</span><span class="avail"> avail</span>
-
-				</div>
+<template name="navigation-bar">
+	<nav class="navbar">
+		<div class="row search-wrapper">
+			<div class="col-xs-3">
+				<strong>DSD</strong>Net
 			</div>
-			<div class="caption-wrapper">
-				<div class="caption">
-					<p class="description">{{description}}</p>
-					<table class="table">
-						<tbody>
-							<tr>
-								<td id="brand">Brand:</td>
-								<td>{{brand}}</td>
-							</tr>
-							<tr>
-								<td id="pack">Pack:</td>
-								<td>{{pack}}</td>
-							</tr>
-							<tr>
-								<td p id="item">Item Number:</td>
-								<td>{{productNumber}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-			</div> <!--end caption-wrapper-->
-			<a href="#" class="plusmore">+ More	</a>
+			<div class="col-xs-9 ">
+				<input type="text" class="custom-search form-control" placeholder="search">
+			</div>
 		</div>
-	</div>
-	{{/each}}
+	</nav>
+</template>
+
+<template name="main">
+	<div class="row body-wrapper">
+		<!--<div class="row">-->
+			<div class="col-xs-3">
+				{{> filter-bar}}
+			</div>
+			<div class="col-xs-9">
+				{{> prod-mod}}
+				{{> prod-mod}}
+				{{> prod-mod}}
+				{{> prod-mod}}
+				{{> prod-mod}}
+			</div>
+
+		<!--</div>row-->
+	</div><!--body-wrapper-->
+</template>
+
+<template name="prod-mod">
+		<div class="module">
+			<div class = "product-picture">
+			</div>
+			<div class = "picture-nav-left">
+				<button type="submit" class="more-btn picture-nav-btn">
+					<div class="circle-outer">
+						<div class="circle-middle">
+							<div class="circle-inner">
+								<
+							</div>
+						</div>
+					</div>
+					Previous
+				</button><!--button-->				
+				</div>
+			<div class ="picture-nav-right">
+				<button type="submit" class="more-btn picture-nav-btn">
+					Next
+					<div class="circle-outer">
+						<div class="circle-middle">
+							<div class="circle-inner">
+								>
+							</div>
+						</div>
+					</div>
+				</button><!--button-->	
+			</div>
+			<div class = "mod-content">
+				<h2>helloo</h2>
+				<p> Pop-up try-hard wolf, trust fund swag meggisngs Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carbs. Pop-up try-hard wolf, trust fund swag meggings Etsy narwhal hashtag actually pour-over letterpress post-ironic Helvetica slow-carb.Fixie Bushwick cornhole cred blog. Intelligentsia fanny pack salvia, cred ugh Odd Future cardigan, fanny pack salvia, cred ugh Odd Future cardigan... </p>
+			</div><!--mod-content-->
+ 			<div class="product-facts-container">
+				<div class = "product-facts">
+					<span><strong>Brand:</strong> Kraft</span>
+				</div>
+				<div class = "product-facts">
+					<span><strong>UPC:</strong> 12345678912</span>
+				</div>
+				<div class = "product-facts">
+					<span><strong>Available:</strong> 3</span>
+				</div>
+				<div class = "product-facts">
+					<span><strong>Available:</strong> 3</span>
+				</div>
+				<div class = "product-facts">
+					<span><strong>Available:</strong> 3</span>
+				</div>
+				<div class = "product-facts">
+					<span><strong>Available:</strong> 3</span>
+				</div>												
+			</div> 
+			<button type="submit" class="more-btn">
+				more
+				<div class="circle-outer">
+					<div class="circle-middle">
+						<div class="circle-inner">
+							+
+						</div>
+					</div>
+				</div>
+			</button><!--button-->
+		</div><!--module-->
+</template>
+
+<template name="filter-bar">
+	<div class="pull-right">
+<!-- 		<button type="button" class="sidebar-button" data-toggle="dropdown">
+	    	Action 
+	  	</button> -->
+			<button type="submit" class="more-btn sidebar-button" data-toggle="dropdown">
+				Action 
+				<div class="circle-outer">
+					<div class="circle-middle">
+						<div class="circle-inner">
+							<div class="arrow-down"></div>
+						</div>
+					</div>
+				</div>
+			</button><!--button-->	  	
+	  	<ul class="dropdown-menu pull-right" role="menu">
+	    	<li><a href="#">Catagories</a></li>
+	    	<li><a href="#">Another action</a></li>
+	    	<li><a href="#">Something else here</a></li>
+	    	<li><a href="#">Separated link</a></li>
+	  	</ul>
+	</div><!--btn-group-->
+	<div class="btn-group sidebar-btn pull-right">
+		<button type="button" class="sidebar-button" data-toggle="dropdown">
+	    	Some Action <span class="caret"></span>
+	  	</button>
+	  	<ul class="dropdown-menu pull-right" role="menu">
+	    	<li><a href="#">Catagories</a></li>
+	    	<li><a href="#">Another action</a></li>
+	    	<li><a href="#">Something else here</a></li>
+	    	<li><a href="#">Separated link</a></li>
+	  	</ul>
+	</div><!--btn-group-->
+	<div class="btn-group sidebar-btn pull-right">
+		<button type="button" class="sidebar-button" data-toggle="dropdown">
+	    	Another Action <span class="caret"></span>
+	  	</button>
+	  	<ul class="dropdown-menu pull-right" role="menu">
+	    	<li><a href="#">Catagories</a></li>
+	    	<li><a href="#">Another action</a></li>
+	    	<li><a href="#">Something else here</a></li>
+	    	<li><a href="#">Separated link</a></li>
+	  	</ul>
+	</div><!--btn-group-->	
 </template>

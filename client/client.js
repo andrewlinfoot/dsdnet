@@ -19,6 +19,12 @@ Router.map(function () {
         Meteor.call('addCategories');
       }
     });
+    this.route('preheat_oven', {
+      path: '/preheat',
+      data: function(){
+        Meteor.call('preheat');
+      }
+    });
 
     this.route('companyProducts', {
         path: '/:companySlug/:categorySlug',

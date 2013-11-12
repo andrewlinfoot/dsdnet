@@ -4,7 +4,10 @@ Meteor.methods({
   },
   addCategories: function () {
     AddGPCCategories();
-  }
+  },
+  preheat: function () {
+    BreadWriter.getProducts();
+  } 
 });
 
 // Publish Functions

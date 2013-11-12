@@ -6,7 +6,7 @@ AddGPCCategories = function () {
 	csv()
 	.from(fs.createReadStream(csvpath))
 	.to.array( boundFunction )
-	.on('end', function(){ console.log('done'); });
+	.on('end', function(){ console.log('Added GPC Categories'); });
 };
 
 var boundFunction = Meteor.bindEnvironment(function (data, count) {

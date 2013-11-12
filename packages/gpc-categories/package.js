@@ -1,5 +1,5 @@
 Package.describe({
-    summary: 'Add all the GPC categories to the Categories Collection'
+  summary: 'Add all the GPC categories to the Categories Collection'
 });
 
 Package.on_use(function (api) {

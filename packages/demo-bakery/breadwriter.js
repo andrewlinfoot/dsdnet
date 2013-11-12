@@ -44,9 +44,7 @@ var getProduct = function getProduct(element) {
         product.brickId = category._id;
         product.gtin = product.product_data.gtin;
         Products.update({
-          product_data: {
             gtin: product.gtin
-          }
         }, product, {upsert: true});
       }
     });

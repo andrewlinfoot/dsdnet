@@ -10,10 +10,10 @@
 Products = new Meteor.Collection('products');
 
 // {
-// 	company: id,
-// 	name: string,
-// 	parent: id,
-// 	slug: string
+// 	code: int,
+// 	description: string,
+// 	type: string,
+// 	parent: id
 // }
 Categories = new Meteor.Collection('categories');
 

@@ -1,6 +1,9 @@
 Meteor.methods({
-  startCrawl : function(){
+  startCrawl: function(){
     CrawlMcFarlings();
+  },
+  addCategories: function () {
+    AddGPCCategories();
   }
 });
 

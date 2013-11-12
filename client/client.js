@@ -13,6 +13,13 @@ Router.map(function () {
       }
     });
 
+    this.route('add_categories', {
+      path: '/addcategories',
+      data : function(){
+        Meteor.call('addCategories');
+      }
+    });
+
     this.route('companyProducts', {
         path: '/:companySlug/:categorySlug',
         template: 'products',
@@ -31,6 +38,10 @@ Router.map(function () {
                 params: this.params
             };
         }
+    });
+
+    this.route('chrisplaythings', {
+      path: '/chrisplaythings'
     });
 
 });

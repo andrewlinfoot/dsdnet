@@ -37,10 +37,32 @@ Meteor.publish('categoryProducts', function (companySlug, categorySlug) {
 Meteor.publish('categoryList', function (companySlug, categorySlug) {
 	var company = Companies.findOne({slug: companySlug }, {fields: {_id: 1} });
 	var category = Categories.findOne({slug: categorySlug }, {fields: {_id: 1, parent: 1} });
-	return Categories.find({company: company._id,
-		$or: [
-			{parent: null},
-			{parent: category.parent},
-			{parent: category._id} ]
-		});
+	return Categories.find( {
+    company: company._id,
+		parent: {
+      $in: [
+			  null,
+			  category.parent,
+			  category._id ]
+		  }
+    });
+});
+/**
+ * @param Options
+ * {
+ *  category: null (all categories) or categoryId or [categoryId, categoryId, ...]
+ * }
+ * TODO: company
+ */
+Meteor.publish('products', function pubProducts(options) {
+  if(!options || !options.category){
+    //return all products TODO: Reevaluate
+    return Products.find();
+  }
+  var categories = Array.isArray(options.category) ? options.category : [options.category];
+  return Products.find( {
+    brickId: {
+      $in: category
+    }
+  });
 });

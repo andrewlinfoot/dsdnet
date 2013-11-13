@@ -48,7 +48,6 @@ h2{
 @module-height-expanded: 230px;
 @small-shadow: 0 1px 2px rgba(0,0,0,0.2);
 @small-shadow-inset: 0 -1px 2px rgba(0,0,0,0.2);
-@small-shadow-reverse: 0 1px 2px rgba(0,0,0,0.2);
 
 
 
@@ -67,7 +66,7 @@ h2{
 	margin: 0 auto;
 	height: 100%;
 	position: relative;
-	padding-top: (@navbar + 20px);
+	padding-top: (@navbar + 5px);
 }
 .module{
 	width: 100%;
@@ -90,26 +89,25 @@ h2{
 .mod-content{
 	padding-left: 15px;
 	padding-right: 15px;
-	height: 65%;
+	height: 80px;
 	overflow: hidden;
 	//max-width: calc(~'100% - @{module-height}');
 }
 .product-facts-container{
-	width: calc(~'90% - @{module-height}');
-	padding-top: 20px;
+	width: calc(~'100% - @{module-height}');
+	height: 25px;
 	display: inline-block;
 	overflow: hidden;
-	height: 35%;
-	margin-left: 15px;
 	position: relative;
-	transition:width .5s;
+	transition: width .5s, height .5s, margin-top .5s;
+	padding-left: 15px;
+	margin-top: 25px;
 }
 .product-facts{
-	height: 100%;
-	margin-right: 10%;
-	overflow: hidden;
-	display: inline;
+	width: 33%;
+	display: inline-block;
 	float: left;
+	margin-bottom: 5px;
 }
 .more-btn{
  	position: absolute;
@@ -160,7 +158,9 @@ h2{
 	width: @module-height-expanded;
 }
 .product-container-expanded{
-	width: 100%;
+	width: calc(~'100% - @{module-height-expanded}');
+	height: 50px;
+	margin-top: 10px;
 }
 .picture-nav-left{
 	clear: left;
@@ -245,4 +245,20 @@ h2{
 }
 .dropdown-menu{
 	top: auto;
+}
+.current-distributor{
+	border-bottom: 1px solid @black;
+	color: @black;
+	font-family: @bold-font;
+	text-align: right;
+	line-height: 1;
+	margin-bottom: 10px;
+	padding-top: 30px;
+}
+.current-distributor p{
+	font-family: @normal-font;
+}
+.crumbs{
+	margin-bottom: 15px;
+	color: @dark-gray;
 }

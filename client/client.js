@@ -28,7 +28,13 @@ Router.map(function () {
 
     this.route('companyProducts', {
         path: '/company',
-        template: 'products'
+        template: 'products',
+        waitOn: function () {
+          var options = {
+            category: null
+          };
+          return Meteor.subscribe('products', options);
+        }
 
         // Old Code
         // path: '/:companySlug/:categorySlug',

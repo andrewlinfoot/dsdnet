@@ -23,7 +23,7 @@ Template.products.events({
 });
 
 Template.main.module = function () {
-	return [1,2,3,4,5];
+	return Products.find();
 };
 
 // Old Code

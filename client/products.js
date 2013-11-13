@@ -25,3 +25,34 @@ Template.products.events({
 Template.main.module = function () {
 	return Products.find();
 };
+
+Template.categories.helpers({
+	'family' : function () {
+		return Categories.find({type: 'family'});
+	},
+	'class' : function () {
+		return Categories.find({type: 'class', parent: Session.get('currentFamily')});
+	},
+	'brick' : function () {
+		return Categories.find({type: 'brick', parent: Session.get('currentClass')});
+	}
+});
+
+Template.categories.events( {
+	'click .category-item': function (e) {
+		e.preventDefault();
+		Meteor.subscribe('categories', {parent: this._id});
+		if(this.type === 'family') {
+				Session.set('currentFamily', this._id);
+		}
+		if(this.type === 'class') {
+				Session.set('currentClass', this._id);
+		}
+		if(this.type === 'brick') {
+				Session.set('currentBrick', this._id);
+		}
+	}
+});
+
+Session.set('currentFamily', 'all');
+Session.set('currentClass', 'all');

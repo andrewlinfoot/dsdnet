@@ -30,10 +30,10 @@ Router.map(function () {
         path: '/company',
         template: 'products',
         waitOn: function () {
-          var options = {
-            category: null
-          };
-          return Meteor.subscribe('products', options);
+          return [
+            Meteor.subscribe('products', {category: null}),
+            Meteor.subscribe('categories', {type: 'family'})
+          ];
         }
     });
 });

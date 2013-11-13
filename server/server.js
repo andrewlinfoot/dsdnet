@@ -29,3 +29,26 @@ Meteor.publish('products', function pubProducts(options) {
     }
   });
 });
+
+
+//TODO: implement category filtering based in item availability
+/**
+ * @param Options
+ * {
+ *    type: 'segment', 'family', 'class' or 'brick'
+ *    parent: id of parent category
+ * }
+*/
+Meteor.publish('categories', function pubCategories(options) {
+  if(!options) {
+    // all categories
+    return Categories.find().limit(50);
+  }
+  if(!options.parent){
+    // hard code food/beverage/tobacco segment
+    // TODO: remove
+    var foodCat = Categories.findOne({code: '50000000'});
+    return Categories.find({type: options.type, parent: foodCat._id});
+  }
+  return Categories.find({parent: options.parent});
+});

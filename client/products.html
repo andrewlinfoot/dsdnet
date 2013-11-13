@@ -100,6 +100,42 @@
 	{{/each}}
 </template>
 
+<template name='categories'>
+			<div>
+				<button type="submit" class="button-lg" data-toggle="dropdown">
+					Family
+					<div class="down-arrow-btn"></div>
+				</button> 	
+				<ul class="dropdown-menu pull-right" role="menu">
+					{{#each family}}
+			    	<li><a class="category-item" href="#">{{description}}</a></li>					
+					{{/each}}
+		  	</ul>
+	  	</div>
+			<div>
+				<button type="submit" class="button-lg" data-toggle="dropdown">
+					Class
+					<div class="down-arrow-btn"></div>
+				</button> 	
+				<ul class="dropdown-menu pull-right" role="menu">
+					{{#each class}}
+			    	<li><a class="category-item" href="#">{{description}}</a></li>					
+					{{/each}}
+		  	</ul>
+	  	</div>
+			<div>
+				<button type="submit" class="button-lg" data-toggle="dropdown">
+					Brick
+					<div class="down-arrow-btn"></div>
+				</button> 	
+				<ul class="dropdown-menu pull-right" role="menu">
+					{{#each brick}}
+			    	<li><a class="category-item" href="#">{{description}}</a></li>					
+					{{/each}}
+		  	</ul>
+	  	</div>
+</template>
+
 <template name="filter-bar">
 	<div class="current-distributor">
 		<h2>Mcfarling Foods</h2>
@@ -107,45 +143,8 @@
 
 	</div>
 	<div class="pull-right">
-	  	<div>
-			<button type="submit" class="button-lg" data-toggle="dropdown">
-				Action
-				<div class="down-arrow-btn"></div>
-
-			</button> 	
-			<ul class="dropdown-menu pull-right" role="menu">
-		    	<li><a href="#">Catagories</a></li>
-		    	<li><a href="#">Another action</a></li>
-		    	<li><a href="#">Something else here</a></li>
-		    	<li><a href="#">Separated link</a></li>
-	  		</ul>
-	  	</div>
-	  	<div>
-			<button type="submit" class="button-lg" data-toggle="dropdown">
-				Action
-				<div class="down-arrow-btn"></div>
-
-			</button> 	
-			<ul class="dropdown-menu pull-right" role="menu">
-		    	<li><a href="#">Catagories</a></li>
-		    	<li><a href="#">Another action</a></li>
-		    	<li><a href="#">Something else here</a></li>
-		    	<li><a href="#">Separated link</a></li>
-	  		</ul>
-	  	</div>
-	  	<div>
-			<button type="submit" class="button-lg" data-toggle="dropdown">
-				Action
-				<div class="down-arrow-btn"></div>
-
-			</button> 	
-			<ul class="dropdown-menu pull-right" role="menu">
-		    	<li><a href="#">Catagories</a></li>
-		    	<li><a href="#">Another action</a></li>
-		    	<li><a href="#">Something else here</a></li>
-		    	<li><a href="#">Separated link</a></li>
-	  		</ul>
-	  	</div>	  		  	
+	  	{{> categories}}
+	</div>	  	
 </template>
 <template name="bread-crumb">
 	<div class="crumbs">

@@ -27,6 +27,7 @@
 <template name="prodMod">
 		<div class="module">
 			<div class = "product-picture">
+				<img src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
 			</div>
 			<div class = "picture-nav-left">
 				<button type="submit" class="more-btn picture-nav-btn">
@@ -90,7 +91,7 @@
 </template>
 
 <template name="nutritionInfo">
-	{{#each sections}}
+	{{#each product_data.kwikee_nutrition.[0]}}
 		<ul>
 		{{#each children}}
 			<li>{{label}}: {{amount}} {{uom}} </li>

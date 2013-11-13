@@ -25,7 +25,3 @@ Template.products.events({
 Template.main.module = function () {
 	return Products.find();
 };
-
-Template.nutritionInfo.sections = function () {
-	return this.product_data.kwikee_nutrition[0];
-};

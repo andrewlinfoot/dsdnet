@@ -35,25 +35,6 @@ Router.map(function () {
           };
           return Meteor.subscribe('products', options);
         }
-
-        // Old Code
-        // path: '/:companySlug/:categorySlug',
-        // template: 'products',
-        // waitOn: function () {
-        //     var companySlug = this.params.companySlug;
-        //     var categorySlug = this.params.categorySlug;
-        //     return [ Meteor.subscribe('categoryProducts', companySlug, categorySlug),
-        //              Meteor.subscribe('categoryList', companySlug, categorySlug),
-        //              Meteor.subscribe('company', companySlug) ];
-        // },
-        // data: function () {
-        //     var companySlug = this.params.companySlug;
-        //     Session.set('currentCompanySlug', companySlug);
-        //     Session.set('searchQuery', undefined);
-        //     return {
-        //         params: this.params
-        //     };
-        // }
     });
 });
 

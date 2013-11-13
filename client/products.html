@@ -16,7 +16,7 @@
 				{{> bread-crumb}}
 
 				{{#each module}}
-					{{> prod-mod}}
+					{{> prodMod}}
 				{{/each}}
 
 			</div>
@@ -24,14 +24,7 @@
 	</div><!--body-wrapper-->
 </template>
 
-<!-- "manufacturer_name": 
-"brand_name":
-"whole_upc": 
-"description":
-"custom_product_name":
-"case_count" -->
-
-<template name="prod-mod">
+<template name="prodMod">
 		<div class="module">
 			<div class = "product-picture">
 			</div>
@@ -60,15 +53,14 @@
 				</button><!--button-->	
 			</div>
 			<div class = "mod-content">
-				<h2>helloo</h2>
-				<p>Pop-up try-hard wolf, trust fund swag</p>
+				<h4>{{product_data.custom_product_name}}</h4>
 			</div><!--mod-content-->
  			<div class="product-facts-container">
 				<div class = "product-facts">
-					<span><strong>Brand:</strong> Kraft</span>
+					<span><strong>Brand:</strong>{{product_data.brand_name}}</span>
 				</div>
 				<div class = "product-facts">
-					<span><strong>UPC:</strong> 12345678912</span>
+					<span><strong>UPC:</strong>{{product_data.whole_upc}}</span>
 				</div>
 				<div class = "product-facts">
 					<span><strong>MFR:</strong> unilover</span>
@@ -77,12 +69,12 @@
 					<span><strong>Available:</strong> 3</span>
 				</div>
 				<div class = "product-facts">
-					<span><strong>Case QTY:</strong> 35 per</span>
+					<span><strong>Case QTY:</strong>{{product_data.case_count}}</span>
 				</div>
 				<div class = "product-facts">
 					<span><strong>Distributor:</strong> Mcfarling</span>
 				</div>
-												
+				{{> nutritionInfo}}
 			</div> 
 			<button type="submit" class="more-btn">
 				<span class="more-btn-text">more</span>
@@ -95,6 +87,16 @@
 				</div>
 			</button><!--button-->
 		</div><!--module-->
+</template>
+
+<template name="nutritionInfo">
+	{{#each sections}}
+		<ul>
+		{{#each children}}
+			<li>{{label}}: {{amount}} {{uom}} </li>
+		{{/each}}
+		</ul>
+	{{/each}}
 </template>
 
 <template name="filter-bar">

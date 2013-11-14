@@ -13,7 +13,7 @@
 				{{> filter-bar}}
 			</div>
 			<div class="col-xs-9">
-				{{> bread-crumb}}
+				{{> breadCrumb}}
 
 				{{#each module}}
 					{{> prodMod}}
@@ -107,6 +107,7 @@
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
 			<li><a class="category-item family-all" href="#">All</a></li>
+			<li class="divider"></li>
 			{{#each family}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>	
 			{{/each}}
@@ -119,6 +120,7 @@
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
 			<li><a class="category-item class-all" href="#">All</a></li>
+			<li class="divider"></li>
 			{{#each class}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}
@@ -131,6 +133,7 @@
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
 			<li><a class="category-item brick-all" href="#">All</a></li>
+			<li class="divider"></li>
 			{{#each brick}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}
@@ -148,8 +151,12 @@
 	  	{{> categories}}
 	</div>	  	
 </template>
-<template name="bread-crumb">
+<template name="breadCrumb">
 	<div class="crumbs">
-		<h4>Catagory     >     distributor     >     price    </h4>
+		<h4>
+		{{#with crumbs}}
+			{{this}}
+		{{/with}}
+		</h4>
 	</div>
 </template>

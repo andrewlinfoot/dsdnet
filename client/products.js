@@ -43,6 +43,31 @@ Template.main.module = function () {
 	return Products.find(query);
 };
 
+// TODO: fix the crumbString............. I'm sorry
+Template.breadCrumb.crumbs = function() {
+	var crumbsString = '';
+	if(Session.equals('currentFamily','all')) {
+		crumbsString = crumbsString + 'All';
+	} else {
+		var family = Categories.findOne({_id: Session.get('currentFamily')});
+		crumbsString = crumbsString + family.description;
+	}
+	if(Session.equals('currentClass', 'all') && !Session.equals('currentFamily','all')) {
+		crumbsString = crumbsString + ' > All';
+	} else if (!Session.equals('currentFamily','all')) {
+		var mclass = Categories.findOne({_id: Session.get('currentClass')});
+		crumbsString = crumbsString + ' > ' + mclass.description;
+	}
+	if(Session.equals('currentBrick', 'all') && !Session.equals('currentClass','all')) {
+		crumbsString = crumbsString + ' > All';
+	} else if (!Session.equals('currentBrick', 'all')) {
+		console.log(Session.get('currentBrick'));
+		var brick = Categories.findOne({_id: Session.get('currentBrick')});
+		crumbsString = crumbsString + ' > ' + brick.description;
+	}
+	return crumbsString;
+};
+
 Template.categories.helpers({
 	'family' : function () {
 		return Categories.find({type: 'family'});
@@ -106,7 +131,10 @@ Template.categories.rendered = function () {
 	}
 };
 
+Session.set('categorySelect', [null, null, null, null]);
+
 //TODO fix
 //Session.set('currentSegment', Categories.findOne({code: '50000000'})._id);
 Session.set('currentFamily', 'all');
 Session.set('currentClass', 'all');
+Session.set('currentBrick', 'all');

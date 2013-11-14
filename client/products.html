@@ -101,33 +101,36 @@
 
 <template name='categories'>
 	<div>
-		<button type="submit" class="button-lg" data-toggle="dropdown">
+		<button type="submit" class="button-lg family-dropdown" data-toggle="dropdown">
 			Family
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
+			<li><a class="category-item family-all" href="#">All</a></li>
 			{{#each family}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>	
 			{{/each}}
   		</ul>
   	</div><!--end pull-->
 	<div class="right">
-		<button type="submit" class="button-lg" data-toggle="dropdown">
+		<button type="submit" class="button-lg class-dropdown" data-toggle="dropdown">
 			Class
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
+			<li><a class="category-item class-all" href="#">All</a></li>
 			{{#each class}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}
   		</ul>
 	</div><!--end pull-->
 	<div class="right">
-		<button type="submit" class="button-lg" data-toggle="dropdown">
+		<button type="submit" class="button-lg brick-dropdown" data-toggle="dropdown">
 			Brick
 			<div class="down-arrow-btn"></div>
 		</button> 	
 		<ul class="dropdown-menu" role="menu">
+			<li><a class="category-item brick-all" href="#">All</a></li>
 			{{#each brick}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>			
 			{{/each}}

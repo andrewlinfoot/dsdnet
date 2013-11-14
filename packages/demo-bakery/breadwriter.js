@@ -24,7 +24,7 @@ var eachItem = function eachItem(callback) {
       kwikee[el].forEach(callback);
     }
   }
-}
+};
 
 var getProduct = function getProduct(element) {
   var url = 'http://new.kwikeesystems.com/members/handler';
@@ -54,7 +54,7 @@ var getProduct = function getProduct(element) {
         }, product, {upsert: true});
       }
     });
-}
+};
 BreadWriter.getProducts = function getProducts() {
   kwikeeLogin(function(){
     eachItem(getProduct);

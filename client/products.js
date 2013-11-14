@@ -55,9 +55,23 @@ Template.categories.helpers({
 	}
 });
 
+//TODO - FIX THIS CODE!!!!
 Template.categories.events( {
 	'click .category-item': function (e) {
 		e.preventDefault();
+		var $target = $(e.currentTarget);
+		if($target.hasClass('family-all')){
+			Session.set('currentFamily', 'all');
+			Session.set('currentClass', 'all');
+			Session.set('currentBrick', 'all');
+		}
+		if($target.hasClass('class-all')){
+			Session.set('currentClass', 'all');
+			Session.set('currentBrick', 'all');
+		}
+		if($target.hasClass('brick-all')){
+			Session.set('currentBrick', 'all');
+		}
 		Meteor.subscribe('categories', {parent: this._id});
 		if(this.type === 'family') {
 			Meteor.subscribe('products', {familyId: this._id});
@@ -76,7 +90,23 @@ Template.categories.events( {
 		}
 	}
 });
+
+Template.categories.rendered = function () {
+	var $classDropdown = $('.class-dropdown');
+	var $brickDropdown = $('.brick-dropdown');
+	if(Session.equals('currentFamily', 'all')) {
+		$classDropdown.hide();
+	} else {
+		$classDropdown.show();
+	}
+	if(Session.equals('currentClass', 'all')) {
+		$brickDropdown.hide();
+	} else {
+		$brickDropdown.show();
+	}
+};
+
 //TODO fix
-Session.set('currentSegment', Categories.findOne({code: '50000000'})._id);
+//Session.set('currentSegment', Categories.findOne({code: '50000000'})._id);
 Session.set('currentFamily', 'all');
 Session.set('currentClass', 'all');

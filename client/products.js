@@ -23,7 +23,24 @@ Template.products.events({
 });
 
 Template.main.module = function () {
-	return Products.find();
+	var segment = Session.get('currentSegment');
+	var family = Session.get('currentFamily');
+	var mclass = Session.get('currentClass');
+	var brick = Session.get('currentBrick');
+	var query = {};
+	if(segment && segment !== 'all'){
+		query.segmentId = segment;
+	}
+	if(family && family !== 'all'){
+		query.familyId = family;
+	}
+	if(mclass && mclass !== 'all'){
+		query.classId = mclass;
+	}
+	if(brick && brick !== 'all'){
+		query.brickId = brick;
+	}
+	return Products.find(query);
 };
 
 Template.categories.helpers({
@@ -43,16 +60,23 @@ Template.categories.events( {
 		e.preventDefault();
 		Meteor.subscribe('categories', {parent: this._id});
 		if(this.type === 'family') {
-				Session.set('currentFamily', this._id);
+			Meteor.subscribe('products', {familyId: this._id});
+			Session.set('currentFamily', this._id);
+			Session.set('currentClass', 'all');
+			Session.set('currentBrick', 'all');
 		}
 		if(this.type === 'class') {
-				Session.set('currentClass', this._id);
+			Meteor.subscribe('products', {classId: this._id});
+			Session.set('currentClass', this._id);
+			Session.set('currentBrick', 'all');
 		}
 		if(this.type === 'brick') {
-				Session.set('currentBrick', this._id);
+			Meteor.subscribe('products', {brickId: this._id});
+			Session.set('currentBrick', this._id);
 		}
 	}
 });
-
+//TODO fix
+Session.set('currentSegment', Categories.findOne({code: '50000000'})._id);
 Session.set('currentFamily', 'all');
 Session.set('currentClass', 'all');

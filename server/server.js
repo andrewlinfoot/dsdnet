@@ -18,16 +18,11 @@ Meteor.methods({
  * TODO: company
  */
 Meteor.publish('products', function pubProducts(options) {
-  if(!options || !options.category){
+  if(!options){
     //return all products TODO: Reevaluate
     return Products.find({}, {limit:50});
   }
-  var categories = Array.isArray(options.category) ? options.category : [options.category];
-  return Products.find( {
-    brickId: {
-      $in: category
-    }
-  });
+  return Products.find( options );
 });
 
 

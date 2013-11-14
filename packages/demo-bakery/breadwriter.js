@@ -40,8 +40,14 @@ var getProduct = function getProduct(element) {
       if(data.status === 1){
         var product = data.content;
         var brickId = product.product_data.gpc_brick_id;
-        var category = Categories.findOne({code: brickId});
-        product.brickId = category._id;
+        var brick = Categories.findOne({code: brickId});
+        var mclass = Categories.findOne({_id: brick.parent});
+        var family = Categories.findOne({_id: mclass.parent});
+        var segment = Categories.findOne({_id: family.parent});
+        product.classId = mclass._id;
+        product.familyId = family._id;
+        product.segmentId = family._id;
+        product.brickId = brick._id;
         product.gtin = product.product_data.gtin;
         Products.update({
             gtin: product.gtin

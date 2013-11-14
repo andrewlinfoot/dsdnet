@@ -31,7 +31,7 @@ Router.map(function () {
         template: 'products',
         waitOn: function () {
           return [
-            Meteor.subscribe('products', {category: null}),
+            Meteor.subscribe('products'),
             Meteor.subscribe('categories', {type: 'family'})
           ];
         }

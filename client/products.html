@@ -93,7 +93,7 @@
 	{{#each product_data.kwikee_nutrition.[0]}}
 		<ul>
 		{{#each children}}
-			<li>{{label}}: {{amount}} {{uom}} </li>
+			<li>{{label}}: {{amount}} {{uom}} {{#if dvp}} - {{dvp}}%{{/if}}</li>
 		{{/each}}
 		</ul>
 	{{/each}}

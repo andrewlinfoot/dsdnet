@@ -20,7 +20,7 @@ Meteor.methods({
 Meteor.publish('products', function pubProducts(options) {
   if(!options || !options.category){
     //return all products TODO: Reevaluate
-    return Products.find({}, {limit: 50});
+    return Products.find({}, {limit:50});
   }
   var categories = Array.isArray(options.category) ? options.category : [options.category];
   return Products.find( {

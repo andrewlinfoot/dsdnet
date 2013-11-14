@@ -104,7 +104,7 @@ h2{
 }
 .module{
 	width: 100%;
-	height: @module-height;
+	height: auto;
 	margin-bottom: 20px;
 	background-color: white;
 	position: relative;
@@ -134,6 +134,7 @@ h2{
 	margin-bottom: 5px;
 
 }
+
 .more-btn{
  	position: absolute;
  	width: 120px;
@@ -181,9 +182,9 @@ h2{
 	float: right;
 	clear: both;
 }
-.module-expanded{
-	height: 375px;
-}
+// .module-expanded{
+// 	height: auto;
+// }
 .product-picture-expanded{
 	height: @module-height-expanded;
 	width: @module-height-expanded;
@@ -193,10 +194,14 @@ h2{
 	height: @module-height-expanded;
 }
 
+.nutrition-ing{
+	display: none;
+	clear: both;
+	height: auto;
+}
 .picture-nav-left{
 	clear: left;
 	float: left;
-	//background-color: red;
 	width: @module-height-expanded / 2;
 	font-family: @bold-font;
 	text-align: center;

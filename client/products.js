@@ -7,6 +7,10 @@ Template.products.events({
 		var $productContainer = $target.siblings('.product-facts-container');
 		var $buttonText = $target.find('.more-btn-text');
 		var $buttonSymbol = $target.find('.circle-inner');
+		var $nutritionContainer = $target.siblings('.nutrition-ing');
+
+		$nutritionContainer.toggle(500);
+
 
 		$picture.toggleClass('product-picture-expanded');
 		$module.toggleClass('module-expanded');

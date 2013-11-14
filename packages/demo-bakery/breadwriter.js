@@ -18,12 +18,28 @@ var kwikeeLogin = function kwikeeLogin(callback) {
   });
 };
 
-var eachItem = function eachItem(callback) {
-  for(var el in kwikee){
-    if(kwikee.hasOwnProperty(el)) {
-      kwikee[el].forEach(callback);
-    }
-  }
+var readBrick = function readBrick(brickCode) {
+  console.log('loading brick: ', brickCode)
+  var categoryUrl = 'http://new.kwikeesystems.com/members/handler?func=search&search_type=gpc_categories&gpc_brick_id={0}'.replace('{0}', brickCode);
+  HTTP.get(categoryUrl, {
+    params: {
+      func: 'search',
+      search_type: 'gpc_categories',
+      gpc_brick_id: brickCode
+    },
+    headers: Options.headers
+  },
+  function(error, response){
+    var jsdom = cheerio.load(response.content);
+    var scriptText = jsdom('head script').eq(2).text();
+    eval(scriptText);
+
+    search_json.map(function(product){
+      //console.log('lookup product: ', product.product_base_id);
+      getProduct(product.product_base_id);
+    });
+
+  });
 };
 
 var getProduct = function getProduct(element) {
@@ -36,6 +52,7 @@ var getProduct = function getProduct(element) {
       headers: Options.headers
     },
     function(error, response){
+      //console.log('retrieved product: ', this);
       var data = JSON.parse(response.content);
       if(data.status === 1){
         var product = data.content;
@@ -50,14 +67,32 @@ var getProduct = function getProduct(element) {
         product.brickId = brick._id;
         product.gtin = product.product_data.gtin;
         Products.update({
-            gtin: product.gtin
+          gtin: product.gtin
         }, product, {upsert: true});
       }
-    });
+    }.bind(element));
 };
 BreadWriter.getProducts = function getProducts() {
   kwikeeLogin(function(){
-    eachItem(getProduct);
+    var foodSegmentId = Categories.findOne({code: '50000000'})._id;
+    var foodSegFamiliesIds = Categories.find({parent: foodSegmentId})
+      .fetch()
+      .map(function(category) {
+        return category._id;
+      });
+    var foodSegFamClass = Categories.find({parent: {$in: foodSegFamiliesIds}})
+      .fetch()
+      .map(function(category) {
+        return category._id;
+      });
+    var brickCodes = Categories.find({parent: {$in: foodSegFamClass}})
+      .fetch()
+      .map(function(category){
+        return category.code;
+      });
+    //console.log('gathered categories');
+    //console.log(brickCodes);
+    brickCodes.forEach(readBrick);
   });
-}
+};
 

@@ -5,7 +5,7 @@
 ProductCompany = new Meteor.Collection('productCompany');
 
 // {
-// 	code: int,
+//	code: int,
 // 	description: string,
 // 	type: string,
 // 	parent: id

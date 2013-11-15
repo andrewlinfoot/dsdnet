@@ -25,7 +25,7 @@
 			url('/gotham/gotham-xlight-webfont.ttf') format('truetype'),
 			url('/gotham/gotham-xlight-webfont.svg#webfont') format('svg');
 }
-@font-face{
+@font-face {
 	font-family: 'gotham-bold-condensed';
 	src: url('/gotham/gothamxnarrow-bold-webfont.eot');
 	src: url('/gotham/gothamxnarrow-bold-webfont.eot') format('embedded-opentype'),
@@ -37,8 +37,11 @@ body {
 	color: @black;
 	background-color: @light-gray;
 }
-h2{
+h2 {
 	margin-top: 15px;
+}
+li {
+	list-style: none;
 }
 @font-family-base: @normal-font;
 @headings-font-family: @bold-font;
@@ -368,5 +371,6 @@ h2{
 .ingredients{
 	display: inline-block;
 	width: calc(~'100% - @{module-height-expanded}');
-	float: left;
+	float: right;
+	height: 100%;
 }

@@ -140,13 +140,13 @@
 <template name='categories'>
 	<h3>Category</h3>
 	<div>
-		<button type="submit" class="button-lg family family-dropdown" data-toggle="dropdown">
+		<button type="submit" class="button-lg family " data-toggle="dropdown">
 			<div class="button-elips">
 				Family
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
-		<ul class="dropdown-menu" role="menu">
+		<ul class="dropdown-menu family-dropdown-menu" role="menu">
 			<li><a class="category-item family-all" href="#">All</a></li>
 			<li class="divider"></li>
 			{{#each family}}
@@ -155,13 +155,13 @@
   		</ul>
   	</div>
 	<div>
-		<button type="submit" class="button-lg class class-dropdown" data-toggle="dropdown">
+		<button type="submit" class="button-lg class" data-toggle="dropdown">
 			<div class="button-elips">
 			Class
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
-		<ul class="dropdown-menu" role="menu">
+		<ul class="dropdown-menu class-dropdown-menu" role="menu">
 			<li><a class="category-item class-all" href="#">All</a></li>
 			<li class="divider"></li>
 			{{#each class}}
@@ -170,13 +170,13 @@
   		</ul>
 	</div>
 	<div>
-		<button type="submit" class="button-lg brick brick-dropdown" data-toggle="dropdown">
+		<button type="submit" class="button-lg brick" data-toggle="dropdown">
 			<div class="button-elips">
 			Brick
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
-		<ul class="dropdown-menu" role="menu">
+		<ul class="dropdown-menu brick-dropdown-menu" role="menu">
 			<li><a class="category-item brick-all" href="#">All</a></li>
 			<li class="divider"></li>
 			{{#each brick}}

@@ -104,15 +104,23 @@
 </template>
 
 <template name="nutritionInfo">
+	{{! each section }}
 	{{#each product_data.kwikee_nutrition.[0]}}
-		<div class= "nutrition-info-section">
-			<p>{{section}}</p>
-		<ul>
-		{{#each children}}
-			<li>{{label}}: {{amount}} {{uom}} {{#if dvp}} - {{dvp}}%{{/if}}</li>
-		{{/each}}
-		</ul>
-	</div>
+	<table>
+	<thead>
+		<tr>
+			<td>{{titleCase section}}</td>
+		</tr>
+	</thead>
+		<tbody>
+			{{#each children}}
+			<tr>
+				<td>{{label}}</td>
+				<td>{{amount}} {{uom}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
 	{{/each}}
 </template>
 

@@ -26,6 +26,15 @@ Template.products.events({
 	}
 });
 
+Template.nutritionInfo.helpers({
+	firstColumn: function(){
+		return this.slice(0,3);
+	},
+	secondColumn: function(){
+		return this[3];
+	}
+})
+
 Template.main.module = function () {
 	var segment = Session.get('currentSegment');
 	var family = Session.get('currentFamily');

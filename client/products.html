@@ -78,18 +78,17 @@
 
 			</div>
 			<div class="nutrition-ing">
-				<div class="nutrition-facts">
-					<h4>Nutrition Facts</h4>
+				<h4>Nutrition Facts</h4>
+				<div class="nutrition-container">
 					{{> nutritionInfo}}
-
 					{{#if product_data.ingredients}}
+	 					<div class="ingredients col-xs-4">
+							<h6>Ingredients</h6> {{product_data.ingredients}}
+						</div>
+					{{/if}}
 				</div>
- 				<div class="ingredients">
-					<h5>Ingredients</h5> {{product_data.ingredients}}
-				</div>
-				{{/if}}
-
 			</div>
+			{{#if product_data.kwikee_nutrition.[0]}}
 			<button type="submit" class="more-btn">
 				<span class="more-btn-text">more</span>
 				<div class="circle-outer">
@@ -100,34 +99,66 @@
 					</div>
 				</div>
 			</button><!--button-->
+			{{/if}}
 		</div><!--module-->
 </template>
 
 <template name="nutritionInfo">
 	{{! each section }}
-	{{#each product_data.kwikee_nutrition.[0]}}
-	<table>
-	<thead>
-		<tr>
-			<td><h6>{{titleCase section}}</h6></td>
-		</tr>
-	</thead>
-		<tbody>
-			{{#each children}}
-			<tr>
-				<td class="nutrition-label">{{label}}</td>
-				{{#if amount}}
-					<td class="nutrition-value">{{amount}}</td>
-					<td class="nutrition-unit">{{lowerCase uom}}</td>
-				{{/if}}
-				{{#if dvp}}
-					<td class="nutrition-percent">{{dvp}}%</td>
-				{{/if}}
-			</tr>
-			{{/each}}
-		</tbody>
-	</table>
-	{{/each}}
+	{{! fix this }}
+	{{#with product_data.kwikee_nutrition.[0]}}
+	<div class="col-xs-4 remove-gutter">
+		{{#each firstColumn}}
+		<table class="nutrition-table nutrition-{{lowerCase section}}">
+			<thead>
+				<tr>
+					<td><h6>{{titleCase section}}</h6></td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each children}}
+				<tr class="nutrition-row">
+					<td class="nutrition-label nutrition-cell">{{label}}</td>
+					{{#if amount}}
+						<td class="nutrition-value nutrition-cell">{{amount}}</td>
+						<td class="nutrition-unit nutrition-cell">{{lowerCase uom}}</td>
+					{{/if}}
+					{{#if dvp}}
+						<td class="nutrition-percent nutrition-cell">{{dvp}}%</td>
+					{{/if}}
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		{{/each}}
+	</div>
+	
+	<div class="col-xs-4">
+		{{#with secondColumn}}
+		<table class="nutrition-table nutrition-{{lowercase section}}">
+			<thead>
+				<tr>
+					<td><h6>{{titleCase section}}</h6></td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each children}}
+				<tr class="nutrition-row">
+					<td class="nutrition-label nutrition-cell">{{label}}</td>
+					{{#if amount}}
+						<td class="nutrition-value nutrition-cell">{{amount}}</td>
+						<td class="nutrition-unit nutrition-cell">{{lowerCase uom}}</td>
+					{{/if}}
+					{{#if dvp}}
+						<td class="nutrition-percent nutrition-cell">{{dvp}}%</td>
+					{{/if}}
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		{{/with}}
+	</div>
+	{{/with}}
 </template>
 
 <template name="distributor">
@@ -198,8 +229,6 @@
 </template>
 <template name="breadCrumb">
 	<div class="crumbs">
-		{{#with crumbs}}
-			{{this}}
-		{{/with}}
+		{{crumbs}}
 	</div>
 </template>

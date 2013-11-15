@@ -218,10 +218,17 @@ li {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-.nutrition-ing ul{
-	margin-left: 15px;
-	padding-left: 0px;
+.nutrition-label{
+	padding-right: 20px; 
 }
+.nutrition-value {
+	float: right;
+}
+
+.nutrition-percent {
+	.nutrition-value;
+}
+
 .picture-nav-left{
 	clear: left;
 	float: left;
@@ -363,10 +370,15 @@ li {
 	height: @navbar;
 }
 .nutrition-facts{
-	width: 230px;
+	width: 100%;
 	display: inline-block;
 	padding-right: 15px;
 	float: left;
+}
+.nutrition-facts table{
+	display: inline-block;
+	float: left;
+	margin-right: 30px;
 }
 .ingredients{
 	display: inline-block;

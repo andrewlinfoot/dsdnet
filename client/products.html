@@ -79,7 +79,7 @@
 			</div>
 			<div class="nutrition-ing">
 				<div class="nutrition-facts">
-					<h5>Nutrition Facts</h5>
+					<h4>Nutrition Facts</h4>
 					{{> nutritionInfo}}
 
 					{{#if product_data.ingredients}}
@@ -109,14 +109,20 @@
 	<table>
 	<thead>
 		<tr>
-			<td>{{titleCase section}}</td>
+			<td><h6>{{titleCase section}}</h6></td>
 		</tr>
 	</thead>
 		<tbody>
 			{{#each children}}
 			<tr>
-				<td>{{label}}</td>
-				<td>{{amount}} {{uom}}</td>
+				<td class="nutrition-label">{{label}}</td>
+				{{#if amount}}
+					<td class="nutrition-value">{{amount}}</td>
+					<td class="nutrition-unit">{{lowerCase uom}}</td>
+				{{/if}}
+				{{#if dvp}}
+					<td class="nutrition-percent">{{dvp}}%</td>
+				{{/if}}
 			</tr>
 			{{/each}}
 		</tbody>

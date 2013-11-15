@@ -5,3 +5,9 @@ Handlebars.registerHelper('titleCase', function(str){
 			.concat(match.substring(1));
 	});
 });
+
+Handlebars.registerHelper('lowerCase', function(str){
+	if(str){
+		return str.toLowerCase();
+	}
+});

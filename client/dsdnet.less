@@ -36,6 +36,13 @@
 body {
 	color: @black;
 	background-color: @light-gray;
+	// background-image: linear-gradient(@light-gray 1px, transparent 1px),
+	// linear-gradient(90deg, @light-gray 1px, transparent 1px),
+	// linear-gradient(rgba(150,150,150,.1) 1px, transparent 1px),
+	// linear-gradient(90deg, rgba(150,150,150,.1) 1px, transparent 1px);
+	// background-size:200px 200px, 200px 200px, 10px 10px, 10px 10px;
+	// background-position: center;
+	// background-attachment: fixed;
 }
 h2 {
 	margin-top: 15px;
@@ -60,7 +67,7 @@ li {
 @module-height-expanded: 230px;
 @small-shadow: 3px 3px 0 rgba(0,0,0,0.2);
 @small-shadow-inset: 0 -1px 2px rgba(0,0,0,0.2);
-@button-shadow: drop-shadow(2px 2px 0 rgba(0,0,0,0.2));
+@button-shadow: drop-shadow(1px 1px 0 rgba(0,0,0,0.2));
 
 //buttons
 .button-lg{
@@ -248,67 +255,6 @@ li {
 	.nutrition-value;
 	margin-left: 7px;
 }
-
-.picture-nav-left{
-	clear: left;
-	float: left;
-	width: @module-height-expanded / 2;
-	font-family: @bold-font;
-	text-align: center;
-	color: @dark-gray;
-}
-.picture-nav-right{
-	float: left;
-	//background-color: red;
-	width: @module-height-expanded / 2;
-	font-family: @bold-font;
-	text-align: center;
-	color: @dark-gray;
-}
-.circle-middle{
-	background: transparent;
-	height: 100%;
-	width: 100%;
-	border: 3px solid @green;
-	border-radius: 50%;
-	padding: 0;
-	position: relative;
-}
-.circle-inner{
-	border-radius: 50%;
-	height: 19px;
-	position: relative;
-	color: @green;
-	line-height: 1;
-}
-.circle-outer{
-	width: 25px;
-	height: 25px;
-	padding: 0px; 
-	border-radius: 50%;
-	position: relative;
-	top: 1px;
-	display: inline-block;
-}
-.more-btn:hover{
-	text-shadow: @small-shadow;
-}
-.more-btn:hover .circle-middle{
-	box-shadow: @small-shadow, inset @small-shadow;
-}
-.more-btn:hover{
-	text-shadow: @small-shadow;
-}
-
-// .more-btn:hover{
-// 	text-shadow: @small-shadow-inset;
-// }
-// .more-btn:hover .circle-outer{
-// 	box-shadow: @small-shadow-inset;
-// }
-// .more-btn:hover .circle-inner{
-// 	box-shadow: @small-shadow;
-// }
 
 .picture-nav-btn{
 	position: relative;

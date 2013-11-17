@@ -5,24 +5,23 @@ Template.products.events({
 		var $module = $target.parent('.module');
 		var $picture = $target.siblings('.product-picture');
 		var $productContainer = $target.siblings('.product-facts-container');
-		var $buttonText = $target.find('.more-btn-text');
-		var $buttonSymbol = $target.find('.circle-inner');
+		
+		var $buttonIcon = $target.find('.more-button-icon');
+		$buttonIcon.toggleClass('plus-btn');
+		$buttonIcon.toggleClass('minus-btn');
+		
+		var $buttonText = $target.find('.more-button-text');
+		$buttonText.text($buttonIcon.hasClass('plus-btn') ? 'More':'Less');
+
 		var $nutritionContainer = $target.siblings('.nutrition-ing');
 
 		$nutritionContainer.toggle(500);
 
-
 		$picture.toggleClass('product-picture-expanded');
+		
 		$module.toggleClass('module-expanded');
 		$productContainer.toggleClass('product-container-expanded');
 
-		if($buttonText.text() === 'more') {
-			$buttonText.text('less');
-			$buttonSymbol.text('-');
-		} else {
-			$buttonText.text('more');
-			$buttonSymbol.text('+');
-		}
 	}
 });
 

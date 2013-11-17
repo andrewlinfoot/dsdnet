@@ -74,59 +74,43 @@
 		</div><!--module-->
 </template>
 
+<template name="nutritionTable">
+	<table class="nutrition-table nutrition-{{lowerCase section}}">
+			<thead>
+				<tr>
+					<td><h6>{{titleCase section}}</h6></td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each children}}
+				<tr class="nutrition-row">
+					<td class="nutrition-label nutrition-cell">{{label}}</td>
+					{{#if amount}}
+						<td class="nutrition-value nutrition-cell">{{amount}}</td>
+						<td class="nutrition-unit nutrition-cell">{{lowerCase uom}}</td>
+					{{/if}}
+					{{#if dvp}}
+						<td class="nutrition-percent nutrition-cell">{{dvp}}%</td>
+					{{/if}}
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+</template>
+
 <template name="nutritionInfo">
 	{{! each section }}
 	{{! fix this }}
 	{{#with product_data.kwikee_nutrition.[0]}}
 	<div class="col-xs-4 remove-gutter">
 		{{#each firstColumn}}
-		<table class="nutrition-table nutrition-{{lowerCase section}}">
-			<thead>
-				<tr>
-					<td><h6>{{titleCase section}}</h6></td>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each children}}
-				<tr class="nutrition-row">
-					<td class="nutrition-label nutrition-cell">{{label}}</td>
-					{{#if amount}}
-						<td class="nutrition-value nutrition-cell">{{amount}}</td>
-						<td class="nutrition-unit nutrition-cell">{{lowerCase uom}}</td>
-					{{/if}}
-					{{#if dvp}}
-						<td class="nutrition-percent nutrition-cell">{{dvp}}%</td>
-					{{/if}}
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
+		{{> nutritionTable}}
 		{{/each}}
 	</div>
 	
 	<div class="col-xs-4">
 		{{#with secondColumn}}
-		<table class="nutrition-table nutrition-{{lowercase section}}">
-			<thead>
-				<tr>
-					<td><h6>{{titleCase section}}</h6></td>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each children}}
-				<tr class="nutrition-row">
-					<td class="nutrition-label nutrition-cell">{{label}}</td>
-					{{#if amount}}
-						<td class="nutrition-value nutrition-cell">{{amount}}</td>
-						<td class="nutrition-unit nutrition-cell">{{lowerCase uom}}</td>
-					{{/if}}
-					{{#if dvp}}
-						<td class="nutrition-percent nutrition-cell">{{dvp}}%</td>
-					{{/if}}
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
+		{{>nutritionTable}}
 		{{/with}}
 	</div>
 	{{/with}}

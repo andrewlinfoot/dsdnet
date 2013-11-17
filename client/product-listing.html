@@ -4,7 +4,7 @@
 		{{> navigation-bar}}
 		{{#with productData}}
 		<div class="body-wrapper">
-			<div class="module module-expanded">
+			<div class="module margin-top">
 				<div class ="row listing-margin">
 					<div class="col-xs-3">
 						<img class="listing-pic" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
@@ -25,10 +25,9 @@
 						</div>
 					</div><!--col-xs-9-->
 				</div><!--ROW-->
-			
-			<div class="row listing-margin">
-				{{> nutritionIngredients}}
-			</div><!--row listing-margin-->
+				<div class="row listing-margin">
+					{{> nutritionIngredients}}
+				</div><!--row listing-margin-->
 			</div><!--MODULE-->
 		</div><!--WRAPPER-->
 		{{/with}}

@@ -148,9 +148,16 @@ li {
 .product-picture{
 	height: @module-height;
 	width: @module-height;
-	background-color: white;
+	// background-color: white;
 	float: left;
-	transition:width .5s, height .5s;
+	transition:all .5s;
+	background-color:white;
+	background-image: linear-gradient(@light-gray 1px, transparent 1px),
+	linear-gradient(90deg, @light-gray 1px, transparent 1px),
+	linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
+	linear-gradient(90deg, rgba(0,0,0,.1) 1px, transparent 1px);
+	background-size:200px 200px, 200px 200px, 40px 40px, 40px 40px;
+	background-position: center;
 
 }
 .product-facts-container{

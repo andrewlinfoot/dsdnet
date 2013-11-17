@@ -47,3 +47,15 @@ Meteor.publish('categories', function pubCategories(options) {
   }
   return Categories.find({parent: options.parent});
 });
+
+/**
+ * TODO: make options work
+ * @param Options
+ * {
+ *  gtin: product gtin
+ *  companyId: company id to verify they are paying
+ * }
+*/
+Meteor.publish('productListing', function pubProductListing(options) {
+  return Products.find({}, {limit:1});
+});

@@ -36,6 +36,13 @@ Router.map(function () {
           ];
         }
     });
+    this.route('gtin', {
+      path: '/gtin',
+      template: 'productListing',
+      waitOn: function () {
+        return Meteor.subscribe('productListing', {gtin: 'somegtin'});
+      }
+    });
 });
 
 // Scroll to top fix for iron-router

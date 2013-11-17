@@ -22,7 +22,19 @@
 			</div>
 	</div><!--body-wrapper-->
 </template>
-
+<template name="nutritionIngredients">
+	<div class="nutrition-ing">
+		<h4>Nutrition Facts</h4>
+		<div class="nutrition-container">
+			{{> nutritionInfo}}
+			{{#if product_data.ingredients}}
+			<div class="ingredients col-xs-4">
+				<h6>Ingredients</h6> {{product_data.ingredients}}
+			</div>
+			{{/if}}
+		</div>
+	</div>
+</template>
 <template name="prodMod">
 		<div class="module">
 			<div class = "product-picture">
@@ -45,17 +57,8 @@
 				</div>
 
 			</div>
-			<div class="nutrition-ing">
-				<h4>Nutrition Facts</h4>
-				<div class="nutrition-container">
-					{{> nutritionInfo}}
-					{{#if product_data.ingredients}}
-	 					<div class="ingredients col-xs-4">
-							<h6>Ingredients</h6> {{product_data.ingredients}}
-						</div>
-					{{/if}}
-				</div>
-			</div>
+			{{> nutritionIngredients}} 
+
 			{{#if product_data.kwikee_nutrition.[0]}}
 			<button type="submit" class="more-btn">
 				<span class="more-btn-text">more</span>

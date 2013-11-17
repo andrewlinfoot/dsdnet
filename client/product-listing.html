@@ -3,31 +3,34 @@
 	<body>
 		{{> navigation-bar}}
 		{{#with productData}}
-		<div class="body-wrapper module">
-			<div class ="row listing-margin">
-				<div class="col-xs-3">
-					<img class="listing-pic" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
-				</div><!--col-xs-3-->
-				<div class ="col-xs-9">
-	 					<h4>{{product_data.custom_product_name}}</h4>
-					<div class = "product-facts">
-						<span><strong>Brand:</strong>{{product_data.brand_name}}</span>
-					</div>
-					<div class = "product-facts">
-						<span><strong>UPC:</strong>{{product_data.whole_upc}}</span>
-					</div>
-					<div class = "product-facts">
-						<span><strong>MFR:</strong> {{product_data.manufacturer_name}}</span>
-					</div>
-					<div class = "product-facts">
-						<span><strong>Available:</strong>3</span>
-					</div>
-				</div><!--col-xs-9-->
-			</div>
+		<div class="body-wrapper">
+			<div class="module module-expanded">
+				<div class ="row listing-margin">
+					<div class="col-xs-3">
+						<img class="listing-pic" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
+					</div><!--col-xs-3-->
+					<div class ="col-xs-9">
+		 					<h4>{{product_data.custom_product_name}}</h4>
+						<div class = "product-facts">
+							<span><strong>Brand:</strong>{{product_data.brand_name}}</span>
+						</div>
+						<div class = "product-facts">
+							<span><strong>UPC:</strong>{{product_data.whole_upc}}</span>
+						</div>
+						<div class = "product-facts">
+							<span><strong>MFR:</strong> {{product_data.manufacturer_name}}</span>
+						</div>
+						<div class = "product-facts">
+							<span><strong>Available:</strong>3</span>
+						</div>
+					</div><!--col-xs-9-->
+				</div><!--ROW-->
+			
 			<div class="row listing-margin">
-				{{> nutritionInfo}}
-			</div>
-		</div>
+				{{> nutritionIngredients}}
+			</div><!--row listing-margin-->
+			</div><!--MODULE-->
+		</div><!--WRAPPER-->
 		{{/with}}
 	</body>
 </template>

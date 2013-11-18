@@ -2,20 +2,22 @@
 
 @font-face {
 	font-family: 'gotham-black';
-	src: url('/gotham/gotham-black-webfont.eot');
-	src: url('/gotham/gotham-black-webfont.eot') format('embedded-opentype'),
-			url('/gotham/gotham-black-webfont.woff') format('woff'),
-			url('/gotham/gotham-black-webfont.ttf') format('truetype'),
-			url('/gotham/gotham-black-webfont.svg#webfont') format('svg');
+
+	src: url('/gotham/gothamxnarrow-bold-webfont.eot');
+	src: url('/gotham/gothamxnarrow-bold-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gothamxnarrow-bold-webfont.woff') format('woff'),
+			url('/gotham/gothamxnarrow-bold-webfont.ttf') format('truetype'),
+			url('/gotham/gothamxnarrow-bold-webfont.svg#webfont') format('svg');
+			
 		
 }
 @font-face{
 	font-family: 'gotham-normal';
-	src: url('/gotham/gotham-book-webfont.eot');
-	src: url('/gotham/gotham-book-webfont.eot') format('embedded-opentype'),
-			url('/gotham/gotham-book-webfont.woff') format('woff'),
-			url('/gotham/gotham-book-webfont.ttf') format('truetype'),
-			url('/gotham/gotham-book-webfont.svg#webfont') format('svg');
+	src: url('/gotham/gotham-light-webfont.eot');
+	src: url('/gotham/gotham-light-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gotham-light-webfont.woff') format('woff'),
+			url('/gotham/gotham-light-webfont.ttf') format('truetype'),
+			url('/gotham/gotham-light-webfont.svg#webfont') format('svg');
 }
 @font-face{
 	font-family: 'gotham-light';
@@ -27,11 +29,11 @@
 }
 @font-face {
 	font-family: 'gotham-bold-condensed';
-	src: url('/gotham/gothamxnarrow-bold-webfont.eot');
-	src: url('/gotham/gothamxnarrow-bold-webfont.eot') format('embedded-opentype'),
-			url('/gotham/gothamxnarrow-bold-webfont.woff') format('woff'),
-			url('/gotham/gothamxnarrow-bold-webfont.ttf') format('truetype'),
-			url('/gotham/gothamxnarrow-bold-webfont.svg#webfont') format('svg');
+	src: url('/gotham/gothamxnarrow-book-webfont.eot');
+	src: url('/gotham/gothamxnarrow-book-webfont.eot') format('embedded-opentype'),
+			url('/gotham/gothamxnarrow-book-webfont.woff') format('woff'),
+			url('/gotham/gothamxnarrow-book-webfont.ttf') format('truetype'),
+			url('/gotham/gothamxnarrow-book-webfont.svg#webfont') format('svg');
 }
 body {
 	color: @black;
@@ -49,6 +51,9 @@ h2 {
 }
 li {
 	list-style: none;
+}
+p{
+	font-size: 12pt;
 }
 @font-family-base: @normal-font;
 @headings-font-family: @bold-font;
@@ -111,7 +116,7 @@ li {
 	height: 25px;
 	width: 25px;
 	float: right;
-	margin-top: 3px;
+	margin-top: 5px;
 	display: inline-block;
 }
 .minus-btn{
@@ -120,7 +125,7 @@ li {
 	height: 25px;
 	width: 25px;
 	float: right;
-	margin-top: 3px;
+	margin-top: 5px;
 	display: inline-block;
 }
 
@@ -175,18 +180,19 @@ li {
 	height: 130px;
 	overflow: hidden;
 	transition:width .5s, height .5s;
-	margin-top: 15px;
 }
 .product-facts{
 	display: block;
-	margin-bottom: 5px;
+	margin-bottom: 1px;
+	font-size: 12pt;
 
 }
 
 .more-btn{
 	display: inline-block;
-	width: 75px;
-	font-size: 17pt;
+	width: 85px;
+	font-size: 18pt;
+	color: @dark-gray;
 	position: absolute;
 	right: 20px;
 	bottom: 8px;
@@ -206,8 +212,8 @@ li {
 	text-align: right;
 	position: relative;
 	font-family: @bold-font;
-	color: @dark-gray;
-	font-size: 24px;
+	color: @green;
+	font-size: 16pt;
 	border: 0px;
 	background-color: transparent;
 	margin-top: 15px;
@@ -226,6 +232,7 @@ li {
 .product-picture-expanded{
 	height: @module-height-expanded;
 	width: @module-height-expanded;
+	-webkit-font-smoothing:antialiased;
 }
 .product-container-expanded{
 	width: calc(~'100% - @{module-height-expanded}');
@@ -238,7 +245,7 @@ li {
 	height: auto;
 	width: 100%;
 	font-size:	8pt;
-	line-height: 1;
+	line-height: 1.5;
 	list-style: none;
 	text-style-position: 0px;
 	padding-left: 15px;
@@ -282,7 +289,7 @@ li {
 	font-family: @normal-font;
 }
 .crumbs{
-	margin-bottom: 7px;
+	margin-bottom: 9px;
 	margin-top: 7px;
 	color: @dark-gray;
 	font-family: @bold-cond-font;
@@ -294,26 +301,28 @@ li {
 .class{
 	margin-left: 10%;
 	width: 90%;
-	font-size: 15pt;
+	font-size: 17pt;
 }
 
 .brick{
 	margin-left: 15%;
 	width: 85%;
-	font-size: 13pt;
+	font-size: 14pt;
 }
 .family{
 	margin-left: 5%;
 	width: 95%;
-	font-size: 17pt;
+	font-size: 18pt;
 }
 .class .down-arrow-btn{
 	height: 21px;
 	width: 21px;
+	margin-top: 6px;
 }
 .brick .down-arrow-btn{
 	height: 17px;
 	width: 17px;
+	margin-top: 7px;
 }
 .button-elips{
 	width: calc(~'100% - 30px');

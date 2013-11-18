@@ -29,7 +29,7 @@
 			{{> nutritionInfo}}
 			{{#if product_data.ingredients}}
 			<div class="ingredients col-xs-4">
-				<h6>Ingredients</h6> {{product_data.ingredients}}
+				<h5>Ingredients</h5> {{product_data.ingredients}}
 			</div>
 			{{/if}}
 		</div>
@@ -41,19 +41,19 @@
 				<img class="pic-scale" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
 			</div>
  			<div class="product-facts-container"> 
- 								<h4>{{product_data.custom_product_name}}</h4>
+ 								<h3>{{product_data.custom_product_name}}</h3>
 
 				<div class = "product-facts">
-					<span><strong>Brand:</strong>{{product_data.brand_name}}</span>
+					<span><strong>Brand: </strong>{{product_data.brand_name}}</span>
 				</div>
 				<div class = "product-facts">
-					<span><strong>UPC:</strong>{{product_data.whole_upc}}</span>
+					<span><strong>UPC: </strong>{{product_data.whole_upc}}</span>
 				</div>
 				<div class = "product-facts">
-					<span><strong>MFR:</strong> {{product_data.manufacturer_name}}</span>
+					<span><strong>MFR: </strong> {{product_data.manufacturer_name}}</span>
 				</div>
 				<div class = "product-facts">
-					<span><strong>Available:</strong>3</span>
+					<span><strong>Available: </strong>3</span>
 				</div>
 
 			</div>
@@ -61,7 +61,7 @@
 
 			{{#if product_data.kwikee_nutrition.[0]}}
 			<button class="button-lg more-btn">
-				<span class="more-button-text">More</span>
+				<span class="more-button-text">MORE</span>
 				<div class="more-button-icon plus-btn"></div>
 			</button>
 			{{/if}}
@@ -72,7 +72,7 @@
 	<table class="nutrition-table nutrition-{{lowerCase section}}">
 			<thead>
 				<tr>
-					<td><h6>{{titleCase section}}</h6></td>
+					<td><h5>{{titleCase section}}</h5></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -122,7 +122,7 @@
 	<div class="family-dropdown">
 		<button type="submit" class="button-lg family " data-toggle="dropdown">
 			<div class="button-elips">
-				Family
+				FAMILY
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
@@ -137,7 +137,7 @@
 	<div class="class-dropdown">
 		<button type="submit" class="button-lg class" data-toggle="dropdown">
 			<div class="button-elips">
-			Class
+			CLASS
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
@@ -152,7 +152,7 @@
 	<div class="brick-dropdown">
 		<button type="submit" class="button-lg brick" data-toggle="dropdown">
 			<div class="button-elips">
-			Brick
+			BRICK
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	

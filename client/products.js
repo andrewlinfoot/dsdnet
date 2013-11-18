@@ -11,7 +11,7 @@ Template.products.events({
 		$buttonIcon.toggleClass('minus-btn');
 		
 		var $buttonText = $target.find('.more-button-text');
-		$buttonText.text($buttonIcon.hasClass('plus-btn') ? 'More':'Less');
+		$buttonText.text($buttonIcon.hasClass('plus-btn') ? 'MORE':'LESS');
 
 		var $nutritionContainer = $target.siblings('.nutrition-ing');
 

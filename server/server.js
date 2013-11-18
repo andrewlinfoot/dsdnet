@@ -22,7 +22,7 @@ Meteor.publish('products', function pubProducts(options) {
     //return all products TODO: Reevaluate
     return Products.find({}, {limit:50});
   }
-  return Products.find( options , {limit:25});
+  return Products.find( options , {limit:100});
 });
 
 

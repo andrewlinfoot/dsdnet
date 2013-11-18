@@ -74,6 +74,11 @@ var getProduct = function getProduct(element) {
 };
 BreadWriter.getProducts = function getProducts() {
   kwikeeLogin(function(){
+    //only crawl the ceareal brick to cut down on crawling
+    var brickCode = 10000601;
+    readBrick(BrickCode);
+    return
+    //to crawl all the food service categories
     var foodSegmentId = Categories.findOne({code: '50000000'})._id;
     var foodSegFamiliesIds = Categories.find({parent: foodSegmentId})
       .fetch()
@@ -90,8 +95,6 @@ BreadWriter.getProducts = function getProducts() {
       .map(function(category){
         return category.code;
       });
-    //console.log('gathered categories');
-    //console.log(brickCodes);
     brickCodes.forEach(readBrick);
   });
 };

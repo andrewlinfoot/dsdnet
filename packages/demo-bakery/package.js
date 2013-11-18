@@ -3,8 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  api.use('node-jquery', 'server');
-  api.add_files('kwikee.js', 'server');
+  api.use('cheerio', 'server');
   api.add_files('breadwriter.js', 'server');
   api.export('BreadWriter');
 });

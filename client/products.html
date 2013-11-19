@@ -8,7 +8,6 @@
 
 <template name="main">
 	<div class="row body-wrapper">
-		<!--<div class="row">-->
 			<div class="col-xs-3">
 				{{> distributor}}
 				{{> filter-bar}}
@@ -21,7 +20,6 @@
 				{{/each}}
 
 			</div>
-		<!--</div>row-->
 	</div><!--body-wrapper-->
 </template>
 
@@ -30,30 +28,6 @@
 			<div class = "product-picture">
 				<img class="pic-scale" src="http://new.kwikeesystems.com{{primary_views.[0].preview}}">
 			</div>
-			<!-- <div class = "picture-nav-left">
-				<button type="submit" class="more-btn picture-nav-btn">
-					<div class="circle-outer">
-						<div class="circle-middle">
-							<div class="circle-inner">
-								<
-							</div>
-						</div>
-					</div>
-					Previous
-				</button>			
-				</div>
-			<div class ="picture-nav-right">
-				<button type="submit" class="more-btn picture-nav-btn">
-					Next
-					<div class="circle-outer">
-						<div class="circle-middle">
-							<div class="circle-inner">
-								>
-							</div>
-						</div>
-					</div>
-				</button>
-			</div> -->
  			<div class="product-facts-container"> 
  								<h4>{{product_data.custom_product_name}}</h4>
 
@@ -69,12 +43,6 @@
 				<div class = "product-facts">
 					<span><strong>Available:</strong>3</span>
 				</div>
-<!-- 				<div class = "product-facts">
-					<span><strong>Case QTY:</strong>{{product_data.case_count}}</span>
-				</div>
-				<div class = "product-facts">
-					<span><strong>Distributor:</strong> Mcfarling</span>
-				</div> -->
 
 			</div>
 			<div class="nutrition-ing">
@@ -98,7 +66,7 @@
 						</div>
 					</div>
 				</div>
-			</button><!--button-->
+			</button>
 			{{/if}}
 		</div><!--module-->
 </template>
@@ -170,7 +138,7 @@
 
 <template name='categories'>
 	<h3>Category</h3>
-	<div>
+	<div class="family-dropdown">
 		<button type="submit" class="button-lg family " data-toggle="dropdown">
 			<div class="button-elips">
 				Family
@@ -185,7 +153,7 @@
 			{{/each}}
   		</ul>
   	</div>
-	<div>
+	<div class="class-dropdown">
 		<button type="submit" class="button-lg class" data-toggle="dropdown">
 			<div class="button-elips">
 			Class
@@ -200,7 +168,7 @@
 			{{/each}}
   		</ul>
 	</div>
-	<div>
+	<div class="brick-dropdown">
 		<button type="submit" class="button-lg brick" data-toggle="dropdown">
 			<div class="button-elips">
 			Brick

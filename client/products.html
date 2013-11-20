@@ -14,13 +14,17 @@
 			</div>
 			<div class="col-xs-9">
 				{{> breadCrumb}}
-
+				{{> loadGif}}
 				{{#each module}}
 					{{> prodMod}}
 				{{/each}}
 
 			</div>
 	</div><!--body-wrapper-->
+</template>
+<template name="loadGif">
+	<img src="ajax-loader.gif" class="loading-gif">
+	</img>
 </template>
 <template name="nutritionIngredients">
 	<div class="nutrition-ing">

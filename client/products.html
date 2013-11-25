@@ -42,7 +42,6 @@
 			</div>
  			<div class="product-facts-container"> 
  								<h3>{{product_data.custom_product_name}}</h3>
-
 				<div class = "product-facts">
 					<span><strong>Brand: </strong>{{product_data.brand_name}}</span>
 				</div>
@@ -167,15 +166,11 @@
 </template>
 
 <template name="filter-bar">
-	<div class="current-distributor">
-<!-- 		<h2>Mcfarling Foods</h2>
-		<p>(425)829-1216<p> -->
-
-	</div>
 	<div>
 	  	{{> categories}}
 	</div>	  	
 </template>
+
 <template name="breadCrumb">
 	<div class="crumbs">
 		{{crumbs}}

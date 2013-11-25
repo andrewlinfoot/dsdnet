@@ -43,8 +43,8 @@ Meteor.publish('categories', function pubCategories(options) {
       brickId: 1
     }
   });
-  
-  // Might be a better solution currently iterating
+
+  // Might be a better solution. Currently iterating
   // through every product without too much of
   // a noticable performance loss. 41478 products
   var categoriesWithProducts = [];

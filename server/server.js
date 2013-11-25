@@ -25,16 +25,38 @@ Meteor.publish('products', function pubProducts(options) {
   return Products.find( options , {limit:100});
 });
 
-
-//TODO: implement category filtering based in item availability
 /**
  * @param Options
  * {
  *    type: 'segment', 'family', 'class' or 'brick'
- *    parent: id of parent category
+ *    parent: id of parent category,
+ *    TODO: companyId: id of company
  * }
 */
 Meteor.publish('categories', function pubCategories(options) {
+  //TODO: filter categories based on company's product availibility
+  var productsCurser = Products.find({}, {
+    fields: {
+      classId: 1,
+      familyId: 1,
+      segmentId: 1,
+      brickId: 1
+    }
+  });
+  
+  // Might be a better solution currently iterating
+  // through every product without too much of
+  // a noticable performance loss. 41478 products
+  var categoriesWithProducts = [];
+  productsCurser.forEach( function (product) {
+    categoriesWithProducts.push(product.classId);
+    categoriesWithProducts.push(product.familyId);
+    categoriesWithProducts.push(product.segmentId);
+    categoriesWithProducts.push(product.brickId);
+  });
+
+  categoriesWithProducts = _.uniq(categoriesWithProducts);
+
   if(!options) {
     // all categories
     return Categories.find().limit(50);
@@ -43,9 +65,16 @@ Meteor.publish('categories', function pubCategories(options) {
     // hard code food/beverage/tobacco segment
     // TODO: remove
     var foodCat = Categories.findOne({code: '50000000'});
-    return Categories.find({type: options.type, parent: foodCat._id});
+    return Categories.find({
+      type: options.type,
+      parent: foodCat._id,
+      _id: {$in: categoriesWithProducts}
+    });
   }
-  return Categories.find({parent: options.parent});
+  return Categories.find({
+    parent: options.parent,
+    _id: {$in: categoriesWithProducts}
+  });
 });
 
 /**

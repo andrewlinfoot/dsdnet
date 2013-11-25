@@ -57,5 +57,10 @@ Meteor.publish('categories', function pubCategories(options) {
  * }
 */
 Meteor.publish('productListing', function pubProductListing(options) {
-  return Products.find({}, {limit:1});
+  var gtin = options.gtin;
+  return Products.find({
+    gtin: gtin
+  }, {
+    limit:1
+  });
 });

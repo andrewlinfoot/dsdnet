@@ -37,10 +37,12 @@ Router.map(function () {
         }
     });
     this.route('gtin', {
-      path: '/gtin',
+      path: '/gtin/:gtin',
       template: 'productListing',
       waitOn: function () {
-        return Meteor.subscribe('productListing', {gtin: 'somegtin'});
+        return Meteor.subscribe('productListing', {
+          gtin: this.params.gtin
+        });
       }
     });
 });

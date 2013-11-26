@@ -32,7 +32,7 @@ Template.nutritionInfo.helpers({
 	secondColumn: function(){
 		return this[3];
 	}
-})
+});
 
 Template.main.module = function () {
 	var segment = Session.get('currentSegment');

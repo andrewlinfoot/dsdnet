@@ -48,6 +48,10 @@ var addProductCompany = function () {
 
 };
 
+Meteor.publish('company', function pubCompany(options) {
+  var companySlug = options.companySlug;
+  return Companies.find({slug: companySlug});
+});
 
 var getCompanyProducts = function (companySlug) {
   var company = Companies.findOne({slug: companySlug});

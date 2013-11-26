@@ -48,10 +48,29 @@ var addProductCompany = function () {
 
 };
 
+
+var getCompanyProducts = function (companySlug) {
+  var company = Companies.findOne({slug: companySlug});
+  var productCompanyCurser = ProductCompany.find({
+    companyId: company._id
+  },{
+    fields: {
+      productId: 1
+    }
+  });
+  var productsArray = productCompanyCurser.map( function (product) {
+    return product.productId;
+  });
+  return productsArray;
+};
+
 /**
  * @param Options
  * {
- *  category: null (all categories) or categoryId or [categoryId, categoryId, ...]
+ *  companySlug: the company slug
+ *  query: {
+ *    brickId or familyId or classId: mongo id
+ *  }
  * }
  * TODO: company
  */
@@ -60,7 +79,17 @@ Meteor.publish('products', function pubProducts(options) {
     //return all products TODO: Reevaluate
     return Products.find({}, {limit:50});
   }
-  return Products.find( options , {limit:100});
+  var companySlug = options.companySlug;
+  var productsArray = getCompanyProducts(companySlug);
+
+  //TODO: find better solution
+  var query = {};
+  if(options.query) {
+    query = options.query;
+  }
+  query._id = {$in: productsArray};
+
+  return Products.find(query, {limit:25});
 });
 
 /**
@@ -68,12 +97,18 @@ Meteor.publish('products', function pubProducts(options) {
  * {
  *    type: 'segment', 'family', 'class' or 'brick'
  *    parent: id of parent category,
- *    TODO: companyId: id of company
+ *    companySlug: company slug
  * }
 */
 Meteor.publish('categories', function pubCategories(options) {
-  //TODO: filter categories based on company's product availibility
-  var productsCurser = Products.find({}, {
+  var companySlug = options.companySlug;
+  var productsArray = getCompanyProducts(companySlug);
+
+  var productsCurser = Products.find({
+    _id: {
+      $in: productsArray
+    }
+  }, {
     fields: {
       classId: 1,
       familyId: 1,

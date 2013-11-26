@@ -96,7 +96,9 @@ Template.categories.helpers({
 Template.categories.events( {
 	'click .category-item': function (e) {
 		e.preventDefault();
+		var options = {};
 		var $target = $(e.currentTarget);
+		var companySlug = Session.get('companySlug');
 		if($target.hasClass('family-all')){
 			Session.set('currentFamily', 'all');
 			Session.set('currentClass', 'all');
@@ -109,20 +111,38 @@ Template.categories.events( {
 		if($target.hasClass('brick-all')){
 			Session.set('currentBrick', 'all');
 		}
-		Meteor.subscribe('categories', {parent: this._id});
+		Meteor.subscribe('categories', {parent: this._id, companySlug: companySlug});
 		if(this.type === 'family') {
-			Meteor.subscribe('products', {familyId: this._id});
+			options = {
+				companySlug: companySlug,
+				query: {
+					familyId: this._id
+				}
+			};
+			Meteor.subscribe('products', options);
 			Session.set('currentFamily', this._id);
 			Session.set('currentClass', 'all');
 			Session.set('currentBrick', 'all');
 		}
 		if(this.type === 'class') {
-			Meteor.subscribe('products', {classId: this._id});
+			options = {
+				companySlug: companySlug,
+				query: {
+					classId: this._id
+				}
+			};
+			Meteor.subscribe('products', options);
 			Session.set('currentClass', this._id);
 			Session.set('currentBrick', 'all');
 		}
 		if(this.type === 'brick') {
-			Meteor.subscribe('products', {brickId: this._id});
+			options = {
+				companySlug: companySlug,
+				query: {
+					brickId: this._id
+				}
+			};
+			Meteor.subscribe('products', options);
 			Session.set('currentBrick', this._id);
 		}
 	}

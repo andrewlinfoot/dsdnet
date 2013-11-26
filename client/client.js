@@ -27,13 +27,17 @@ Router.map(function () {
     });
 
     this.route('companyProducts', {
-        path: '/company',
+        path: '/:companySlug',
         template: 'products',
         waitOn: function () {
+          var companySlug = this.params.companySlug;
           return [
-            Meteor.subscribe('products'),
-            Meteor.subscribe('categories', {type: 'family'})
+            Meteor.subscribe('products', {companySlug: companySlug}),
+            Meteor.subscribe('categories', {type: 'family', companySlug: companySlug})
           ];
+        },
+        before: function () {
+          Session.set('companySlug', this.params.companySlug);
         }
     });
     this.route('gtin', {

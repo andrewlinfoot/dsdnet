@@ -1,6 +1,6 @@
 // {
-//   productId: id,
-//   companyId: id
+//   productId: mongo id of product
+//   companyId: mongo id of company
 // }
 ProductCompany = new Meteor.Collection('productCompany');
 

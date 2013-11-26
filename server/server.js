@@ -7,8 +7,46 @@ Meteor.methods({
   },
   preheat: function () {
     BreadWriter.getProducts();
+  },
+  addProductCompany: function () {
+    addProductCompany();
   }
 });
+
+var addProductCompany = function () {
+  var productSet = Products.find({}, {
+    limit: 8000,
+    fields: {
+      _id: 1
+    }
+  });
+
+  var company = {
+    name: 'McFarling Foods',
+    slug: 'mcfarling',
+    phone: '(425) 829-1216'
+  };
+
+  var companyId = '';
+  if( Companies.findOne({slug: 'mcfarling'}) ) {
+    companyId = Companies.findOne({slug: 'mcfarling'});
+    companyId = companyId._id;
+  } else {
+    companyId = Companies.insert(company);
+  }
+
+  productSet.forEach( function (product) {
+    var productCompanyObj = {
+      productId: product._id,
+      companyId: companyId
+    };
+    ProductCompany.update({
+      productId: product._id
+    }, productCompanyObj, {
+      upsert: true});
+  });
+
+};
 
 /**
  * @param Options

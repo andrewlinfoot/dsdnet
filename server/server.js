@@ -48,6 +48,14 @@ var addProductCompany = function () {
 
 };
 
+/**
+ * publish company information
+ * @param  {object} options
+ * {
+ *   companySlug: the companies slug
+ * }
+ * @return {curser}         mongoDB curser for the company info
+ */
 Meteor.publish('company', function pubCompany(options) {
   var companySlug = options.companySlug;
   return Companies.find({slug: companySlug});

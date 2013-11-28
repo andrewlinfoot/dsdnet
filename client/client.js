@@ -44,6 +44,7 @@ Router.map(function () {
           return Companies.findOne();
         }
     });
+    
     this.route('gtin', {
       path: '/gtin/:gtin',
       template: 'productListing',

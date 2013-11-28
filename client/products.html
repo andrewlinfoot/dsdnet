@@ -14,7 +14,6 @@
 			</div>
 			<div class="col-xs-9">
 				{{> breadCrumb}}
-				{{> loadGif}}
 				{{#each module}}
 					{{> prodMod}}
 				{{/each}}
@@ -29,11 +28,6 @@
 				<img src="ajax-loader.gif"/>
 			</center>
 		</div>
-</template>
-
-<template name="loadGif">
-	<img src="ajax-loader.gif" class="loading-gif">
-	</img>
 </template>
 
 <template name="nutritionIngredients">

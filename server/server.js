@@ -81,10 +81,10 @@ var getCompanyProducts = function (companySlug) {
  * {
  *  companySlug: the company slug
  *  query: {
- *    brickId or familyId or classId: mongo id
+ *    brickId or familyId or classId: mongo id,
+ *    skip: number of products to skip
  *  }
  * }
- * TODO: company
  */
 Meteor.publish('products', function pubProducts(options) {
   if(!options){
@@ -99,9 +99,16 @@ Meteor.publish('products', function pubProducts(options) {
   if(options.query) {
     query = options.query;
   }
+  console.log(options);
   query._id = {$in: productsArray};
 
-  return Products.find(query, {limit:25});
+  if(!options.limit) {
+    options.limit = 20;
+  }
+
+  return Products.find(query, {
+    limit: options.limit
+  });
 });
 
 /**
@@ -129,9 +136,6 @@ Meteor.publish('categories', function pubCategories(options) {
     }
   });
 
-  // Might be a better solution. Currently iterating
-  // through every product without too much of
-  // a noticable performance loss. 41478 products
   var categoriesWithProducts = [];
   productsCurser.forEach( function (product) {
     categoriesWithProducts.push(product.classId);

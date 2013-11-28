@@ -1,3 +1,6 @@
+//Initialize Category Select
+Session.set('categorySelect', [null, null, null, null]);
+
 Template.products.events({
 	'click .more-btn' : function (e) {
 		e.preventDefault();
@@ -88,11 +91,6 @@ Template.categories.helpers({
 Template.categories.events( {
 	'click .category-item': function (e) {
 		e.preventDefault();
-		var companySlug = Session.get('companySlug');
-		var options = {
-			companySlug: companySlug,
-			query: {}
-		};
 
 		var type = this.type;
 		var categoryId = this._id;
@@ -108,19 +106,15 @@ Template.categories.events( {
 		{
 			case 'segment':
 				categoryIndex = 0;
-				options.query.segmentId = categoryId;
 				break;
 			case 'family':
 				categoryIndex = 1;
-				options.query.familyId = categoryId;
 				break;
 			case 'class':
 				categoryIndex = 2;
-				options.query.classId = categoryId;
 				break;
 			case 'brick':
 				categoryIndex = 3;
-				options.query.brickId = categoryId;
 				break;
 		}
 
@@ -131,12 +125,77 @@ Template.categories.events( {
 		}
 		Session.set('categorySelect', categorySelect);
 
-		Meteor.subscribe('categories', {parent: categoryId, companySlug: companySlug});
-		Meteor.subscribe('products', options);
+		//re-runs the products subscribe
+		Session.set('itemsLimit', 20);
+
+		Meteor.subscribe('categories', {
+			parent: categoryId,
+			companySlug: Session.get('companySlug')
+		});
 	}
 });
 
-Session.set('categorySelect', [null, null, null, null]);
+var buildProductSubOptions = function (limit) {
+	var companySlug = Session.get('companySlug');
+	var options = {
+		companySlug: companySlug,
+		limit: limit,
+		query: {}
+	};
+	var categorySelect = Session.get('categorySelect');
+	for(var i = 0; i < categorySelect.length; i++) {
+		if(categorySelect[i] !== null) {
+			switch(i)
+			{
+				case 0:
+					options.query.segmentId = categorySelect[i];
+					break;
+				case 1:
+					options.query.familyId = categorySelect[i];
+					break;
+				case 2:
+					options.query.classId = categorySelect[i];
+					break;
+				case 3:
+					options.query.brickId = categorySelect[i];
+			}
+		}
+	}
+	return options;
+};
+
+var ITEMS_INCREMENT = 20;
+Session.set('itemsLimit', ITEMS_INCREMENT);
+Deps.autorun(function() {
+	var itemsLimit = Session.get('itemsLimit');
+	var options = buildProductSubOptions(itemsLimit);
+  Meteor.subscribe('products', options);
+});
+
+// whenever #showMoreResults becomes visible, retrieve more results
+function showMoreVisible() {
+    var threshold, target = $('#showMoreResults');
+    if (!target.length) return;
+ 
+    threshold = $(window).scrollTop() + $(window).height() - target.height();
+
+    if (target.offset().top < threshold) {
+        if (!target.data('visible')) {
+            // console.log('target became visible (inside viewable area)');
+            target.data('visible', true);
+            Session.set('itemsLimit',
+                Session.get('itemsLimit') + ITEMS_INCREMENT);
+        }
+    } else {
+        if (target.data('visible')) {
+            // console.log('target became invisible (below viewable arae)');
+            target.data('visible', false);
+        }
+    }
+}
+ 
+// run the above func every time the user scrolls
+$(window).scroll(showMoreVisible);
 
 Template.categories.rendered = function () {
 	var $classDropdown = $('.class-dropdown');

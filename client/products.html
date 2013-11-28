@@ -18,14 +18,24 @@
 				{{#each module}}
 					{{> prodMod}}
 				{{/each}}
-
+				{{> showMoreResults}}
 			</div>
 	</div><!--body-wrapper-->
 </template>
+
+<template name="showMoreResults">
+		<div id="showMoreResults" style="padding-bottom:30px;">
+			<center>
+				<img src="ajax-loader.gif"/>
+			</center>
+		</div>
+</template>
+
 <template name="loadGif">
 	<img src="ajax-loader.gif" class="loading-gif">
 	</img>
 </template>
+
 <template name="nutritionIngredients">
 	<div class="nutrition-ing">
 		<h4>Nutrition Facts</h4>

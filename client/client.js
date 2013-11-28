@@ -33,7 +33,6 @@ Router.map(function () {
           var companySlug = this.params.companySlug;
           return [
             Meteor.subscribe('company', {companySlug: companySlug}),
-            Meteor.subscribe('products', {companySlug: companySlug}),
             Meteor.subscribe('categories', {type: 'family', companySlug: companySlug})
           ];
         },
@@ -44,7 +43,7 @@ Router.map(function () {
           return Companies.findOne();
         }
     });
-    
+
     this.route('gtin', {
       path: '/gtin/:gtin',
       template: 'productListing',

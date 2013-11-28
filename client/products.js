@@ -35,138 +35,121 @@ Template.nutritionInfo.helpers({
 });
 
 Template.main.module = function () {
-	var segment = Session.get('currentSegment');
-	var family = Session.get('currentFamily');
-	var mclass = Session.get('currentClass');
-	var brick = Session.get('currentBrick');
+	var segment = Session.get('categorySelect')[0];
+	var family = Session.get('categorySelect')[1];
+	var mclass = Session.get('categorySelect')[2];
+	var brick = Session.get('categorySelect')[3];
 	var query = {};
-	if(segment && segment !== 'all'){
+	if(segment){
 		query.segmentId = segment;
 	}
-	if(family && family !== 'all'){
+	if(family){
 		query.familyId = family;
 	}
-	if(mclass && mclass !== 'all'){
+	if(mclass){
 		query.classId = mclass;
 	}
-	if(brick && brick !== 'all'){
+	if(brick){
 		query.brickId = brick;
 	}
 	return Products.find(query);
 };
 
-// TODO: fix the crumbString............. I'm sorry
 Template.breadCrumb.crumbs = function() {
-	var crumbsString = '';
-	if(Session.equals('currentFamily','all')) {
-		crumbsString = crumbsString + 'All';
-	} else {
-		var family = Categories.findOne({_id: Session.get('currentFamily')});
-		crumbsString = crumbsString + family.description;
+	var categorySelect = Session.get('categorySelect');
+	var categoryArray = [];
+	for(var i = 0; i < categorySelect.length; i++) {
+		categoryArray[i] = Categories.findOne({_id: categorySelect[i]});
 	}
-	if(Session.equals('currentClass', 'all') && !Session.equals('currentFamily','all')) {
-		crumbsString = crumbsString + ' > All';
-	} else if (!Session.equals('currentFamily','all')) {
-		var mclass = Categories.findOne({_id: Session.get('currentClass')});
-		crumbsString = crumbsString + ' > ' + mclass.description;
-	}
-	if(Session.equals('currentBrick', 'all') && !Session.equals('currentClass','all')) {
-		crumbsString = crumbsString + ' > All';
-	} else if (!Session.equals('currentBrick', 'all')) {
-		console.log(Session.get('currentBrick'));
-		var brick = Categories.findOne({_id: Session.get('currentBrick')});
-		crumbsString = crumbsString + ' > ' + brick.description;
-	}
-	return crumbsString;
+	return categoryArray;
 };
 
 Template.categories.helpers({
-	'family' : function () {
-		return Categories.find({type: 'family'});
-	},
-	'class' : function () {
-		return Categories.find({type: 'class', parent: Session.get('currentFamily')});
-	},
-	'brick' : function () {
-		return Categories.find({type: 'brick', parent: Session.get('currentClass')});
+	'categoryDropdown' : function () {
+		var categorySelect = Session.get('categorySelect');
+		var dropdownArray = [
+			{
+				type: 'family',
+				categoryList: Categories.find({type: 'family'})
+			},
+			{
+				type: 'class',
+				categoryList: Categories.find({type: 'class', parent: categorySelect[1]})
+			},
+			{
+				type: 'brick',
+				categoryList: Categories.find({type: 'brick', parent: categorySelect[2]})
+			}
+		];
+		return dropdownArray;
 	}
 });
 
-//TODO - FIX THIS CODE!!!!
 Template.categories.events( {
 	'click .category-item': function (e) {
 		e.preventDefault();
-		var options = {};
-		var $target = $(e.currentTarget);
 		var companySlug = Session.get('companySlug');
-		if($target.hasClass('family-all')){
-			Session.set('currentFamily', 'all');
-			Session.set('currentClass', 'all');
-			Session.set('currentBrick', 'all');
+		var options = {
+			companySlug: companySlug,
+			query: {}
+		};
+
+		var type = this.type;
+		var categoryId = this._id;
+
+		//if category id is undefined,
+		//the category is all
+		if(!categoryId){
+			categoryId = null;
 		}
-		if($target.hasClass('class-all')){
-			Session.set('currentClass', 'all');
-			Session.set('currentBrick', 'all');
+
+		var categoryIndex;
+		switch(type)
+		{
+			case 'segment':
+				categoryIndex = 0;
+				options.query.segmentId = categoryId;
+				break;
+			case 'family':
+				categoryIndex = 1;
+				options.query.familyId = categoryId;
+				break;
+			case 'class':
+				categoryIndex = 2;
+				options.query.classId = categoryId;
+				break;
+			case 'brick':
+				categoryIndex = 3;
+				options.query.brickId = categoryId;
+				break;
 		}
-		if($target.hasClass('brick-all')){
-			Session.set('currentBrick', 'all');
+
+		var categorySelect = Session.get('categorySelect');
+		categorySelect[categoryIndex] = categoryId;
+		for(var i = 1; i < (4-categoryIndex); i++) {
+			categorySelect[categoryIndex+i] = null;
 		}
-		Meteor.subscribe('categories', {parent: this._id, companySlug: companySlug});
-		if(this.type === 'family') {
-			options = {
-				companySlug: companySlug,
-				query: {
-					familyId: this._id
-				}
-			};
-			Meteor.subscribe('products', options);
-			Session.set('currentFamily', this._id);
-			Session.set('currentClass', 'all');
-			Session.set('currentBrick', 'all');
-		}
-		if(this.type === 'class') {
-			options = {
-				companySlug: companySlug,
-				query: {
-					classId: this._id
-				}
-			};
-			Meteor.subscribe('products', options);
-			Session.set('currentClass', this._id);
-			Session.set('currentBrick', 'all');
-		}
-		if(this.type === 'brick') {
-			options = {
-				companySlug: companySlug,
-				query: {
-					brickId: this._id
-				}
-			};
-			Meteor.subscribe('products', options);
-			Session.set('currentBrick', this._id);
-		}
+		Session.set('categorySelect', categorySelect);
+
+		Meteor.subscribe('categories', {parent: categoryId, companySlug: companySlug});
+		Meteor.subscribe('products', options);
 	}
 });
+
+Session.set('categorySelect', [null, null, null, null]);
 
 Template.categories.rendered = function () {
 	var $classDropdown = $('.class-dropdown');
 	var $brickDropdown = $('.brick-dropdown');
-	if(Session.equals('currentFamily', 'all')) {
+
+	if(Session.get('categorySelect')[1] === null) {
 		$classDropdown.hide();
 	} else {
 		$classDropdown.show();
 	}
-	if(Session.equals('currentClass', 'all')) {
+	if(Session.get('categorySelect')[2] === null) {
 		$brickDropdown.hide();
 	} else {
 		$brickDropdown.show();
 	}
 };
-
-Session.set('categorySelect', [null, null, null, null]);
-
-//TODO fix
-//Session.set('currentSegment', Categories.findOne({code: '50000000'})._id);
-Session.set('currentFamily', 'all');
-Session.set('currentClass', 'all');
-Session.set('currentBrick', 'all');

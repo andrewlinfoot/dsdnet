@@ -122,51 +122,25 @@
 
 <template name='categories'>
 	<h3>Category</h3>
-	<div class="family-dropdown">
-		<button type="submit" class="button-lg family " data-toggle="dropdown">
+
+	{{#each categoryDropdown}}
+	<div class="{{type}}-dropdown">
+		<button type="submit" class="button-lg {{type}}" data-toggle="dropdown">
 			<div class="button-elips">
-				FAMILY
+				{{type}}
 			</div>
 			<div class="down-arrow-btn"></div>
 		</button> 	
-		<ul class="dropdown-menu family-dropdown-menu" role="menu">
-			<li><a class="category-item family-all" href="#">All</a></li>
+		<ul class="dropdown-menu {{type}}-dropdown-menu" role="menu">
+			<li><a class="category-item {{type}}-all" href="#">All</a></li>
 			<li class="divider"></li>
-			{{#each family}}
+			{{#each categoryList}}
 	    	<li><a class="category-item" href="#">{{description}}</a></li>	
 			{{/each}}
   		</ul>
-  	</div>
-	<div class="class-dropdown">
-		<button type="submit" class="button-lg class" data-toggle="dropdown">
-			<div class="button-elips">
-			CLASS
-			</div>
-			<div class="down-arrow-btn"></div>
-		</button> 	
-		<ul class="dropdown-menu class-dropdown-menu" role="menu">
-			<li><a class="category-item class-all" href="#">All</a></li>
-			<li class="divider"></li>
-			{{#each class}}
-	    	<li><a class="category-item" href="#">{{description}}</a></li>			
-			{{/each}}
-  		</ul>
-	</div>
-	<div class="brick-dropdown">
-		<button type="submit" class="button-lg brick" data-toggle="dropdown">
-			<div class="button-elips">
-			BRICK
-			</div>
-			<div class="down-arrow-btn"></div>
-		</button> 	
-		<ul class="dropdown-menu brick-dropdown-menu" role="menu">
-			<li><a class="category-item brick-all" href="#">All</a></li>
-			<li class="divider"></li>
-			{{#each brick}}
-	    	<li><a class="category-item" href="#">{{description}}</a></li>			
-			{{/each}}
-  		</ul>
-	</div>
+  </div>	
+	{{/each}}
+
 </template>
 
 <template name="filter-bar">
@@ -177,6 +151,11 @@
 
 <template name="breadCrumb">
 	<div class="crumbs">
-		{{crumbs}}
+		{{#each crumbs}}
+			{{#if description}}
+				{{description}} >
+			{{/if}}
+		{{/each}}
+		All
 	</div>
 </template>

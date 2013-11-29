@@ -43,6 +43,16 @@ Template.main.module = function () {
 	var mclass = Session.get('categorySelect')[2];
 	var brick = Session.get('categorySelect')[3];
 	var query = {};
+
+	var searchFilter = Session.get('searchFilter');
+	if (searchFilter) {
+		if(_.isString(searchFilter)) {
+			query = {
+				"product_data.custom_product_name": { $regex: searchFilter, $options: 'i'}
+			};
+		}
+	}
+
 	if(segment){
 		query.segmentId = segment;
 	}
@@ -55,7 +65,8 @@ Template.main.module = function () {
 	if(brick){
 		query.brickId = brick;
 	}
-	return Products.find(query);
+
+	return Products.find(query, {sort: {"product_data.custom_product_name": 1}});
 };
 
 Template.breadCrumb.crumbs = function() {
@@ -65,6 +76,13 @@ Template.breadCrumb.crumbs = function() {
 		categoryArray[i] = Categories.findOne({_id: categorySelect[i]});
 	}
 	return categoryArray;
+};
+
+Template.breadCrumb.rendered = function () {
+	$crumbs = $('.crumbs');
+	var crumbString = $crumbs.text().trim();
+	crumbString = crumbString.replace(/\s{2,}/g, ' ');
+	$('#search').attr('placeholder','Search in '+crumbString );
 };
 
 Template.categories.helpers({
@@ -125,6 +143,10 @@ Template.categories.events( {
 		}
 		Session.set('categorySelect', categorySelect);
 
+		//removes any search query
+		Session.set('searchFilter', undefined);
+		$('#search').val('');
+
 		//re-runs the products subscribe
 		Session.set('itemsLimit', 20);
 
@@ -135,13 +157,18 @@ Template.categories.events( {
 	}
 });
 
-var buildProductSubOptions = function (limit) {
+var buildProductSubOptions = function (limit, searchFilter) {
 	var companySlug = Session.get('companySlug');
 	var options = {
 		companySlug: companySlug,
 		limit: limit,
 		query: {}
 	};
+	if(searchFilter) {
+		options.query = {
+			"product_data.custom_product_name": { $regex: searchFilter, $options: 'i'}
+		};
+	}
 	var categorySelect = Session.get('categorySelect');
 	for(var i = 0; i < categorySelect.length; i++) {
 		if(categorySelect[i] !== null) {
@@ -168,7 +195,8 @@ var ITEMS_INCREMENT = 20;
 Session.set('itemsLimit', ITEMS_INCREMENT);
 Deps.autorun(function() {
 	var itemsLimit = Session.get('itemsLimit');
-	var options = buildProductSubOptions(itemsLimit);
+	var searchFilter = Session.get('searchFilter');
+	var options = buildProductSubOptions(itemsLimit, searchFilter);
   Meteor.subscribe('products', options);
 });
 
@@ -212,3 +240,32 @@ Template.categories.rendered = function () {
 		$brickDropdown.show();
 	}
 };
+
+//intitialize searchFilter
+Session.set('searchFilter', undefined);
+
+//Search
+Template.navigationBar.events({
+	'keyup #search' : function (e) {
+		e.preventDefault();
+		if (this.timeoutId) {
+			Meteor.clearTimeout(this.timeoutId);
+		}
+    var text = e.currentTarget.value;
+		this.timeoutId = Meteor.setTimeout(function () {
+			if(text.length > 1) {
+				Session.set('searchFilter', text);
+			} else {
+				Session.set('searchFilter', undefined);
+			}
+		}, 200);
+	}
+});
+
+Template.prodMod.rendered = function () {
+	var searchFilter = Session.get('searchFilter');
+	if(searchFilter) {
+		$(this.find('h3')).highlight(searchFilter);
+	}
+};
+

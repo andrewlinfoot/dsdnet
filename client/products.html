@@ -1,8 +1,8 @@
 <template name="products">
 	<body>
-		{{> navigation-bar}}
+		{{> head}}
+		{{> navigationBar}}
 		{{> main}}
-		
 	</body>
 </template>
 
@@ -10,7 +10,7 @@
 	<div class="row body-wrapper">
 			<div class="col-xs-3">
 				{{> distributor}}
-				{{> filter-bar}}
+				{{> filterBar}}
 			</div>
 			<div class="col-xs-9">
 				{{> breadCrumb}}
@@ -147,14 +147,14 @@
 
 </template>
 
-<template name="filter-bar">
+<template name="filterBar">
 	<div>
 	  	{{> categories}}
 	</div>	  	
 </template>
 
 <template name="breadCrumb">
-	<div class="crumbs">
+	<div class="crumbs">		
 		{{#each crumbs}}
 			{{#if description}}
 				{{description}} >

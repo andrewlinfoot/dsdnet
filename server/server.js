@@ -99,7 +99,6 @@ Meteor.publish('products', function pubProducts(options) {
   if(options.query) {
     query = options.query;
   }
-  console.log(options);
   query._id = {$in: productsArray};
 
   if(!options.limit) {
@@ -107,7 +106,8 @@ Meteor.publish('products', function pubProducts(options) {
   }
 
   return Products.find(query, {
-    limit: options.limit
+    limit: options.limit,
+    sort: {"product_data.custom_product_name": 1}
   });
 });
 

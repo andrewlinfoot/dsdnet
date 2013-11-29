@@ -37,6 +37,8 @@ Router.map(function () {
           ];
         },
         before: function () {
+          //when refreshing the page, this doesnt set before
+          //products subscription is called, not sure why
           Session.set('companySlug', this.params.companySlug);
         },
         data: function () {

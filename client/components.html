@@ -1,18 +1,22 @@
 <template name="head">
 	<head>
 		<title>DSDNet</title>
+    <style type="text/css">
+      .highlight {
+        background-color: #FFFF88;
+      }
+    </style>
 	</head>
 </template>
 
-<template name="navigation-bar">
+<template name="navigationBar">
   <nav class="navbar">
     <div class="row search-wrapper">
       <div class="col-xs-3">
         <img class="navbar-logo" src="/dsdnet-logo-40.png"></img>
-        <!-- <strong>DSD</strong>Net -->
       </div>
       <div class="col-xs-9 ">
-        <input type="text" class="custom-search form-control" placeholder="Search">
+        <input type="text" id="search" class="custom-search form-control" placeholder="Search">
       </div>
     </div>
   </nav>

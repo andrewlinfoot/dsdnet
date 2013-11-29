@@ -193,7 +193,14 @@ Deps.autorun(function() {
 	if(itemsLimit) {
 		var searchFilter = Session.get('searchFilter');
 		var options = buildProductSubOptions(itemsLimit, searchFilter);
-		Meteor.subscribe('products', options);
+		Meteor.subscribe('products', options, function() {
+			//removes the loading icon when there are no more products
+			var productCount = Products.find().count();
+			var itemsLimit = Session.get('itemsLimit');
+			if(itemsLimit > productCount){
+				$('#showMoreResults').html('');
+			}
+		});
 	}
 });
 

@@ -227,6 +227,8 @@ function showMoreVisible() {
 }
  
 // run the above func every time the user scrolls
+// TODO: more efficient way, rap so that it
+// only runs on the company page
 $(window).scroll(showMoreVisible);
 
 Template.categories.rendered = function () {

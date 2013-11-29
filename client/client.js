@@ -40,6 +40,12 @@ Router.map(function () {
           //when refreshing the page, this doesnt set before
           //products subscription is called, not sure why
           Session.set('companySlug', this.params.companySlug);
+          //Initialize Category Select
+          Session.set('categorySelect', [null, null, null, null]);
+          //intitialize searchFilter
+          Session.set('searchFilter', undefined);
+          //initialize items limit
+          Session.set('itemsLimit', 20);
         },
         data: function () {
           return Companies.findOne();

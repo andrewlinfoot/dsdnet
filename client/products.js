@@ -1,6 +1,3 @@
-//Initialize Category Select
-Session.set('categorySelect', [null, null, null, null]);
-
 Template.products.events({
 	'click .more-btn' : function (e) {
 		e.preventDefault();
@@ -190,12 +187,14 @@ var buildProductSubOptions = function (limit, searchFilter) {
 };
 
 var ITEMS_INCREMENT = 20;
-Session.set('itemsLimit', ITEMS_INCREMENT);
+
 Deps.autorun(function() {
 	var itemsLimit = Session.get('itemsLimit');
-	var searchFilter = Session.get('searchFilter');
-	var options = buildProductSubOptions(itemsLimit, searchFilter);
-  Meteor.subscribe('products', options);
+	if(itemsLimit) {
+		var searchFilter = Session.get('searchFilter');
+		var options = buildProductSubOptions(itemsLimit, searchFilter);
+		Meteor.subscribe('products', options);
+	}
 });
 
 // whenever #showMoreResults becomes visible, retrieve more results
@@ -239,9 +238,6 @@ Template.categories.rendered = function () {
 	}
 };
 
-//intitialize searchFilter
-Session.set('searchFilter', undefined);
-
 //Search
 Template.navigationBar.events({
 	'keyup #search' : function (e) {
@@ -266,4 +262,3 @@ Template.prodMod.rendered = function () {
 		$(this.find('h3')).highlight(searchFilter);
 	}
 };
-

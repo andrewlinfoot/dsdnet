@@ -46,11 +46,9 @@ Template.main.module = function () {
 
 	var searchFilter = Session.get('searchFilter');
 	if (searchFilter) {
-		if(_.isString(searchFilter)) {
-			query = {
-				"product_data.custom_product_name": { $regex: searchFilter, $options: 'i'}
-			};
-		}
+		query = {
+			"product_data.custom_product_name": { $regex: searchFilter, $options: 'i'}
+		};
 	}
 
 	if(segment){
